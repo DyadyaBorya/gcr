@@ -1,2 +1,2 @@
-gopher-college-rugby
+Example of N-tier MVC website with tests.
 ====================
