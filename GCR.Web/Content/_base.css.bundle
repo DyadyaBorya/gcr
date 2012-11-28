@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bundle minify="true" runOnBuild="true">
+  <!--The order of the <file> elements determins the order of them when bundled.-->
+  <file>/Content/base.css</file>
+  <file>/Content/site.css</file>
+  <file>/Content/themes/base/jquery.ui.core.css</file>
+  <file>/Content/themes/base/jquery.ui.resizable.css</file>
+  <file>/Content/themes/base/jquery.ui.selectable.css</file>
+  <file>/Content/themes/base/jquery.ui.accordion.css</file>
+  <file>/Content/themes/base/jquery.ui.autocomplete.css</file>
+  <file>/Content/themes/base/jquery.ui.button.css</file>
+  <file>/Content/themes/base/jquery.ui.dialog.css</file>
+  <file>/Content/themes/base/jquery.ui.slider.css</file>
+  <file>/Content/themes/base/jquery.ui.tabs.css</file>
+  <file>/Content/themes/base/jquery.ui.datepicker.css</file>
+  <file>/Content/themes/base/jquery.ui.progressbar.css</file>
+  <file>/Content/themes/base/jquery.ui.theme.css</file>
+</bundle>
