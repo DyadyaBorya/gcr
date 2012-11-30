@@ -11,16 +11,24 @@
 <body>
     <div id="body">
         <div id="inner-body">
-            <div class="container">
-                            <div id="header">
+            <div id="header">
                 <div class="content-wrapper">
-                  <h1 style="color:#ececec">Test Web Site</h1>
+                    <h1 style="color: #ececec">Test Web Site</h1>
+                    <div class="nav">
+                <ul class="clearfix">
+                    <li class="alpha"><a href="index.html">Home</a><div class="highlite"></div></li>
+                    <li><a href="index-1.html">About</a><div class="highlite"></div></li>
+                    <li><a href="index-2.html">Schedule</a><div class="highlite"></div></li>
+                    <li><a href="index-3.html">Team</a><div class="highlite"></div></li>
+                    <li><a href="index-4.html">News</a><div class="highlite"></div></li>
+                    <li class="omega"><a href="index-5.html">Contacts</a><div class="highlite"></div></li>
+                </ul>
+                </div>
                 </div>
             </div>
-                 <div class="content-wrapper" style="background-color:#fff">
-                @RenderBody()
-                     </div>
-            </div>
+            <div class="container">
+                    @RenderBody()
+                </div>
         </div>
     </div>
     <div id="footer">

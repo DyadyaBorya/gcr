@@ -7,9 +7,9 @@
    * For credits and origins, see AUTHORS.
    * This is a compressed file. See the sources in the 'src' directory.
 ----------------------------------------------------------------------- */
-@font-color: #111111;
-@header-color: #222222;
-@link-color: #006699;
+@grid-width: 960px;
+@columns: 24;
+@gutter: 10px;
 
 @error-font: #8a1f11;
 @error-background: #FFBABA;
@@ -26,6 +26,20 @@
 @notice-font: #514721;
 @notice-background: #FEEFB3;
 @notice-border: #ffd324;
+
+@font-color: #111111;
+@font-alt-color: #fafafa;
+@heading-color: #222222;
+@link-color: #006699;
+
+@accent-color: #0079ce;
+@accent-alt-color: #996699;
+@strong-color: #003473;
+@background-color: #010101;
+@main-color: #010101;
+@main-alt-color: #9c9ea5;
+@footer-color: #202020;
+@content-color: #ffffff;
 
 @media screen, projection
 {
@@ -46,7 +60,7 @@
 	/* typography.css */
 	html {font-size:100.01%;}
 	body {font-size:75%;color:@font-color;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
-	h1, h2, h3, h4, h5, h6 {font-weight:normal;color:@header-color;}
+	h1, h2, h3, h4, h5, h6 {font-weight:normal;color:@heading-color;}
 	h1 {font-size:3em;line-height:1;margin-bottom:0.5em;}
 	h2 {font-size:2em;margin-bottom:0.75em;}
 	h3 {font-size:1.5em;line-height:1;margin-bottom:1em;}
@@ -71,7 +85,7 @@
 	pre {margin:1.5em 0;white-space:pre;}
 	pre, code, tt {font:1em 'andale mono', 'lucida console', monospace;line-height:1.5;}
 	li ul, li ol {margin:0;}
-	ul, ol {margin:0 1.5em 1.5em 0;padding-left:1.5em;}
+	ul, ol {margin:0 0.5em 1.5em 0;padding-left:1.5em;}
 	ul {list-style-type:disc;}
 	ol {list-style-type:decimal;}
 	dl {margin:0 0 1.5em 0;}
@@ -122,14 +136,14 @@
 	.success a {color:darken(@success-font, 10%);}
 	.info a {color:darken(@info-font, 10%);}
 
-	@grid-width: 960px;
-	@columns: 24;
-	@gutter: 10px;
+
 	/*960 Grid */
 	.container                                  { position: relative; width: @grid-width; margin: 0 auto; padding: 0; }
 	.container .column,
 	.container .columns                         { float: left; display: inline; margin-left: @gutter; margin-right: @gutter; }
-	.row                                        { margin-bottom: 20px; display:block; }
+	.container .row                             { margin-bottom: @gutter; display:block; }
+	.container .two.row                         { margin-bottom: (@gutter * 2); }
+	.container .three.row                       { margin-bottom: (@gutter * 5); }
 
 	/* Nested Column Classes */
 	.column.alpha, .columns.alpha               { margin-left: 0; }

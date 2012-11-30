@@ -848,7 +848,7 @@ h6 {
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error {
-  color: #f00;
+  color: #8a1f11;
 }
 .field-validation-valid {
   display: none;
@@ -856,9 +856,9 @@ h6 {
 input.input-validation-error,
 select.input-validation-error {
   border-color: #f58282;
-  border-top-color: 74%;
-  border-left-color: 74%;
-  background-color: 86%;
+  border-top-color: #ed2424;
+  border-left-color: #ed2424;
+  background-color: #ffd9d9;
 }
 .validation-summary-errors ul {
   margin: 0;
@@ -904,7 +904,7 @@ div.alert {
 div.error a,
 div.alert a {
   color: #8a1f11;
-  font-weight: 600;
+  font-weight: 700;
 }
 div.notice a {
   color: #514721;

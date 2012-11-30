@@ -244,7 +244,7 @@
   }
   ul,
   ol {
-    margin: 0 1.5em 1.5em 0;
+    margin: 0 0.5em 1.5em 0;
     padding-left: 1.5em;
   }
   ul {
@@ -422,22 +422,22 @@
   }
   .error,
   .alert {
-    background: #fbe3e4;
+    background: #ffbaba;
     color: #8a1f11;
-    border-color: #fbc2c4;
+    border-color: #f58282;
   }
   .notice {
-    background: #fff6bf;
+    background: #feefb3;
     color: #514721;
     border-color: #ffd324;
   }
   .success {
-    background: #e6efc2;
+    background: #dff2bf;
     color: #264409;
     border-color: #c6d880;
   }
   .info {
-    background: #d5edf8;
+    background: #bde5f8;
     color: #205791;
     border-color: #92cae4;
   }
@@ -468,9 +468,15 @@
     margin-left: 10px;
     margin-right: 10px;
   }
-  .row {
-    margin-bottom: 20px;
+  .container .row {
+    margin-bottom: 10px;
     display: block;
+  }
+  .container .two.row {
+    margin-bottom: 20px;
+  }
+  .container .three.row {
+    margin-bottom: 50px;
   }
   /* Nested Column Classes */
   .column.alpha,
