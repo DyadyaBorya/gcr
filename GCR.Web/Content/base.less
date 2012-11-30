@@ -7,14 +7,25 @@
    * For credits and origins, see AUTHORS.
    * This is a compressed file. See the sources in the 'src' directory.
 ----------------------------------------------------------------------- */
-/*!
-* Skeleton V1.2
-* Copyright 2011, Dave Gamache
-* www.getskeleton.com
-* Free to use under the MIT license.
-* http://www.opensource.org/licenses/mit-license.php
-* 6/20/2012
-*/
+@font-color: #111111;
+@header-color: #222222;
+@link-color: #006699;
+
+@error-font: #8a1f11;
+@error-background: #FFBABA;
+@error-border: #f58282;
+
+@info-font: #205791;
+@info-background: #BDE5F8;
+@info-border: #92cae4;
+
+@success-font: #264409;
+@success-background: #DFF2BF;
+@success-border: #c6d880;
+
+@notice-font: #514721;
+@notice-background: #FEEFB3;
+@notice-border: #ffd324;
 
 @media screen, projection
 {
@@ -34,8 +45,8 @@
 
 	/* typography.css */
 	html {font-size:100.01%;}
-	body {font-size:75%;color:#222;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
-	h1, h2, h3, h4, h5, h6 {font-weight:normal;color:#111;}
+	body {font-size:75%;color:@font-color;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
+	h1, h2, h3, h4, h5, h6 {font-weight:normal;color:@header-color;}
 	h1 {font-size:3em;line-height:1;margin-bottom:0.5em;}
 	h2 {font-size:2em;margin-bottom:0.75em;}
 	h3 {font-size:1.5em;line-height:1;margin-bottom:1em;}
@@ -48,15 +59,15 @@
 	p .left {margin:1.5em 1.5em 1.5em 0;padding:0;}
 	.right {float:right !important;}
 	p .right {margin:1.5em 0 1.5em 1.5em;padding:0;}
-	a:focus, a:hover {color:#09f;}
-	a {color:#06c;text-decoration:underline;}
-	blockquote {margin:1.5em;color:#666;font-style:italic;}
+	a:focus, a:hover {color:lighten(@link-color, 30%);}
+	a {color:@link-color;text-decoration:underline;}
+	blockquote {margin:1.5em;color:lighten(@font-color, 30%);font-style:italic;}
 	strong, dfn {font-weight:bold;}
 	em, dfn {font-style:italic;}
 	sup, sub {line-height:0;}
-	abbr, acronym {border-bottom:1px dotted #666;}
+	abbr, acronym {border-bottom:1px dotted lighten(@font-color, 30%);}
 	address {margin:0 0 1.5em;font-style:italic;}
-	del {color:#666;}
+	del {color:lighten(@font-color, 30%);}
 	pre {margin:1.5em 0;white-space:pre;}
 	pre, code, tt {font:1em 'andale mono', 'lucida console', monospace;line-height:1.5;}
 	li ul, li ol {margin:0;}
@@ -76,8 +87,8 @@
 	.small {font-size:.8em;margin-bottom:1.875em;line-height:1.875em;}
 	.large {font-size:1.2em;line-height:2.5em;margin-bottom:1.25em;}
 	.hide {display:none;}
-	.quiet {color:#666;}
-	.loud {color:#000;}
+	.quiet {color:lighten(@font-color, 30%);}
+	.loud {color:darken(@font-color, 20%);}
 	.highlight {background:#ff0;}
 	.added {background:#060;color:#fff;}
 	.removed {background:#900;color:#fff;}
@@ -102,88 +113,111 @@
 	form.inline {line-height:3;}
 	form.inline p {margin-bottom:0;}
 	.error, .alert, .notice, .success, .info {padding:0.8em;margin-bottom:1em;border:2px solid #ddd;}
-	.error, .alert {background:#fbe3e4;color:#8a1f11;border-color:#fbc2c4;}
-	.notice {background:#fff6bf;color:#514721;border-color:#ffd324;}
-	.success {background:#e6efc2;color:#264409;border-color:#c6d880;}
-	.info {background:#d5edf8;color:#205791;border-color:#92cae4;}
-	.error a, .alert a {color:#8a1f11;}
-	.notice a {color:#514721;}
-	.success a {color:#264409;}
-	.info a {color:#205791;}
+	.error, .alert {background:@error-background;color:@error-font;border-color:@error-border;}
+	.notice {background:@notice-background;color:@notice-font;border-color:@notice-border;}
+	.success {background:@success-background;color:@success-font;border-color:@success-border;}
+	.info {background:@info-background;color:@info-font;border-color:@info-border;}
+	.error a, .alert a {color:darken(@error-font, 10%);}
+	.notice a {color:darken(@notice-font, 10%);}
+	.success a {color:darken(@success-font, 10%);}
+	.info a {color:darken(@info-font, 10%);}
 
 	@grid-width: 960px;
 	@columns: 24;
 	@gutter: 10px;
-	/* Skeleton 960 Grid */
+	/*960 Grid */
 	.container                                  { position: relative; width: @grid-width; margin: 0 auto; padding: 0; }
-    .container .column,
-    .container .columns                         { float: left; display: inline; margin-left: 10px; margin-right: 10px; }
-    .row                                        { margin-bottom: 20px; display:block; }
+	.container .column,
+	.container .columns                         { float: left; display: inline; margin-left: @gutter; margin-right: @gutter; }
+	.row                                        { margin-bottom: 20px; display:block; }
 
-    /* Nested Column Classes */
-    .column.alpha, .columns.alpha               { margin-left: 0; }
-    .column.omega, .columns.omega               { margin-right: 0; }
+	/* Nested Column Classes */
+	.column.alpha, .columns.alpha               { margin-left: 0; }
+	.column.omega, .columns.omega               { margin-right: 0; }
 
-    /* Base Grid */
-    .container .one.column,
-    .container .one.columns                     { width: (1/@columns * @grid-width - @gutter * 2);  }
-    .container .two.columns                     { width: (2/@columns * @grid-width - @gutter * 2); }
-    .container .three.columns                   { width: (3/@columns * @grid-width - @gutter * 2); }
-    .container .four.columns                    { width: (4/@columns * @grid-width - @gutter * 2); }
-    .container .five.columns                    { width: (5/@columns * @grid-width - @gutter * 2); }
-    .container .six.columns                     { width: (6/@columns * @grid-width - @gutter * 2); }
-    .container .seven.columns                   { width: (7/@columns * @grid-width - @gutter * 2); }
-    .container .eight.columns                   { width: (8/@columns * @grid-width - @gutter * 2); }
-    .container .nine.columns                    { width: (9/@columns * @grid-width - @gutter * 2); }
-    .container .ten.columns                     { width: (10/@columns * @grid-width - @gutter * 2); }
-    .container .eleven.columns                  { width: (11/@columns * @grid-width - @gutter * 2); }
-    .container .twelve.columns                  { width: (12/@columns * @grid-width - @gutter * 2); }
-    .container .thirteen.columns                { width: (13/@columns * @grid-width - @gutter * 2); }
-    .container .fourteen.columns                { width: (14/@columns * @grid-width - @gutter * 2); }
-    .container .fifteen.columns                 { width: (15/@columns * @grid-width - @gutter * 2); }
-    .container .sixteen.columns                 { width: (16/@columns * @grid-width - @gutter * 2); }
+	/* Base Grid */
+	.container .one.column,
+	.container .one.columns                     { width: (1/@columns * @grid-width - @gutter * 2);  }
+	.container .two.columns                     { width: (2/@columns * @grid-width - @gutter * 2); }
+	.container .three.columns                   { width: (3/@columns * @grid-width - @gutter * 2); }
+	.container .four.columns                    { width: (4/@columns * @grid-width - @gutter * 2); }
+	.container .five.columns                    { width: (5/@columns * @grid-width - @gutter * 2); }
+	.container .six.columns                     { width: (6/@columns * @grid-width - @gutter * 2); }
+	.container .seven.columns                   { width: (7/@columns * @grid-width - @gutter * 2); }
+	.container .eight.columns                   { width: (8/@columns * @grid-width - @gutter * 2); }
+	.container .nine.columns                    { width: (9/@columns * @grid-width - @gutter * 2); }
+	.container .ten.columns                     { width: (10/@columns * @grid-width - @gutter * 2); }
+	.container .eleven.columns                  { width: (11/@columns * @grid-width - @gutter * 2); }
+	.container .twelve.columns                  { width: (12/@columns * @grid-width - @gutter * 2); }
+	.container .thirteen.columns                { width: (13/@columns * @grid-width - @gutter * 2); }
+	.container .fourteen.columns                { width: (14/@columns * @grid-width - @gutter * 2); }
+	.container .fifteen.columns                 { width: (15/@columns * @grid-width - @gutter * 2); }
+	.container .sixteen.columns                 { width: (16/@columns * @grid-width - @gutter * 2); }
 	.container .seventeen.columns               { width: (17/@columns * @grid-width - @gutter * 2); }
-    .container .eighteen.columns                { width: (18/@columns * @grid-width - @gutter * 2); }
-    .container .nineteen.columns                { width: (19/@columns * @grid-width - @gutter * 2); }
-    .container .twenty.columns                  { width: (20/@columns * @grid-width - @gutter * 2); }
-    .container .twentyone.columns               { width: (21/@columns * @grid-width - @gutter * 2); }
-    .container .twentytwo.columns               { width: (22/@columns * @grid-width - @gutter * 2); }
-    .container .twentythree.columns             { width: (23/@columns * @grid-width - @gutter * 2); }
-    .container .twelvefour.columns              { width: (24/@columns * @grid-width - @gutter * 2); }
+	.container .eighteen.columns                { width: (18/@columns * @grid-width - @gutter * 2); }
+	.container .nineteen.columns                { width: (19/@columns * @grid-width - @gutter * 2); }
+	.container .twenty.columns                  { width: (20/@columns * @grid-width - @gutter * 2); }
+	.container .twentyone.columns               { width: (21/@columns * @grid-width - @gutter * 2); }
+	.container .twentytwo.columns               { width: (22/@columns * @grid-width - @gutter * 2); }
+	.container .twentythree.columns             { width: (23/@columns * @grid-width - @gutter * 2); }
+	.container .twelvefour.columns              { width: (24/@columns * @grid-width - @gutter * 2); }
 
-    .container .one-third.column                { width: (1/3 * @grid-width - @gutter * 2); }
-    .container .two-thirds.column               { width: (2/3 * @grid-width - @gutter * 2); }
+	.container .one-third.column                { width: (1/3 * @grid-width - @gutter * 2); }
+	.container .two-thirds.column               { width: (2/3 * @grid-width - @gutter * 2); }
 
-    /* Offsets */
-    .container .offset-by-one                   { padding-left: (1/@columns * @grid-width);  }
-    .container .offset-by-two                   { padding-left: (2/@columns * @grid-width); }
-    .container .offset-by-three                 { padding-left: (3/@columns * @grid-width); }
-    .container .offset-by-four                  { padding-left: (4/@columns * @grid-width); }
-    .container .offset-by-five                  { padding-left: (5/@columns * @grid-width); }
-    .container .offset-by-six                   { padding-left: (6/@columns * @grid-width); }
-    .container .offset-by-seven                 { padding-left: (7/@columns * @grid-width); }
-    .container .offset-by-eight                 { padding-left: (8/@columns * @grid-width); }
-    .container .offset-by-nine                  { padding-left: (9/@columns * @grid-width); }
-    .container .offset-by-ten                   { padding-left: (10/@columns * @grid-width); }
-    .container .offset-by-eleven                { padding-left: (11/@columns * @grid-width); }
-    .container .offset-by-twelve                { padding-left: (12/@columns * @grid-width); }
-    .container .offset-by-thirteen              { padding-left: (13/@columns * @grid-width); }
-    .container .offset-by-fourteen              { padding-left: (14/@columns * @grid-width); }
-    .container .offset-by-fifteen               { padding-left: (15/@columns * @grid-width); }
+	/* Offsets */
+	.container .offset-by-one                   { padding-left: (1/@columns * @grid-width);  }
+	.container .offset-by-two                   { padding-left: (2/@columns * @grid-width); }
+	.container .offset-by-three                 { padding-left: (3/@columns * @grid-width); }
+	.container .offset-by-four                  { padding-left: (4/@columns * @grid-width); }
+	.container .offset-by-five                  { padding-left: (5/@columns * @grid-width); }
+	.container .offset-by-six                   { padding-left: (6/@columns * @grid-width); }
+	.container .offset-by-seven                 { padding-left: (7/@columns * @grid-width); }
+	.container .offset-by-eight                 { padding-left: (8/@columns * @grid-width); }
+	.container .offset-by-nine                  { padding-left: (9/@columns * @grid-width); }
+	.container .offset-by-ten                   { padding-left: (10/@columns * @grid-width); }
+	.container .offset-by-eleven                { padding-left: (11/@columns * @grid-width); }
+	.container .offset-by-twelve                { padding-left: (12/@columns * @grid-width); }
+	.container .offset-by-thirteen              { padding-left: (13/@columns * @grid-width); }
+	.container .offset-by-fourteen              { padding-left: (14/@columns * @grid-width); }
+	.container .offset-by-fifteen               { padding-left: (15/@columns * @grid-width); }
 	.container .offset-by-sixteen               { padding-left: (16/@columns * @grid-width); }
-    .container .offset-by-seventeen             { padding-left: (17/@columns * @grid-width); }
-    .container .offset-by-eighteen              { padding-left: (18/@columns * @grid-width); }
-    .container .offset-by-nineteen              { padding-left: (19/@columns * @grid-width); }
-    .container .offset-by-twenty				{ padding-left: (20/@columns * @grid-width); }
-    .container .offset-by-twentyone             { padding-left: (21/@columns * @grid-width); }
-    .container .offset-by-twentytwo             { padding-left: (22/@columns * @grid-width); }
+	.container .offset-by-seventeen             { padding-left: (17/@columns * @grid-width); }
+	.container .offset-by-eighteen              { padding-left: (18/@columns * @grid-width); }
+	.container .offset-by-nineteen              { padding-left: (19/@columns * @grid-width); }
+	.container .offset-by-twenty				{ padding-left: (20/@columns * @grid-width); }
+	.container .offset-by-twentyone             { padding-left: (21/@columns * @grid-width); }
+	.container .offset-by-twentytwo             { padding-left: (22/@columns * @grid-width); }
 	.container .offset-by-twentythree           { padding-left: (23/@columns * @grid-width); }
+
+	/* Borders */
+	.container .border	{ background: url("images/content-border.gif") repeat-y scroll 0 0 transparent; }
+
+	.container .three.border				{ background-position: (3/@columns * @grid-width) 0; }
+	.container .four.border					{ background-position: (4/@columns * @grid-width) 0; }
+	.container .five.border					{ background-position: (5/@columns * @grid-width) 0; }
+	.container .six.border					{ background-position: (6/@columns * @grid-width) 0; }
+	.container .seven.border				{ background-position: (7/@columns * @grid-width) 0; }
+	.container .eight.border				{ background-position: (8/@columns * @grid-width) 0; }
+	.container .nine.border					{ background-position: (9/@columns * @grid-width) 0; }
+	.container .ten.border					{ background-position: (10/@columns * @grid-width) 0; }
+	.container .eleven.border				{ background-position: (11/@columns * @grid-width) 0; }
+	.container .twelve.border				{ background-position: (12/@columns * @grid-width) 0; }
+	.container .thirteen.border				{ background-position: (13/@columns * @grid-width) 0; }
+	.container .fourteen.border				{ background-position: (14/@columns * @grid-width) 0; }
+	.container .fifteen.border				{ background-position: (15/@columns * @grid-width) 0; }
+	.container .sixteen.border				{ background-position: (16/@columns * @grid-width) 0; }
+	.container .seventeen.border			{ background-position: (17/@columns * @grid-width) 0; }
+	.container .eighteen.border				{ background-position: (18/@columns * @grid-width) 0; }
+	.container .nineteen.border				{ background-position: (19/@columns * @grid-width) 0; }
+	.container .twenty.border				{ background-position: (20/@columns * @grid-width) 0; }
+	.container .twentyone.border			{ background-position: (21/@columns * @grid-width) 0; }
 
 	.box {padding:1.5em;margin-bottom:1.5em;background:#e5eCf9;}
 	hr {background:#ddd;color:#ddd;clear:both;float:none;width:100%;height:1px;margin:0 0 17px;border:none;}
 	hr.space {background:#fff;color:#fff;visibility:hidden;}
-	.clearfix:after, .container:after, .row:after, .wrapper:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
-	.clearfix, .container {display:block;}
+	.clearfix:after, .container:after, .row:after, .border:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
+	.clearfix, .container, .row, .border{display:block;}
 	.clear {clear:both;}
 
 }

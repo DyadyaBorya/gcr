@@ -1,34 +1,251 @@
-﻿html {
-  background: #202020;
-}
-body {
-  background: #010101;
-}
-#body {
-  background: transparent url(images/bottom.jpg) center bottom repeat-x;
-  position:relative;
-}
-#inner-body {
-  min-height: 1200px;
-  background: transparent url(images/background.jpg) center top repeat-x;
-}
-#header {
-  padding: 20px 0px 20px 0px;
-}
-#footer {
-  min-height: 40px;
-  background: #202020;
+﻿@font-color: #111111;
+@header-color: #222222;
+@link-color: #006699;
+
+@error-font: #8a1f11;
+@error-background: #FFBABA;
+@error-border: #f58282;
+
+@info-font: #205791;
+@info-background: #BDE5F8;
+@info-border: #92cae4;
+
+@success-font: #264409;
+@success-background: #DFF2BF;
+@success-border: #c6d880;
+
+@notice-font: #514721;
+@notice-background: #FEEFB3;
+@notice-border: #ffd324;
+
+@accent-color: #0079ce;
+@accent2-color: #996699;
+@strong-color: #003473;
+@background-color: #010101;
+@main-color: #010101;
+@main2-color: #9c9ea5;
+@footer-color: #202020;
+
+.rounded-corners (@radius: 3px)
+{
+	-moz-border-radius: @radius;
+	-webkit-border-radius: @radius;
+	border-radius: @radius;
 }
 
-.border-vert {
-    background: url("images/content-border.gif") repeat-y scroll 317px 0 transparent;
+@font-face
+{
+	font-family: 'Patua One';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Patua One'), local('PatuaOne-Regular'), url('fonts/PatuaOne-Regular.woff') format('woff');
 }
-.border-vert.a {
-    background-position: 280px 0;
+
+html
+{
+	background: #202020;
 }
-.border-vert.b {
-    background-position: 640px 0;
+
+body
+{
+	background: #010101;
+	position: relative;
 }
-.border-vert.c {
-    background-position: 400px 0;
+
+#body
+{
+	background: transparent url(images/bottom.jpg) center bottom repeat-x;
 }
+
+#inner-body
+{
+	min-height: 1200px;
+	background: transparent url(images/background.jpg) center top repeat-x;
+}
+
+#header
+{
+	padding: 20px 0px 20px 0px;
+}
+
+#footer
+{
+	min-height: 40px;
+	background: #202020;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	font-family: 'Patua One', cursive;
+	font-weight: normal;
+}
+
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+	color: #f00;
+}
+
+.field-validation-valid {
+	display: none;
+}
+
+input.input-validation-error, select.input-validation-error
+{
+	border-color: @error-border;
+	border-top-color: lightness(@error-border, -20%);
+	border-left-color: lightness(@error-border, -20%);
+	background-color: lightness(@error-background, 6%);
+}
+
+.validation-summary-errors
+{
+}
+
+.validation-summary-errors ul
+{
+	margin: 0;
+	list-style: none;
+}
+
+.validation-summary-valid
+{
+	display: none;
+}
+
+div.error, div.alert, div.notice, div.success, div.info
+{
+	position: relative;
+	padding: 0.8em 0.8em 0.8em 50px;
+	margin-bottom: 1em;
+	border: 2px solid #ddd;
+	.rounded-corners(5px);
+}
+
+div.info
+{
+	color: @info-font;
+	background: @info-background url('images/Info32.png') no-repeat 10px center;
+	border-color: @info-border;
+}
+
+div.success
+{
+	color: @success-font;
+	background: @success-background url('images/Success32.png') no-repeat 10px center;
+	border-color: @success-border;
+}
+
+div.notice
+{
+	color: @notice-font;
+	background: @notice-background url('images/Warning32.png') no-repeat 10px center;
+	border-color: @notice-border;
+}
+
+div.error, div.alert
+{
+	color: @error-font;
+	background: @error-background url('images/Error32.png') no-repeat 10px center;
+	border-color: @error-border;
+}
+
+div.error a, div.alert a
+{
+	color: @error-font;
+	font-weight:700;
+
+}
+
+div.notice a
+{
+	color: @notice-font;
+	font-weight:600;
+}
+
+div.success a
+{
+	color: @success-font;
+	font-weight:600;
+}
+
+div.info a
+{
+	color: @info-font;
+	font-weight:600;
+}
+
+#top-message
+{
+	overflow: hidden;
+	width: 100%;
+	text-align: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 0;
+	opacity: .95;
+	padding: 0;
+	margin: 0;
+	border-width: 0;
+}
+
+#top-message.info
+{
+	background: @info-background;
+	color: @info-font;
+}
+
+#top-message.success
+{
+	background: @success-background;
+	color: @success-font;
+}
+
+#top-message.notice
+{
+	background: @notice-background;
+	color: @notice-font;
+}
+
+#top-message.error, #flashMessage.alert
+{
+	background: @error-background;
+	color: @error-font;
+}
+
+#top-message div
+{
+	overflow: hidden;
+	/*width 962px minus 50px left pad and 20px right pad*/
+	width: 892px;
+	margin: 0 auto;
+	text-align: center;
+	border: none;
+	padding: 8px 20px 5px 50px;
+}
+
+#top-message.info div
+{
+	background: url('images/Info32.png') no-repeat 10px center;
+}
+
+#top-message.success div
+{
+	background: url('images/Success32.png') no-repeat 10px center;
+}
+
+#top-message.notice div
+{
+	background: url('images/Warning32.png') no-repeat 10px center;
+}
+
+#top-message.error div, #flashMessage.alert div
+{
+	background: url('images/Error32.png') no-repeat 10px center;
+}
+
+/* End styles for validation helpers
+-----------------------------------------------------------*/
+

@@ -1,12 +1,18 @@
+@font-face {
+  font-family: 'Patua One';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Patua One'), local('PatuaOne-Regular'), url('fonts/PatuaOne-Regular.woff') format('woff');
+}
 html {
   background: #202020;
 }
 body {
   background: #010101;
+  position: relative;
 }
 #body {
   background: transparent url(images/bottom.jpg) center bottom repeat-x;
-  position: relative;
 }
 #inner-body {
   min-height: 1200px;
@@ -19,15 +25,140 @@ body {
   min-height: 40px;
   background: #202020;
 }
-.border-vert {
-  background: url("images/content-border.gif") repeat-y scroll 317px 0 transparent;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Patua One', cursive;
+  font-weight: normal;
 }
-.border-vert.a {
-  background-position: 280px 0;
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+  color: #f00;
 }
-.border-vert.b {
-  background-position: 640px 0;
+.field-validation-valid {
+  display: none;
 }
-.border-vert.c {
-  background-position: 400px 0;
+input.input-validation-error,
+select.input-validation-error {
+  border-color: #f58282;
+  border-top-color: 74%;
+  border-left-color: 74%;
+  background-color: 86%;
 }
+.validation-summary-errors ul {
+  margin: 0;
+  list-style: none;
+}
+.validation-summary-valid {
+  display: none;
+}
+div.error,
+div.alert,
+div.notice,
+div.success,
+div.info {
+  position: relative;
+  padding: 0.8em 0.8em 0.8em 50px;
+  margin-bottom: 1em;
+  border: 2px solid #ddd;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+div.info {
+  color: #205791;
+  background: #bde5f8 url('images/Info32.png') no-repeat 10px center;
+  border-color: #92cae4;
+}
+div.success {
+  color: #264409;
+  background: #dff2bf url('images/Success32.png') no-repeat 10px center;
+  border-color: #c6d880;
+}
+div.notice {
+  color: #514721;
+  background: #feefb3 url('images/Warning32.png') no-repeat 10px center;
+  border-color: #ffd324;
+}
+div.error,
+div.alert {
+  color: #8a1f11;
+  background: #ffbaba url('images/Error32.png') no-repeat 10px center;
+  border-color: #f58282;
+}
+div.error a,
+div.alert a {
+  color: #8a1f11;
+  font-weight: 600;
+}
+div.notice a {
+  color: #514721;
+  font-weight: 600;
+}
+div.success a {
+  color: #264409;
+  font-weight: 600;
+}
+div.info a {
+  color: #205791;
+  font-weight: 600;
+}
+#top-message {
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 0;
+  opacity: .95;
+  padding: 0;
+  margin: 0;
+  border-width: 0;
+}
+#top-message.info {
+  background: #bde5f8;
+  color: #205791;
+}
+#top-message.success {
+  background: #dff2bf;
+  color: #264409;
+}
+#top-message.notice {
+  background: #feefb3;
+  color: #514721;
+}
+#top-message.error,
+#flashMessage.alert {
+  background: #ffbaba;
+  color: #8a1f11;
+}
+#top-message div {
+  overflow: hidden;
+  /*width 962px minus 50px left pad and 20px right pad*/
+
+  width: 892px;
+  margin: 0 auto;
+  text-align: center;
+  border: none;
+  padding: 8px 20px 5px 50px;
+}
+#top-message.info div {
+  background: url('images/Info32.png') no-repeat 10px center;
+}
+#top-message.success div {
+  background: url('images/Success32.png') no-repeat 10px center;
+}
+#top-message.notice div {
+  background: url('images/Warning32.png') no-repeat 10px center;
+}
+#top-message.error div,
+#flashMessage.alert div {
+  background: url('images/Error32.png') no-repeat 10px center;
+}
+/* End styles for validation helpers
+-----------------------------------------------------------*/

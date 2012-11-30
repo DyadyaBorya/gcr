@@ -26,19 +26,26 @@ namespace GCR.Web
             // NOTE: Web Essentials bundles may only be updated at build time.
             bun = new StyleBundle("~/Content/css", VirtualPathUtility.ToAbsolute("~/Content/_base.min.css")).Include(
                         "~/Content/base.css",
-                        "~/Content/site.css",
-                        "~/Content/themes/base/jquery.ui.core.css",
-                        "~/Content/themes/base/jquery.ui.resizable.css",
-                        "~/Content/themes/base/jquery.ui.selectable.css",
-                        "~/Content/themes/base/jquery.ui.accordion.css",
-                        "~/Content/themes/base/jquery.ui.autocomplete.css",
-                        "~/Content/themes/base/jquery.ui.button.css",
-                        "~/Content/themes/base/jquery.ui.dialog.css",
-                        "~/Content/themes/base/jquery.ui.slider.css",
-                        "~/Content/themes/base/jquery.ui.tabs.css",
-                        "~/Content/themes/base/jquery.ui.datepicker.css",
-                        "~/Content/themes/base/jquery.ui.progressbar.css",
-                        "~/Content/themes/base/jquery.ui.theme.css");
+                        "~/Content/site.css");
+            bun.Transforms.Clear();
+            bundles.Add(bun);
+
+            string theme = "base";
+            bun = new StyleBundle("~/Content/themes/" + theme + "/css", VirtualPathUtility.ToAbsolute("~/Content/themes/" + theme + "/minified/jquery-ui.min.css")).Include(
+            "~/Content/themes/" + theme + "/jquery.ui.core.css",
+            "~/Content/themes/" + theme + "/jquery.ui.accordion.css",
+            "~/Content/themes/" + theme + "/jquery.ui.autocomplete.css",
+            "~/Content/themes/" + theme + "/jquery.ui.button.css",
+            "~/Content/themes/" + theme + "/jquery.ui.dialog.css",
+            "~/Content/themes/" + theme + "/jquery.ui.menu.css",
+            "~/Content/themes/" + theme + "/jquery.ui.progressbar.css",
+            "~/Content/themes/" + theme + "/jquery.ui.resizable.css",
+            "~/Content/themes/" + theme + "/jquery.ui.selectable.css",
+            "~/Content/themes/" + theme + "/jquery.ui.slider.css",
+            "~/Content/themes/" + theme + "/jquery.ui.spinner.css",
+            "~/Content/themes/" + theme + "/jquery.ui.tabs.css",
+            "~/Content/themes/" + theme + "/jquery.ui.tooltip.css",
+            "~/Content/themes/" + theme + "/jquery.ui.theme.css");
             bun.Transforms.Clear();
             bundles.Add(bun);
         }
