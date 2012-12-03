@@ -12,23 +12,33 @@
     <div id="body">
         <div id="inner-body">
             <div id="header">
-                <div class="content-wrapper">
-                    <h1 style="color: #ececec">Test Web Site</h1>
-                    <div class="nav">
-                <ul class="clearfix">
-                    <li class="alpha"><a href="index.html">Home</a><div class="highlite"></div></li>
-                    <li><a href="index-1.html">About</a><div class="highlite"></div></li>
-                    <li><a href="index-2.html">Schedule</a><div class="highlite"></div></li>
-                    <li><a href="index-3.html">Team</a><div class="highlite"></div></li>
-                    <li><a href="index-4.html">News</a><div class="highlite"></div></li>
-                    <li class="omega"><a href="index-5.html">Contacts</a><div class="highlite"></div></li>
-                </ul>
-                </div>
+                <div class="content-wrapper clearfix">
+                    <div style="float: right;">
+                        <div class="fb">
+                            <span>Follow us on facebook</span>&nbsp;
+                            <img src="~/Content/images/fb.png" />
+                        </div>
+                        <div class="nav">
+                            <ul class="clearfix">
+                                <li class="alpha"><a href="index.html">Home</a><div class="highlite"></div>
+                                </li>
+                                <li><a href="index-1.html">About</a><div class="highlite"></div>
+                                </li>
+                                <li><a href="index-2.html">Schedule</a><div class="highlite"></div>
+                                </li>
+                                <li><a href="index-3.html">Team</a><div class="highlite"></div>
+                                </li>
+                                <li class="omega"><a href="index-4.html">News</a><div class="highlite"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <img src="~/Content/images/logo.png" style="height: 180px; width: 225px" />
                 </div>
             </div>
             <div class="container">
-                    @RenderBody()
-                </div>
+                @RenderBody()
+            </div>
         </div>
     </div>
     <div id="footer">

@@ -75,6 +75,7 @@ body
 	position: relative; 
 	width: @grid-width; 
 	margin: 0 auto; 
+	color: @font-alt-color;
 }
 
 .container
@@ -97,9 +98,9 @@ h1, h2, h3, h4, h5, h6
 
 div.nav
 {
-	background: none repeat scroll 0 0 lighten(@footer-color, 3%);
-    border: 1px solid lighten(@footer-color, 8%);
-	.rounded-corners(3px);
+    border: 1px solid lighten(@footer-color, 40%);
+	margin-top:55px;
+	.rounded-corners(1px);
 }
 
 div.nav ul{
@@ -116,7 +117,7 @@ div.nav  li {
     float: left;
     position: relative;
     text-align: center;
-    width: 16.6%;
+    width: 130px;
 }
 div.nav  li.alpha {
     background: none;
@@ -131,6 +132,7 @@ div.nav a {
     font-weight: bold;
     padding: 20px 0 15px;
     position: relative;
+	text-transform:uppercase;
 }
 
 div.nav .highlite {
@@ -143,10 +145,25 @@ div.nav .highlite {
 	-webkit-transition:opacity 0.4s; /* Safari and Chrome */
 	-o-transition:opacity 0.4s; /* Opera */
 }
+
 div.nav li:hover .highlite, div.nav li.on .highlite {
 	opacity:1;
 	visibility:visible;
 }
+
+div.fb
+{
+    vertical-align: middle;
+	font-weight: 600;
+    text-align: right;
+	margin-top: 20px;
+}
+
+div.fb span, div.fb img
+{
+	vertical-align:middle;
+}
+
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error {

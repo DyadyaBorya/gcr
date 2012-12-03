@@ -245,7 +245,7 @@
   }
   ul,
   ol {
-    margin: 0 1.5em 1.5em 0;
+    margin: 0 0.5em 1.5em 0;
     padding-left: 1.5em;
   }
   ul {
@@ -423,22 +423,22 @@
   }
   .error,
   .alert {
-    background: #fbe3e4;
+    background: #ffbaba;
     color: #8a1f11;
-    border-color: #fbc2c4;
+    border-color: #f58282;
   }
   .notice {
-    background: #fff6bf;
+    background: #feefb3;
     color: #514721;
     border-color: #ffd324;
   }
   .success {
-    background: #e6efc2;
+    background: #dff2bf;
     color: #264409;
     border-color: #c6d880;
   }
   .info {
-    background: #d5edf8;
+    background: #bde5f8;
     color: #205791;
     border-color: #92cae4;
   }
@@ -469,9 +469,15 @@
     margin-left: 10px;
     margin-right: 10px;
   }
-  .row {
-    margin-bottom: 20px;
+  .container .row {
+    margin-bottom: 10px;
     display: block;
+  }
+  .container .two.row {
+    margin-bottom: 20px;
+  }
+  .container .three.row {
+    margin-bottom: 50px;
   }
   /* Nested Column Classes */
   .column.alpha,
@@ -831,6 +837,13 @@ body {
 }
 #header {
   padding: 20px 0px 20px 0px;
+  position: relative;
+  width: 960px;
+  margin: 0 auto;
+}
+.container {
+  background-color: #ffffff;
+  padding: 40px 0 20px 0;
 }
 #footer {
   min-height: 40px;
@@ -844,6 +857,63 @@ h5,
 h6 {
   font-family: 'Patua One', cursive;
   font-weight: normal;
+}
+div.nav {
+  background: none repeat scroll 0 0 #282828;
+  border: 1px solid #343434;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+}
+div.nav ul {
+  line-height: 1;
+}
+div.nav ul,
+.div.nav li {
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+}
+div.nav li {
+  background: url('images/menu-border2.gif') no-repeat scroll 0 9px transparent;
+  float: left;
+  position: relative;
+  text-align: center;
+  width: 16.6%;
+}
+div.nav li.alpha {
+  background: none;
+}
+div.nav a {
+  color: #fafafa;
+  text-decoration: none;
+  display: block;
+  font-family: Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 20px 0 15px;
+  position: relative;
+}
+div.nav .highlite {
+  background-color: #0079ce;
+  height: 5px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s;
+  -moz-transition: opacity 0.4s;
+  /* Firefox 4 */
+
+  -webkit-transition: opacity 0.4s;
+  /* Safari and Chrome */
+
+  -o-transition: opacity 0.4s;
+  /* Opera */
+
+}
+div.nav li:hover .highlite,
+div.nav li.on .highlite {
+  opacity: 1;
+  visibility: visible;
 }
 /* Styles for validation helpers
 -----------------------------------------------------------*/
