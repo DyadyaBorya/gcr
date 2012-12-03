@@ -840,6 +840,7 @@ body {
   position: relative;
   width: 960px;
   margin: 0 auto;
+  color: #fafafa;
 }
 .container {
   background-color: #ffffff;
@@ -859,11 +860,11 @@ h6 {
   font-weight: normal;
 }
 div.nav {
-  background: none repeat scroll 0 0 #282828;
-  border: 1px solid #343434;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
+  border: 1px solid #868686;
+  margin-top: 55px;
+  -moz-border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
 }
 div.nav ul {
   line-height: 1;
@@ -879,7 +880,7 @@ div.nav li {
   float: left;
   position: relative;
   text-align: center;
-  width: 16.6%;
+  width: 130px;
 }
 div.nav li.alpha {
   background: none;
@@ -893,6 +894,7 @@ div.nav a {
   font-weight: bold;
   padding: 20px 0 15px;
   position: relative;
+  text-transform: uppercase;
 }
 div.nav .highlite {
   background-color: #0079ce;
@@ -914,6 +916,16 @@ div.nav li:hover .highlite,
 div.nav li.on .highlite {
   opacity: 1;
   visibility: visible;
+}
+div.fb {
+  vertical-align: middle;
+  font-weight: 600;
+  text-align: right;
+  margin-top: 20px;
+}
+div.fb span,
+div.fb img {
+  vertical-align: middle;
 }
 /* Styles for validation helpers
 -----------------------------------------------------------*/
