@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width" />
     @Styles.Render("~/Content/css")
     @Styles.Render("~/Content/themes/base/css")
+<link rel="stylesheet" type="text/css" href="~/Content/skin.css" />
 </head>
 <body>
     <div id="body">
@@ -37,6 +38,7 @@
                     <img src="~/Content/images/logo2.png" style="" />
                 </div>
             </div>
+            @RenderSection("home", required: false);
             <div class="container">
                 @RenderBody()
             </div>
@@ -46,6 +48,7 @@
         <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
     </div>
     @Scripts.Render("~/Script/base")
+        <script type="text/javascript" src="~/Scripts/jquery.jcarousel.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

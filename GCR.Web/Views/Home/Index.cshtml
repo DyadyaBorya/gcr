@@ -2,6 +2,16 @@
     ViewBag.Title = "Home Page";
 }
 
+@section home {
+<ul id="mycarousel" class="jcarousel-skin-tango">
+        <li><img src="~/Content/images/slide5.jpg" width="950" height="456" alt=""></li>
+        	<li class="current"><img src="~/Content/images/slide1.jpg" width="950" height="456" alt=""></li>
+            <li><img src="~/Content/images/slide6.jpg" width="950" height="456" alt=""></li>
+            <li><img src="~/Content/images/slide2.jpg" width="950" height="456" alt=""></li>
+            <li><img src="~/Content/images/slide3.jpg" width="950" height="456" alt=""></li>
+            <li><img src="~/Content/images/slide4.jpg" width="950" height="456" alt=""></li>
+        </ul>
+}
 <div class="three row">
     <div class="wrapper eight border">
         <div class="six columns offset-by-one alpha">
@@ -152,3 +162,14 @@
     </div>
 </div>
 
+@section Scripts {
+   <script type="text/javascript">
+
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel({
+        wrap: 'circular',
+        scroll: 1
+    });
+});
+</script>
+}
