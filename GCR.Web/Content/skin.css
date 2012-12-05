@@ -1,40 +1,36 @@
-.carousel_box{}
-.jcarousel-skin-tango {
-	height:456px; 
+.jcarousel-skin-custom {
+	height:450px; 
     overflow:hidden;
-	margin-bottom:4px;
+	margin-bottom:20px;
 }
-.jcarousel-skin-tango li { float:left;}
+.jcarousel-skin-custom li { float:left;}
 
-.jcarousel-list-horizontal {
-}
-.jcarousel-container{left:50%;margin-left:-1425px}
+.jcarousel-container{left:50%;margin-left:-1440px}
 
-.jcarousel-skin-tango .jcarousel-clip-horizontal {
-    height: 456px;
+.jcarousel-skin-custom .jcarousel-clip-horizontal {
+    height: 450px;
 }
 
-.jcarousel-skin-tango .jcarousel-item {
-    width: 950px;
-    height: 456px;
+.jcarousel-skin-custom .jcarousel-item {
+    width: 960px;
+    height: 450px;
 	position:relative;
 }
-.jcarousel-skin-tango .jcarousel-item span{ display:block; height:456px; width:950px; position:absolute; background:url(images/carousel_item.png) repeat; z-index:999;}
+.jcarousel-skin-custom .jcarousel-item span{ display:block; height:450px; width:960px; position:absolute; background:url(images/carousel_item.png) repeat; z-index:999;}
 .jcarousel-item.current{ opacity:1 !important;}
 .jcarousel-item.current span{ display:none !important;}
-.jcarousel-skin-tango .jcarousel-item-horizontal {
+.jcarousel-skin-custom .jcarousel-item-horizontal {
 	margin: 0;
 }
-.jcarousel-item.current{}
 
 /**
  *  Horizontal Buttons
  */
-.jcarousel-skin-tango .jcarousel-next-horizontal {
+.jcarousel-skin-custom .jcarousel-next-horizontal {
     position: absolute;
     bottom:210px;
     left:0;
-	margin-left:1915px;
+	margin-left:1880px;
     width: 35px;
     height: 35px;
     cursor: pointer;
@@ -42,18 +38,18 @@
 	z-index:999;
 }
 
-.jcarousel-skin-tango .jcarousel-prev-horizontal {
+.jcarousel-skin-custom .jcarousel-prev-horizontal {
     position: absolute;
 	z-index:999;
     bottom:210px;
     width: 35px;
 	left:0;
-	margin-left:901px;
+	margin-left:965px;
     height: 35px;
     cursor: pointer;
     background:url(images/carousel_prev.png) no-repeat 0 top;
 }
 
-.jcarousel-skin-tango .jcarousel-next-horizontal:hover, .jcarousel-skin-tango .jcarousel-prev-horizontal:hover {
+.jcarousel-skin-custom .jcarousel-next-horizontal:hover, .jcarousel-skin-custom .jcarousel-prev-horizontal:hover {
 	background-position: 0 bottom;
 }

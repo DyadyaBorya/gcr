@@ -3,14 +3,20 @@
 }
 
 @section home {
-<ul id="mycarousel" class="jcarousel-skin-tango">
-        <li><img src="~/Content/images/slide5.jpg" width="950" height="456" alt=""></li>
-        	<li class="current"><img src="~/Content/images/slide1.jpg" width="950" height="456" alt=""></li>
-            <li><img src="~/Content/images/slide6.jpg" width="950" height="456" alt=""></li>
-            <li><img src="~/Content/images/slide2.jpg" width="950" height="456" alt=""></li>
-            <li><img src="~/Content/images/slide3.jpg" width="950" height="456" alt=""></li>
-            <li><img src="~/Content/images/slide4.jpg" width="950" height="456" alt=""></li>
+<div style="position:relative; overflow:hidden">
+<ul id="mycarousel" class="jcarousel-skin-custom">
+        <li><img src="~/Content/images/slide5.jpg" width="960" height="450" alt=""></li>
+        	<li class="current"><img src="~/Content/images/slide1.jpg" width="960" height="450" alt=""></li>
+            <li><img src="~/Content/images/slide6.jpg" width="960" height="450" alt=""></li>
+            <li><img src="~/Content/images/slide2.jpg" width="960" height="450" alt=""></li>
+            <li><img src="~/Content/images/slide3.jpg" width="960" height="450" alt=""></li>
+            <li><img src="~/Content/images/slide4.jpg" width="960" height="450" alt=""></li>
         </ul>
+    <div class="left-shade"></div>
+    <div class="right-shade"></div>
+    <div class="top-shadow"></div>
+    <div class="bottom-shadow"></div>
+</div>
 }
 <div class="three row">
     <div class="wrapper eight border">
@@ -168,6 +174,8 @@
 jQuery(document).ready(function() {
     jQuery('#mycarousel').jcarousel({
         wrap: 'circular',
+        auto: 8,
+        easing: 'easeOutSine',
         scroll: 1
     });
 });
