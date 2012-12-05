@@ -207,8 +207,8 @@
     <Content Include="Content\images\Error32.png" />
     <Content Include="Content\images\fb.png" />
     <Content Include="Content\images\Info32.png" />
-    <Content Include="Content\images\logo2.png" />
-    <Content Include="Content\images\menu-border2.gif" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\menu-border.gif" />
     <Content Include="Content\images\shade.png" />
     <Content Include="Content\images\Success32.png" />
     <Content Include="Content\images\top-shadow.png" />
