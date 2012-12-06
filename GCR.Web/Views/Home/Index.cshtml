@@ -170,11 +170,30 @@
 
 @section Scripts {
    <script type="text/javascript">
+       function mycarousel_initCallback(carousel) {
+           var prev = jQuery('<div class="jcarousel-reveal-prev"><div class="jcarousel-prev jcarousel-prev-horizontal"></div></div>');
+           var next = jQuery('<div class="jcarousel-reveal-next"><div class="jcarousel-next jcarousel-next-horizontal"></div></div>');
 
+           carousel.container.append(prev);
+           carousel.container.append(next);
+
+           next.bind('click', function () {
+               carousel.next();
+               return false;
+           });
+
+           prev.bind('click', function () {
+               carousel.prev();
+               return false;
+           });
+       };
 jQuery(document).ready(function() {
     jQuery('#mycarousel').jcarousel({
         wrap: 'circular',
         auto: 8,
+        buttonNextHTML: null,
+        buttonPrevHTML: null,
+        initCallback: mycarousel_initCallback,
         easing: 'easeOutSine',
         scroll: 1
     });

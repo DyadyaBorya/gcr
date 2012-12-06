@@ -913,14 +913,8 @@ h6 {
   visibility: hidden;
   transition: opacity 0.4s;
   -moz-transition: opacity 0.4s;
-  /* Firefox 4 */
-
   -webkit-transition: opacity 0.4s;
-  /* Safari and Chrome */
-
   -o-transition: opacity 0.4s;
-  /* Opera */
-
 }
 .nav li:hover .highlite,
 .nav li.on .highlite {
@@ -970,8 +964,7 @@ h6 {
   left: 50%;
   margin-left: 480px;
 }
-/* Styles for validation helpers
------------------------------------------------------------*/
+/* Styles for validation helpers */
 .field-validation-error {
   color: #8a1f11;
 }
@@ -1096,6 +1089,60 @@ div.info a {
 #flashMessage.alert div {
   background: url('images/Error32.png') no-repeat 10px center;
 }
-/* End styles for validation helpers
------------------------------------------------------------*/
+/* End styles for validation helpers */
+/* jcarousel home page theme */
+.jcarousel-skin-homepage {
+  height: 450px;
+  overflow: hidden;
+}
+.jcarousel-skin-homepage li {
+  float: left;
+}
+.jcarousel-skin-homepage .jcarousel-container {
+  left: 50%;
+  margin-left: -1440px;
+}
+.jcarousel-skin-homepage .jcarousel-clip-horizontal {
+  height: 450px;
+}
+.jcarousel-skin-homepage .jcarousel-item {
+  width: 960px;
+  height: 450px;
+  position: relative;
+}
+.jcarousel-skin-homepage .jcarousel-item-horizontal {
+  margin: 0;
+}
+.jcarousel-skin-homepage .jcarousel-next-horizontal {
+  position: absolute;
+  bottom: 210px;
+  left: 0;
+  margin-left: 1880px;
+  width: 35px;
+  height: 37px;
+  cursor: pointer;
+  background: url(images/carousel_next.png) no-repeat 0 top;
+  z-index: 2;
+  opacity: 0.5;
+}
+.jcarousel-skin-homepage .jcarousel-prev-horizontal {
+  position: absolute;
+  z-index: 2;
+  bottom: 210px;
+  width: 35px;
+  left: 0;
+  margin-left: 965px;
+  height: 37px;
+  cursor: pointer;
+  background: url(images/carousel_previous.png) no-repeat 0 top;
+  opacity: 0.5;
+  transition: opacity 0.5s;
+  -moz-transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+  -o-transition: opacity 0.5s;
+}
+.jcarousel-skin-homepage .jcarousel-next-horizontal:hover,
+.jcarousel-skin-homepage .jcarousel-prev-horizontal:hover {
+  opacity: 1;
+}
 
