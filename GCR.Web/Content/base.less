@@ -9,7 +9,7 @@
 ----------------------------------------------------------------------- */
 @grid-width: 960px;
 @columns: 24;
-@gutter: 10px;
+@gutter: 5px;
 
 @error-font: #8a1f11;
 @error-background: #FFBABA;
@@ -138,94 +138,102 @@
 
 
 	/*960 Grid */
-	.container                                  { position: relative; width: @grid-width; margin: 0 auto; padding: 0; }
-	.container .column,
-	.container .columns                         { float: left; display: inline; margin-left: @gutter; margin-right: @gutter; }
-	.container .row                             { margin-bottom: @gutter; display:block; }
-	.container .two.row                         { margin-bottom: (@gutter * 2); }
-	.container .three.row                       { margin-bottom: (@gutter * 5); }
+	.container                                  
+	{ 
+		position: relative; 
+		width: @grid-width; 
+		margin: 0 auto; 
+		padding: 0; 
 
-	/* Nested Column Classes */
-	.column.alpha, .columns.alpha               { margin-left: 0; }
-	.column.omega, .columns.omega               { margin-right: 0; }
+		.column,
+		.columns                         { float: left; display: inline; margin-left: @gutter; margin-right: @gutter; }
+		.row                             { margin-bottom: @gutter; display:block; }
+		.two.row                         { margin-bottom: (@gutter * 2); }
+		.three.row                       { margin-bottom: (@gutter * 5); }
+		.four.row                        { margin-bottom: (@gutter * 10); }
 
-	/* Base Grid */
-	.container .one.column,
-	.container .one.columns                     { width: (1/@columns * @grid-width - @gutter * 2);  }
-	.container .two.columns                     { width: (2/@columns * @grid-width - @gutter * 2); }
-	.container .three.columns                   { width: (3/@columns * @grid-width - @gutter * 2); }
-	.container .four.columns                    { width: (4/@columns * @grid-width - @gutter * 2); }
-	.container .five.columns                    { width: (5/@columns * @grid-width - @gutter * 2); }
-	.container .six.columns                     { width: (6/@columns * @grid-width - @gutter * 2); }
-	.container .seven.columns                   { width: (7/@columns * @grid-width - @gutter * 2); }
-	.container .eight.columns                   { width: (8/@columns * @grid-width - @gutter * 2); }
-	.container .nine.columns                    { width: (9/@columns * @grid-width - @gutter * 2); }
-	.container .ten.columns                     { width: (10/@columns * @grid-width - @gutter * 2); }
-	.container .eleven.columns                  { width: (11/@columns * @grid-width - @gutter * 2); }
-	.container .twelve.columns                  { width: (12/@columns * @grid-width - @gutter * 2); }
-	.container .thirteen.columns                { width: (13/@columns * @grid-width - @gutter * 2); }
-	.container .fourteen.columns                { width: (14/@columns * @grid-width - @gutter * 2); }
-	.container .fifteen.columns                 { width: (15/@columns * @grid-width - @gutter * 2); }
-	.container .sixteen.columns                 { width: (16/@columns * @grid-width - @gutter * 2); }
-	.container .seventeen.columns               { width: (17/@columns * @grid-width - @gutter * 2); }
-	.container .eighteen.columns                { width: (18/@columns * @grid-width - @gutter * 2); }
-	.container .nineteen.columns                { width: (19/@columns * @grid-width - @gutter * 2); }
-	.container .twenty.columns                  { width: (20/@columns * @grid-width - @gutter * 2); }
-	.container .twentyone.columns               { width: (21/@columns * @grid-width - @gutter * 2); }
-	.container .twentytwo.columns               { width: (22/@columns * @grid-width - @gutter * 2); }
-	.container .twentythree.columns             { width: (23/@columns * @grid-width - @gutter * 2); }
-	.container .twelvefour.columns              { width: (24/@columns * @grid-width - @gutter * 2); }
+		/* Nested Column Classes */
+		.column.alpha, .columns.alpha               { margin-left: 0; }
+		.column.omega, .columns.omega               { margin-right: 0; }
 
-	.container .one-third.column                { width: (1/3 * @grid-width - @gutter * 2); }
-	.container .two-thirds.column               { width: (2/3 * @grid-width - @gutter * 2); }
+		/* Base Grid */
+		.one.column,
+		.one.columns			{ width: (1/@columns * @grid-width - @gutter * 2);  }
+		.two.columns            { width: (2/@columns * @grid-width - @gutter * 2); }
+		.three.columns          { width: (3/@columns * @grid-width - @gutter * 2); }
+		.four.columns           { width: (4/@columns * @grid-width - @gutter * 2); }
+		.five.columns           { width: (5/@columns * @grid-width - @gutter * 2); }
+		.six.columns            { width: (6/@columns * @grid-width - @gutter * 2); }
+		.seven.columns          { width: (7/@columns * @grid-width - @gutter * 2); }
+		.eight.columns          { width: (8/@columns * @grid-width - @gutter * 2); }
+		.nine.columns           { width: (9/@columns * @grid-width - @gutter * 2); }
+		.ten.columns            { width: (10/@columns * @grid-width - @gutter * 2); }
+		.eleven.columns         { width: (11/@columns * @grid-width - @gutter * 2); }
+		.twelve.columns         { width: (12/@columns * @grid-width - @gutter * 2); }
+		.thirteen.columns       { width: (13/@columns * @grid-width - @gutter * 2); }
+		.fourteen.columns       { width: (14/@columns * @grid-width - @gutter * 2); }
+		.fifteen.columns        { width: (15/@columns * @grid-width - @gutter * 2); }
+		.sixteen.columns        { width: (16/@columns * @grid-width - @gutter * 2); }
+		.seventeen.columns      { width: (17/@columns * @grid-width - @gutter * 2); }
+		.eighteen.columns       { width: (18/@columns * @grid-width - @gutter * 2); }
+		.nineteen.columns       { width: (19/@columns * @grid-width - @gutter * 2); }
+		.twenty.columns         { width: (20/@columns * @grid-width - @gutter * 2); }
+		.twentyone.columns      { width: (21/@columns * @grid-width - @gutter * 2); }
+		.twentytwo.columns      { width: (22/@columns * @grid-width - @gutter * 2); }
+		.twentythree.columns    { width: (23/@columns * @grid-width - @gutter * 2); }
+		.twelvefour.columns     { width: (24/@columns * @grid-width - @gutter * 2); }
 
-	/* Offsets */
-	.container .offset-by-one                   { padding-left: (1/@columns * @grid-width);  }
-	.container .offset-by-two                   { padding-left: (2/@columns * @grid-width); }
-	.container .offset-by-three                 { padding-left: (3/@columns * @grid-width); }
-	.container .offset-by-four                  { padding-left: (4/@columns * @grid-width); }
-	.container .offset-by-five                  { padding-left: (5/@columns * @grid-width); }
-	.container .offset-by-six                   { padding-left: (6/@columns * @grid-width); }
-	.container .offset-by-seven                 { padding-left: (7/@columns * @grid-width); }
-	.container .offset-by-eight                 { padding-left: (8/@columns * @grid-width); }
-	.container .offset-by-nine                  { padding-left: (9/@columns * @grid-width); }
-	.container .offset-by-ten                   { padding-left: (10/@columns * @grid-width); }
-	.container .offset-by-eleven                { padding-left: (11/@columns * @grid-width); }
-	.container .offset-by-twelve                { padding-left: (12/@columns * @grid-width); }
-	.container .offset-by-thirteen              { padding-left: (13/@columns * @grid-width); }
-	.container .offset-by-fourteen              { padding-left: (14/@columns * @grid-width); }
-	.container .offset-by-fifteen               { padding-left: (15/@columns * @grid-width); }
-	.container .offset-by-sixteen               { padding-left: (16/@columns * @grid-width); }
-	.container .offset-by-seventeen             { padding-left: (17/@columns * @grid-width); }
-	.container .offset-by-eighteen              { padding-left: (18/@columns * @grid-width); }
-	.container .offset-by-nineteen              { padding-left: (19/@columns * @grid-width); }
-	.container .offset-by-twenty				{ padding-left: (20/@columns * @grid-width); }
-	.container .offset-by-twentyone             { padding-left: (21/@columns * @grid-width); }
-	.container .offset-by-twentytwo             { padding-left: (22/@columns * @grid-width); }
-	.container .offset-by-twentythree           { padding-left: (23/@columns * @grid-width); }
+		.one-third.column       { width: (1/3 * @grid-width - @gutter * 2); }
+		.two-thirds.column      { width: (2/3 * @grid-width - @gutter * 2); }
 
-	/* Borders */
-	.container .border	{ background: url("images/content-border.gif") repeat-y scroll 0 0 transparent; }
+		/* Offsets */
+		.offset-by-one                   { padding-left: (1/@columns * @grid-width);  }
+		.offset-by-two                   { padding-left: (2/@columns * @grid-width); }
+		.offset-by-three                 { padding-left: (3/@columns * @grid-width); }
+		.offset-by-four                  { padding-left: (4/@columns * @grid-width); }
+		.offset-by-five                  { padding-left: (5/@columns * @grid-width); }
+		.offset-by-six                   { padding-left: (6/@columns * @grid-width); }
+		.offset-by-seven                 { padding-left: (7/@columns * @grid-width); }
+		.offset-by-eight                 { padding-left: (8/@columns * @grid-width); }
+		.offset-by-nine                  { padding-left: (9/@columns * @grid-width); }
+		.offset-by-ten                   { padding-left: (10/@columns * @grid-width); }
+		.offset-by-eleven                { padding-left: (11/@columns * @grid-width); }
+		.offset-by-twelve                { padding-left: (12/@columns * @grid-width); }
+		.offset-by-thirteen              { padding-left: (13/@columns * @grid-width); }
+		.offset-by-fourteen              { padding-left: (14/@columns * @grid-width); }
+		.offset-by-fifteen               { padding-left: (15/@columns * @grid-width); }
+		.offset-by-sixteen               { padding-left: (16/@columns * @grid-width); }
+		.offset-by-seventeen             { padding-left: (17/@columns * @grid-width); }
+		.offset-by-eighteen              { padding-left: (18/@columns * @grid-width); }
+		.offset-by-nineteen              { padding-left: (19/@columns * @grid-width); }
+		.offset-by-twenty				 { padding-left: (20/@columns * @grid-width); }
+		.offset-by-twentyone             { padding-left: (21/@columns * @grid-width); }
+		.offset-by-twentytwo             { padding-left: (22/@columns * @grid-width); }
+		.offset-by-twentythree           { padding-left: (23/@columns * @grid-width); }
 
-	.container .three.border				{ background-position: (3/@columns * @grid-width) 0; }
-	.container .four.border					{ background-position: (4/@columns * @grid-width) 0; }
-	.container .five.border					{ background-position: (5/@columns * @grid-width) 0; }
-	.container .six.border					{ background-position: (6/@columns * @grid-width) 0; }
-	.container .seven.border				{ background-position: (7/@columns * @grid-width) 0; }
-	.container .eight.border				{ background-position: (8/@columns * @grid-width) 0; }
-	.container .nine.border					{ background-position: (9/@columns * @grid-width) 0; }
-	.container .ten.border					{ background-position: (10/@columns * @grid-width) 0; }
-	.container .eleven.border				{ background-position: (11/@columns * @grid-width) 0; }
-	.container .twelve.border				{ background-position: (12/@columns * @grid-width) 0; }
-	.container .thirteen.border				{ background-position: (13/@columns * @grid-width) 0; }
-	.container .fourteen.border				{ background-position: (14/@columns * @grid-width) 0; }
-	.container .fifteen.border				{ background-position: (15/@columns * @grid-width) 0; }
-	.container .sixteen.border				{ background-position: (16/@columns * @grid-width) 0; }
-	.container .seventeen.border			{ background-position: (17/@columns * @grid-width) 0; }
-	.container .eighteen.border				{ background-position: (18/@columns * @grid-width) 0; }
-	.container .nineteen.border				{ background-position: (19/@columns * @grid-width) 0; }
-	.container .twenty.border				{ background-position: (20/@columns * @grid-width) 0; }
-	.container .twentyone.border			{ background-position: (21/@columns * @grid-width) 0; }
+		/* Borders */
+		.border			{ background: url("images/content-border.gif") repeat-y scroll 0 0 transparent; }
+
+		.three.border				{ background-position: (3/@columns * @grid-width) 0; }
+		.four.border				{ background-position: (4/@columns * @grid-width) 0; }
+		.five.border				{ background-position: (5/@columns * @grid-width) 0; }
+		.six.border					{ background-position: (6/@columns * @grid-width) 0; }
+		.seven.border				{ background-position: (7/@columns * @grid-width) 0; }
+		.eight.border				{ background-position: (8/@columns * @grid-width) 0; }
+		.nine.border				{ background-position: (9/@columns * @grid-width) 0; }
+		.ten.border					{ background-position: (10/@columns * @grid-width) 0; }
+		.eleven.border				{ background-position: (11/@columns * @grid-width) 0; }
+		.twelve.border				{ background-position: (12/@columns * @grid-width) 0; }
+		.thirteen.border			{ background-position: (13/@columns * @grid-width) 0; }
+		.fourteen.border			{ background-position: (14/@columns * @grid-width) 0; }
+		.fifteen.border				{ background-position: (15/@columns * @grid-width) 0; }
+		.sixteen.border				{ background-position: (16/@columns * @grid-width) 0; }
+		.seventeen.border			{ background-position: (17/@columns * @grid-width) 0; }
+		.eighteen.border			{ background-position: (18/@columns * @grid-width) 0; }
+		.nineteen.border			{ background-position: (19/@columns * @grid-width) 0; }
+		.twenty.border				{ background-position: (20/@columns * @grid-width) 0; }
+		.twentyone.border			{ background-position: (21/@columns * @grid-width) 0; }
+	}
 
 	.box {padding:1.5em;margin-bottom:1.5em;background:#e5eCf9;}
 	hr {background:#ddd;color:#ddd;clear:both;float:none;width:100%;height:1px;margin:0 0 17px;border:none;}
