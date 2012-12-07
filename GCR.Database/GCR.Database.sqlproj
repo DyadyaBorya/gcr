@@ -23,6 +23,7 @@
     <SqlServerVerification>False</SqlServerVerification>
     <IncludeCompositeObjects>True</IncludeCompositeObjects>
     <TargetDatabaseSet>True</TargetDatabaseSet>
+    <GenerateCreateScript>True</GenerateCreateScript>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -63,6 +64,7 @@
     <Folder Include="Scripts\Post" />
     <Folder Include="Scripts\Pre" />
     <Folder Include="Snapshots" />
+    <Folder Include="Compares" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\webpages_UsersInRoles.sql" />
@@ -79,7 +81,7 @@
     <None Include="Scripts\Post\DefaultData.sql" />
     <None Include="Scripts\Pre\DeleteLookup.sql" />
     <None Include="Scripts\Pre\DeleteData.sql" />
-    <None Include="Scripts\Comparison.scmp" />
+    <None Include="Compares\Comparison.scmp" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="Scripts\Pre\Script.PreDeployment.sql" />

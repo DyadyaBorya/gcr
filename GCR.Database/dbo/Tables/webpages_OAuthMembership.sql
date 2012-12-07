@@ -2,6 +2,6 @@
     [Provider]       NVARCHAR (30)  NOT NULL,
     [ProviderUserId] NVARCHAR (100) NOT NULL,
     [UserId]         INT            NOT NULL,
-    PRIMARY KEY CLUSTERED ([Provider] ASC, [ProviderUserId] ASC)
+    CONSTRAINT [PK_webpages_OAuthMembership] PRIMARY KEY CLUSTERED ([Provider] ASC, [ProviderUserId] ASC)
 );
 

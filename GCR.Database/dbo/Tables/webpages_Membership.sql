@@ -10,6 +10,6 @@
     [PasswordSalt]                            NVARCHAR (128) NOT NULL,
     [PasswordVerificationToken]               NVARCHAR (128) NULL,
     [PasswordVerificationTokenExpirationDate] DATETIME       NULL,
-    PRIMARY KEY CLUSTERED ([UserId] ASC)
+     CONSTRAINT [PK_webpages_Membership] PRIMARY KEY CLUSTERED ([UserId] ASC)
 );
 
