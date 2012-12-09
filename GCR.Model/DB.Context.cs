@@ -12,6 +12,7 @@ namespace GCR.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using GCR.Core.Entities;
     
     internal partial class DB : DbContext
     {
@@ -29,7 +30,6 @@ namespace GCR.Model
         public DbSet<News> News { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Season> Seasons { get; set; }
-        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<webpages_Membership> webpages_Membership { get; set; }

@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GCR.Model
+namespace GCR.Core.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class UserProfile
+    public partial class News
     {
-        public UserProfile()
-        {
-            this.webpages_Roles = new HashSet<webpages_Roles>();
-        }
-    
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-    
-        public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
+    	public int NewsId { get; set; }
+    	public string Title { get; set; }
+    	public string Summary { get; set; }
+    	public string Link { get; set; }
+    	public string Article { get; set; }
+    	public System.DateTime CreatedOn { get; set; }
+    	public int CreatedBy { get; set; }
+    	public System.DateTime ModifiedOn { get; set; }
+    	public int ModifiedBy { get; set; }
     }
 }

@@ -189,11 +189,13 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Member\MemberViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -374,6 +376,10 @@
     <ProjectReference Include="..\GCR.Core\GCR.Core.csproj">
       <Project>{354e0669-442b-4430-875d-97444b384fe9}</Project>
       <Name>GCR.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\GCR.Model\GCR.Model.csproj">
+      <Project>{d4e079f5-3acd-460f-a1ea-30ed20f667f0}</Project>
+      <Name>GCR.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

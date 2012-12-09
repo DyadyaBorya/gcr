@@ -7,23 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GCR.Model
+namespace GCR.Core.Entities
 {
     using System;
     using System.Collections.Generic;
     
     public partial class Member
     {
-        public int MemberId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public bool IsActive { get; set; }
-        public int MemberSince { get; set; }
-        public string Bio { get; set; }
-        public string Photo { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public System.DateTime ModifiedOn { get; set; }
-        public int ModifiedBy { get; set; }
+    	public int MemberId { get; set; }
+    	public string FirstName { get; set; }
+    	public string LastName { get; set; }
+    	public bool IsActive { get; set; }
+    	public int MemberSince { get; set; }
+    	public string Bio { get; set; }
+    	public string Photo { get; set; }
+    	public System.DateTime CreatedOn { get; set; }
+    	public int CreatedBy { get; set; }
+    	public System.DateTime ModifiedOn { get; set; }
+    	public int ModifiedBy { get; set; }
     }
 }

@@ -7,15 +7,15 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GCR.Model
+namespace GCR.Core.Entities
 {
     using System;
     using System.Collections.Generic;
     
     public partial class webpages_OAuthMembership
     {
-        public string Provider { get; set; }
-        public string ProviderUserId { get; set; }
-        public int UserId { get; set; }
+    	public string Provider { get; set; }
+    	public string ProviderUserId { get; set; }
+    	public int UserId { get; set; }
     }
 }

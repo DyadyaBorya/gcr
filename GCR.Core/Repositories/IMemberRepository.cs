@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.Concurrent;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GCR.Core.Entities;
 
-namespace GCR.Core
+namespace GCR.Core.Repositories
 {
-    public static class ServiceRegistar
+    public interface IMemberRepository : IRepository<Member>
     {
     }
 }

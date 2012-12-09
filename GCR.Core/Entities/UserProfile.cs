@@ -7,21 +7,21 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GCR.Model
+namespace GCR.Core.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class webpages_Roles
+    public partial class UserProfile
     {
-        public webpages_Roles()
-        {
-            this.UserProfiles = new HashSet<UserProfile>();
-        }
+    	public UserProfile()
+    	{
+    		this.webpages_Roles = new HashSet<webpages_Roles>();
+    	}
     
-        public int RoleId { get; set; }
-        public string RoleName { get; set; }
+    	public int UserId { get; set; }
+    	public string UserName { get; set; }
     
-        public virtual ICollection<UserProfile> UserProfiles { get; set; }
+    	public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
     }
 }
