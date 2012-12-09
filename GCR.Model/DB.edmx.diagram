@@ -4,12 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5f8ae0c87091465995965a0598a6fc20" Name="Diagram1">
-        <EntityTypeShape EntityType="GCR.Model.UserProfile" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="GCR.Model.webpages_Membership" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GCR.Model.webpages_OAuthMembership" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GCR.Model.webpages_Roles" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="GCR.Model.webpages_UsersInRoles" ManuallyRouted="false" />
+      <Diagram DiagramId="5f8ae0c87091465995965a0598a6fc20" Name="Diagram1" ZoomLevel="62">
+        <EntityTypeShape EntityType="GCR.Model.Member" Width="1.5" PointX="2.9197123995608241" PointY="30.625416129187411" />
+        <EntityTypeShape EntityType="GCR.Model.News" Width="1.5" PointX="5.7096058827403962" PointY="11.697033366047327" />
+        <EntityTypeShape EntityType="GCR.Model.Schedule" Width="1.5" PointX="8.9816822376948231" PointY="0.20090837786016444" />
+        <EntityTypeShape EntityType="GCR.Model.Season" Width="1.5" PointX="2.0956064174396944" PointY="3.62663914432127" />
+        <EntityTypeShape EntityType="GCR.Model.sysdiagram" Width="1.5" PointX="3.8770731295817873" PointY="24.580096360566138" />
+        <EntityTypeShape EntityType="GCR.Model.Team" Width="1.5" PointX="4.6825146920431937" PointY="6.4624932885460993" />
+        <EntityTypeShape EntityType="GCR.Model.UserProfile" Width="1.5" PointX="10.625" PointY="13.125" />
+        <EntityTypeShape EntityType="GCR.Model.webpages_Membership" Width="1.5" PointX="9.125" PointY="6.375" />
+        <EntityTypeShape EntityType="GCR.Model.webpages_OAuthMembership" Width="1.5" PointX="5.375" PointY="7" />
+        <EntityTypeShape EntityType="GCR.Model.webpages_Roles" Width="1.5" PointX="15" PointY="13.375" />
+        <AssociationConnector Association="GCR.Model.FK_Schedule_Season" />
+        <AssociationConnector Association="GCR.Model.FK_Schedule_Team" />
+        <AssociationConnector Association="GCR.Model.webpages_UsersInRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

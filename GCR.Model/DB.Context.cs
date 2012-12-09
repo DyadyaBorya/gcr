@@ -13,7 +13,7 @@ namespace GCR.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DB : DbContext
+    internal partial class DB : DbContext
     {
         public DB()
             : base("name=DB")
@@ -25,6 +25,12 @@ namespace GCR.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Member> Members { get; set; }
+        public DbSet<News> News { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<Season> Seasons { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
+        public DbSet<Team> Teams { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<webpages_Membership> webpages_Membership { get; set; }
         public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
