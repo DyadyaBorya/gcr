@@ -18,12 +18,17 @@ namespace GCR.Business.Services
             memberRepository = repo;
         }
 
-        public IEnumerable<Member> Fetch 
-        { 
-            get 
-            { 
-                return memberRepository.Query;
-            }
+        public IEnumerable<Member> FetchAll()
+        {
+            return memberRepository.Query.
+                OrderByDescending(a => a.IsActive).
+                ThenBy(a => a.LastName).
+                ThenBy(a=> a.FirstName);
+        }
+
+        public IEnumerable<Member> FetchActive()
+        {
+            return this.FetchAll().Where(a=>a.IsActive);
         }
 
         public Member GetById(int id)

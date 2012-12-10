@@ -360,6 +360,7 @@
     <Content Include="Scripts\_base.min.js.map">
       <DependentUpon>_base.js.bundle</DependentUpon>
     </Content>
+    <Content Include="Views\Member\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

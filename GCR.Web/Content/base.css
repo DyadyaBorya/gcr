@@ -466,6 +466,8 @@
   
     /* Offsets */
   
+    /* Trailing */
+  
     /* Borders */
   
   }
@@ -612,38 +614,29 @@
   .container .offset-by-twelve {
     padding-left: 480px;
   }
-  .container .offset-by-thirteen {
-    padding-left: 520px;
+  .container .trailing-by-one {
+    padding-right: 40px;
   }
-  .container .offset-by-fourteen {
-    padding-left: 560px;
+  .container .trailing-by-two {
+    padding-right: 80px;
   }
-  .container .offset-by-fifteen {
-    padding-left: 600px;
+  .container .trailing-by-three {
+    padding-right: 120px;
   }
-  .container .offset-by-sixteen {
-    padding-left: 640px;
+  .container .trailing-by-four {
+    padding-right: 160px;
   }
-  .container .offset-by-seventeen {
-    padding-left: 680px;
+  .container .trailing-by-five {
+    padding-right: 200px;
   }
-  .container .offset-by-eighteen {
-    padding-left: 720px;
+  .container .trailing-by-six {
+    padding-right: 240px;
   }
-  .container .offset-by-nineteen {
-    padding-left: 760px;
+  .container .trailing-by-seven {
+    padding-right: 280px;
   }
-  .container .offset-by-twenty {
-    padding-left: 800px;
-  }
-  .container .offset-by-twentyone {
-    padding-left: 840px;
-  }
-  .container .offset-by-twentytwo {
-    padding-left: 880px;
-  }
-  .container .offset-by-twentythree {
-    padding-left: 920px;
+  .container .trailing-by-eight {
+    padding-right: 320px;
   }
   .container .border {
     background: url("images/content-border.gif") repeat-y scroll 0 0 transparent;

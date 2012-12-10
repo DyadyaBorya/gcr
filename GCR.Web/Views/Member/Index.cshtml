@@ -1,0 +1,24 @@
+﻿@model IEnumerable<GCR.Web.Models.Member.MemberViewModel>
+
+@{
+    ViewBag.Title = "Team Members";
+}
+<h2 class="offset-by-one">Our Team</h2>
+<div class="three row">
+    <div class="twelve border">
+        @foreach (var item in Model)
+        {
+            <div class="ten columns offset-by-one trailing-by-one">
+
+                <img src="@Url.Content(item.PhotoForDisplay)" alt="@item.FullName" class="team-pic" />
+
+                <h4>@item.FullName</h4>
+
+                <p>@item.Bio</p>
+
+            </div>
+        }
+    </div>
+</div>
+
+

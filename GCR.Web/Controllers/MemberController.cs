@@ -3,23 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GCR.Core.Services;
+using GCR.Web.Models.Member;
 
 namespace GCR.Web.Controllers
 {
     public class MemberController : Controller
     {
+        private IMemberService memberService;
+
+        public MemberController(IMemberService service)
+        {
+            memberService = service;
+        }
         //
         // GET: /Member/
 
         public ActionResult Index()
         {
-            return View();
+            var members = from m in memberService.FetchActive()
+                          select new MemberViewModel
+                          {
+                              MemberId = m.MemberId,
+                              Bio = m.Bio,
+                              FirstName = m.FirstName,
+                              LastName = m.LastName,
+                              MemberSince = m.MemberSince,
+                              Photo = m.Photo
+                          };
+                        
+            return View(members);
         }
 
-        //
-        // GET: /Member/Details/5
-
-        public ActionResult Details(int id)
+        public ActionResult Admin()
         {
             return View();
         }
@@ -82,7 +98,7 @@ namespace GCR.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {

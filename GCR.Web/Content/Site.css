@@ -148,6 +148,16 @@ h6 {
   left: 50%;
   margin-left: 480px;
 }
+img.team-pic {
+  border: 6px solid #bbbbbb;
+  margin-right: 20px;
+  float: left;
+  width: 150px;
+  height: 200px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
+}
 /* Styles for validation helpers */
 .field-validation-error {
   color: #8a1f11;

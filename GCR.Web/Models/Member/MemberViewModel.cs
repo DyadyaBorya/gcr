@@ -14,5 +14,8 @@ namespace GCR.Web.Models.Member
         public int MemberSince { get; set; }
         public string Bio { get; set; }
         public string Photo { get; set; }
+
+        public string FullName { get { return this.FirstName + " " + this.LastName; } }
+        public string PhotoForDisplay { get { return string.IsNullOrEmpty(this.Photo) ? "~/Content/Images/NoPhoto.png" : this.Photo; } }
     }
 }
