@@ -148,9 +148,15 @@ h6 {
   left: 50%;
   margin-left: 480px;
 }
-img.team-pic {
+.team-pic {
+  margin-bottom: 25px;
+  font-size: 0.95em;
+  overflow: hidden;
+  height: 215px;
+}
+.team-pic img {
   border: 6px solid #bbbbbb;
-  margin-right: 20px;
+  margin-right: 15px;
   float: left;
   width: 150px;
   height: 200px;

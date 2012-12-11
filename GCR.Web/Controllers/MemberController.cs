@@ -8,13 +8,14 @@ using GCR.Web.Models.Member;
 
 namespace GCR.Web.Controllers
 {
-    public class MemberController : Controller
+    public class MemberController : BaseController
     {
         private IMemberService memberService;
 
         public MemberController(IMemberService service)
         {
             memberService = service;
+            SetActiveTab(Tabs.Member);
         }
         //
         // GET: /Member/

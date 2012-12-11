@@ -6,8 +6,13 @@ using System.Web.Mvc;
 
 namespace GCR.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        public HomeController()
+        {
+            SetActiveTab(Tabs.Home);
+        }
+
         public ActionResult Index()
         {
             ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
@@ -18,6 +23,7 @@ namespace GCR.Web.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
+            SetActiveTab(Tabs.About);
 
             return View();
         }

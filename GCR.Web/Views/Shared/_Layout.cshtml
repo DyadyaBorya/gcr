@@ -13,7 +13,7 @@
         <div id="inner-body">
             <div id="header">
                 <div class="clearfix">
-                    <div style="float: right;">  
+                    <div style="float: right;">
                         <div class="est">Established 1981</div>
                         <div class="fb">
                             <img src="~/Content/images/fb.png" />&nbsp;  
@@ -21,15 +21,25 @@
                         </div>
                         <div class="nav">
                             <ul class="clearfix">
-                                <li class="alpha"><a href="index.html">Home</a><div class="highlite"></div>
+                                <li class="alpha @ViewBag.HomeTab">
+                                    <a href="@Url.Action("Index", "Home")">Home</a>
+                                    <div class="highlite"></div>
                                 </li>
-                                <li><a href="index-1.html">About</a><div class="highlite"></div>
+                                <li class="@ViewBag.AboutTab">
+                                    <a href="@Url.Action("About", "Home")">About</a>
+                                    <div class="highlite"></div>
                                 </li>
-                                <li><a href="index-2.html">Schedule</a><div class="highlite"></div>
+                                <li class="@ViewBag.ScheduleTab">
+                                    <a href="@Url.Action("Index", "Schedule")">Schedule</a>
+                                    <div class="highlite"></div>
                                 </li>
-                                <li><a href="index-3.html">Team</a><div class="highlite"></div>
+                                <li class="@ViewBag.MemberTab">
+                                    <a href="@Url.Action("Index", "Member")">Team</a>
+                                    <div class="highlite"></div>
                                 </li>
-                                <li class="omega"><a href="index-4.html">News</a><div class="highlite"></div>
+                                <li class="@ViewBag.NewsTab">
+                                    <a href="@Url.Action("Index", "News")">News</a>
+                                    <div class="highlite"></div>
                                 </li>
                             </ul>
                         </div>
@@ -47,7 +57,7 @@
         <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
     </div>
     @Scripts.Render("~/Script/base")
-        <script type="text/javascript" src="~/Scripts/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.jcarousel.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

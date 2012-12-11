@@ -8,11 +8,11 @@
     <div class="twelve border">
         @foreach (var item in Model)
         {
-            <div class="ten columns offset-by-one trailing-by-one">
+            <div class="ten columns offset-by-one trailing-by-one team-pic">
 
                 <img src="@Url.Content(item.PhotoForDisplay)" alt="@item.FullName" class="team-pic" />
 
-                <h4>@item.FullName</h4>
+                <h3>@item.FullName</h3>
 
                 <p>@item.Bio</p>
 
