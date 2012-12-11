@@ -11,6 +11,7 @@ namespace GCR.Web.App_Start
 
     using Ninject;
     using Ninject.Web.Common;
+    using GCR.Core;
 
     public static class NinjectWebCommon 
     {
@@ -24,6 +25,7 @@ namespace GCR.Web.App_Start
             DynamicModuleUtility.RegisterModule(typeof(OnePerRequestHttpModule));
             DynamicModuleUtility.RegisterModule(typeof(NinjectHttpModule));
             bootstrapper.Initialize(CreateKernel);
+            IoC.SetBootstrapper(bootstrapper);
         }
         
         /// <summary>

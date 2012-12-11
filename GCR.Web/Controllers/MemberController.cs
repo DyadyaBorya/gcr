@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GCR.Core.Entities;
 using GCR.Core.Services;
 using GCR.Web.Models.Member;
 
@@ -38,7 +39,17 @@ namespace GCR.Web.Controllers
 
         public ActionResult Admin()
         {
-            return View();
+            var members = from m in memberService.FetchAll()
+                          select new MemberViewModel
+                          {
+                              MemberId = m.MemberId,
+                              FirstName = m.FirstName,
+                              LastName = m.LastName,
+                              MemberSince = m.MemberSince,
+                              IsActive = m.IsActive
+                          };
+
+            return View(members);
         }
 
         //
@@ -46,25 +57,33 @@ namespace GCR.Web.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            var members = new MemberViewModel();
+
+            return View(members);
         }
 
         //
         // POST: /Member/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(MemberViewModel model)
         {
             try
             {
-                // TODO: Add insert logic here
+                if (ModelState.IsValid)
+                {
+                    var member = MemberViewModel.ToModel(model);
+                    memberService.SaveMember(member);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Admin");
+                }
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex);
             }
+
+            return View(model);
         }
 
         //
@@ -72,25 +91,34 @@ namespace GCR.Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View();
+            var member = memberService.GetById(id);
+
+            return View(member);
         }
 
         //
         // POST: /Member/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, MemberViewModel model)
         {
             try
             {
-                // TODO: Add update logic here
+                if (ModelState.IsValid)
+                {
+                    var member = MemberViewModel.ToModel(model);
+                    member.MemberId = id;
+                    memberService.SaveMember(member);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Admin");
+                }
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex);
             }
+
+            return View(model);
         }
 
 
@@ -103,14 +131,15 @@ namespace GCR.Web.Controllers
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                var member = memberService.GetById(id);
+                memberService.DeleteMember(member);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ModelState.AddModelError("", ex);
             }
+
+            return RedirectToAction("Admin");
         }
     }
 }

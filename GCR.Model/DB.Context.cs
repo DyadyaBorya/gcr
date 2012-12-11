@@ -16,8 +16,7 @@ namespace GCR.Model
     
     internal partial class DB : DbContext
     {
-        public DB()
-            : base("name=DB")
+    	protected void OnConstructorCalled()
         {
         }
     

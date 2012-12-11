@@ -18,6 +18,7 @@ namespace GCR.Model
             Bind<IScheduleRepository>().To<ScheduleRepository>();
             Bind<ISeasonRepository>().To<SeasonRepository>();
             Bind<ITeamRepository>().To<TeamRepository>();
+            Bind<IUserRepository>().To<UserRepository>();
         }
     }
 }

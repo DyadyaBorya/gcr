@@ -1,5 +1,5 @@
 
-namespace GCR.Model
+namespace GCR.Core.Entities
 {
     using System;
     using System.Collections.Generic;
