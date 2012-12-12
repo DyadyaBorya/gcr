@@ -114,6 +114,7 @@
     <Compile Include="Repositories\ITeamRepository.cs" />
     <Compile Include="Repositories\INewsRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\INewsService.cs" />
     <Compile Include="Services\ISeasonService.cs" />
     <Compile Include="Services\ITeamService.cs" />

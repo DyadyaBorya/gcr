@@ -18,6 +18,7 @@ namespace GCR.Business
             Bind<IScheduleService>().To<ScheduleService>();
             Bind<ISeasonService>().To<SeasonService>();
             Bind<ITeamService>().To<TeamService>();
+            Bind<IUserService>().To<UserService>();
         }
     }
 }
