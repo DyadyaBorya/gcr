@@ -10,9 +10,9 @@ using Ninject.Activation;
 using GCR.Core.Repositories;
 using GCR.Core.Entities;
 
-namespace GCR.Core.Identity
+namespace GCR.Core.Security
 {
-    class PrincipalProvider : Provider<CustomPrincipal>
+    internal class PrincipalIocProvider : Provider<CustomPrincipal>
     {
         protected override CustomPrincipal CreateInstance(IContext context)
         {

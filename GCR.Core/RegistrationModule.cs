@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
-using GCR.Core.Identity;
+using GCR.Core.Security;
 using Ninject.Web.Common;
 using Ninject.Modules;
 using System.Web;
@@ -17,11 +17,11 @@ namespace GCR.Core
         {
             if (System.Web.Hosting.HostingEnvironment.IsHosted)
             {
-                Bind<CustomPrincipal>().ToProvider(new PrincipalProvider()).InRequestScope();
+                Bind<CustomPrincipal>().ToProvider(new PrincipalIocProvider()).InRequestScope();
             }
             else
             {
-                Bind<CustomPrincipal>().ToProvider(new PrincipalProvider()).InSingletonScope();
+                Bind<CustomPrincipal>().ToProvider(new PrincipalIocProvider()).InSingletonScope();
             }
         }
     }

@@ -5,12 +5,10 @@ using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using DotNetOpenAuth.AspNet;
-using Microsoft.Web.WebPages.OAuth;
-using WebMatrix.WebData;
 using GCR.Web.Models;
 using GCR.Core;
 using GCR.Core.Services;
+using GCR.Core.Security;
 
 namespace GCR.Web.Controllers
 {
@@ -41,7 +39,7 @@ namespace GCR.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && userService.Login(model.UserName, model.Password, model.RememberMe))
+            if (ModelState.IsValid && userService.LoginLocal(model.UserName, model.Password, model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }
@@ -85,13 +83,13 @@ namespace GCR.Web.Controllers
                 // Attempt to register the user
                 try
                 {
-                    WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    userService.Login(model.UserName, model.Password, false);
+                    userService.CreateLocalAccount(model.UserName, model.Password);
+                    userService.LoginLocal(model.UserName, model.Password, false);
                     return RedirectToAction("Index", "Home");
                 }
-                catch (MembershipCreateUserException e)
+                catch (UserCreationException ex)
                 {
-                    //ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    ModelState.AddModelError("", ex.Message);
                 }
             }
 
@@ -106,39 +104,17 @@ namespace GCR.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Disassociate(string provider, string providerUserId)
         {
-            string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
-            ManageMessageId? message = null;
-
-            // Only disassociate the account if the currently logged in user is the owner
-            if (ownerAccount == User.Identity.Name)
-            {
-                // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
-                {
-                    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-                    if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
-                    {
-                        OAuthWebSecurity.DeleteAccount(provider, providerUserId);
-                        scope.Complete();
-                        message = ManageMessageId.RemoveLoginSuccess;
-                    }
-                }
-            }
-
-            return RedirectToAction("Manage", new { Message = message });
+            bool disassociate = userService.Disassociate(provider, providerUserId);
+            return RedirectToAction("Manage", new { Message = disassociate ? "The external login was removed." : null });
         }
 
         //
         // GET: /Account/Manage
 
-        public ActionResult Manage(ManageMessageId? message)
+        public ActionResult Manage(string message)
         {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
-                : "";
-            ViewBag.HasLocalPassword = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.StatusMessage = message;
+            ViewBag.HasLocalPassword = userService.HasLocalAccount(CurrentUser.Identity.UserId);
             ViewBag.ReturnUrl = Url.Action("Manage");
             return View();
         }
@@ -150,9 +126,10 @@ namespace GCR.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Manage(LocalPasswordModel model)
         {
-            bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            bool hasLocalAccount = userService.HasLocalAccount(CurrentUser.Identity.UserId);
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
+
             if (hasLocalAccount)
             {
                 if (ModelState.IsValid)
@@ -161,7 +138,7 @@ namespace GCR.Web.Controllers
                     bool changePasswordSucceeded;
                     try
                     {
-                        changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
+                        changePasswordSucceeded = userService.ChangeLocalPassword(CurrentUser.Identity.Name, model.OldPassword, model.NewPassword);
                     }
                     catch (Exception)
                     {
@@ -170,7 +147,7 @@ namespace GCR.Web.Controllers
 
                     if (changePasswordSucceeded)
                     {
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
+                        return RedirectToAction("Manage", new { Message = "Your password has been changed." });
                     }
                     else
                     {
@@ -192,8 +169,8 @@ namespace GCR.Web.Controllers
                 {
                     try
                     {
-                        WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
-                        return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
+                        userService.CreateLocalAccount(CurrentUser.Identity.Name, model.NewPassword);
+                        return RedirectToAction("Manage", new { Message = "Your password has been set." });
                     }
                     catch (Exception e)
                     {
@@ -214,7 +191,7 @@ namespace GCR.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            return new ExternalLoginResult(provider, Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
+            return new ExternalLoginResult(provider, GetExternalCallbackUrl(returnUrl), userService);
         }
 
         //
@@ -223,30 +200,29 @@ namespace GCR.Web.Controllers
         [AllowAnonymous]
         public ActionResult ExternalLoginCallback(string returnUrl)
         {
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(Url.Action("ExternalLoginCallback", new { ReturnUrl = returnUrl }));
-            if (!result.IsSuccessful)
+            var result = userService.GetOAuthResultFromRequest(GetExternalCallbackUrl(returnUrl));
+            if (!result.IsValid)
             {
                 return RedirectToAction("ExternalLoginFailure");
             }
 
-            if (OAuthWebSecurity.Login(result.Provider, result.ProviderUserId, createPersistentCookie: false))
+            if (userService.LoginOAuth(result.Provider, result.ProviderUserId))
             {
                 return RedirectToLocal(returnUrl);
             }
 
-            if (User.Identity.IsAuthenticated)
+            if (CurrentUser.IsAuthenticated)
             {
                 // If the current user is logged in add the new account
-                OAuthWebSecurity.CreateOrUpdateAccount(result.Provider, result.ProviderUserId, User.Identity.Name);
+                userService.UpdateOAuthAccount(CurrentUser.Identity.Name, result.Provider, result.ProviderUserId);
                 return RedirectToLocal(returnUrl);
             }
             else
             {
                 // User is new, ask for their desired membership name
-                string loginData = OAuthWebSecurity.SerializeProviderUserId(result.Provider, result.ProviderUserId);
-                ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
+                ViewBag.ProviderDisplayName = result.ProviderDisplayName;
                 ViewBag.ReturnUrl = returnUrl;
-                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = loginData });
+                return View("ExternalLoginConfirmation", new RegisterExternalLoginModel { UserName = result.UserName, ExternalLoginData = result.EncryptedLoginData });
             }
         }
 
@@ -258,40 +234,28 @@ namespace GCR.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLoginConfirmation(RegisterExternalLoginModel model, string returnUrl)
         {
-            string provider = null;
-            string providerUserId = null;
-
-            if (User.Identity.IsAuthenticated || !OAuthWebSecurity.TryDeserializeProviderUserId(model.ExternalLoginData, out provider, out providerUserId))
+            if (CurrentUser.IsAuthenticated)
             {
                 return RedirectToAction("Manage");
             }
 
+            var result = userService.GetOAuthResult(model.ExternalLoginData);
             if (ModelState.IsValid)
             {
-                // Insert a new user into the database
-                using (UsersContext db = new UsersContext())
+                if (!userService.UsernameExists(model.UserName))
                 {
-                    UserProfile user = db.UserProfiles.FirstOrDefault(u => u.UserName.ToLower() == model.UserName.ToLower());
-                    // Check if user already exists
-                    if (user == null)
-                    {
-                        // Insert name into the profile table
-                        db.UserProfiles.Add(new UserProfile { UserName = model.UserName });
-                        db.SaveChanges();
+                    userService.CreateOAuthAccount(model.UserName, result.Provider, result.ProviderUserId);
+                    userService.LoginOAuth(result.Provider, result.ProviderUserId);
 
-                        OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, model.UserName);
-                        OAuthWebSecurity.Login(provider, providerUserId, createPersistentCookie: false);
-
-                        return RedirectToLocal(returnUrl);
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
-                    }
+                    return RedirectToLocal(returnUrl);
                 }
+                else
+                {
+                    ModelState.AddModelError("UserName", "User name already exists. Please enter a different user name.");
+                } 
             }
 
-            ViewBag.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
+            ViewBag.ProviderDisplayName = result.ProviderDisplayName;
             ViewBag.ReturnUrl = returnUrl;
             return View(model);
         }
@@ -310,27 +274,25 @@ namespace GCR.Web.Controllers
         public ActionResult ExternalLoginsList(string returnUrl)
         {
             ViewBag.ReturnUrl = returnUrl;
-            return PartialView("_ExternalLoginsListPartial", OAuthWebSecurity.RegisteredClientData);
+            return PartialView("_ExternalLoginsListPartial", userService.GetOAuthProviders());
         }
 
         [ChildActionOnly]
         public ActionResult RemoveExternalLogins()
         {
-            ICollection<OAuthAccount> accounts = OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name);
+            var accounts = userService.GetOAuthAccountsForUser(CurrentUser.Identity.Name);
             List<ExternalLogin> externalLogins = new List<ExternalLogin>();
-            foreach (OAuthAccount account in accounts)
+            foreach (var account in accounts)
             {
-                AuthenticationClientData clientData = OAuthWebSecurity.GetOAuthClientData(account.Provider);
-
                 externalLogins.Add(new ExternalLogin
                 {
-                    Provider = account.Provider,
-                    ProviderDisplayName = clientData.DisplayName,
+                    Provider = account.ProviderName,
+                    ProviderDisplayName = account.ProviderDisplayName,
                     ProviderUserId = account.ProviderUserId,
                 });
             }
 
-            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            ViewBag.ShowRemoveButton = externalLogins.Count > 1 || userService.HasLocalAccount(CurrentUser.Identity.UserId);
             return PartialView("_RemoveExternalLoginsPartial", externalLogins);
         }
 
@@ -347,19 +309,20 @@ namespace GCR.Web.Controllers
             }
         }
 
-        public enum ManageMessageId
+        private string GetExternalCallbackUrl(string internalReturnUrl)
         {
-            ChangePasswordSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
+            return Url.Action("ExternalLoginCallback", new { ReturnUrl = internalReturnUrl });
         }
 
         internal class ExternalLoginResult : ActionResult
         {
-            public ExternalLoginResult(string provider, string returnUrl)
+            private IUserService userService;
+            
+            public ExternalLoginResult(string provider, string returnUrl, IUserService service)
             {
                 Provider = provider;
                 ReturnUrl = returnUrl;
+                userService = service;
             }
 
             public string Provider { get; private set; }
@@ -367,7 +330,7 @@ namespace GCR.Web.Controllers
 
             public override void ExecuteResult(ControllerContext context)
             {
-                OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
+                userService.RequestAuthentication(Provider, ReturnUrl);
             }
         }
         #endregion

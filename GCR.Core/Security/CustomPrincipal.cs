@@ -5,7 +5,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GCR.Core.Identity
+namespace GCR.Core.Security
 {
     /// <summary>
     /// Represents a custom principal.
