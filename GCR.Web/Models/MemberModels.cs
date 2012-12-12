@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace GCR.Web.Models.Member
+namespace GCR.Web.Models
 {
     public class MemberViewModel
     {

@@ -190,14 +190,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
-    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\Enums.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Member\MemberViewModel.cs" />
+    <Compile Include="Models\MemberModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -286,6 +285,64 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tooltip.min.css" />
+    <Content Include="Content\themes\custom\images\ui-bg_flat_100_020202_40x100.png" />
+    <Content Include="Content\themes\custom\images\ui-bg_flat_100_cccccc_40x100.png" />
+    <Content Include="Content\themes\custom\images\ui-bg_flat_100_ffffff_40x100.png" />
+    <Content Include="Content\themes\custom\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Content\themes\custom\images\ui-bg_highlight-soft_15_222222_1x100.png" />
+    <Content Include="Content\themes\custom\images\ui-bg_highlight-soft_15_444444_1x100.png" />
+    <Content Include="Content\themes\custom\images\ui-bg_highlight-soft_80_fafafa_1x100.png" />
+    <Content Include="Content\themes\custom\images\ui-bg_inset-soft_15_003473_1x100.png" />
+    <Content Include="Content\themes\custom\images\ui-bg_inset-soft_20_0079ce_1x100.png" />
+    <Content Include="Content\themes\custom\images\ui-icons_003473_256x240.png" />
+    <Content Include="Content\themes\custom\images\ui-icons_a83300_256x240.png" />
+    <Content Include="Content\themes\custom\images\ui-icons_fafafa_256x240.png" />
+    <Content Include="Content\themes\custom\jquery-ui.css" />
+    <Content Include="Content\themes\custom\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\custom\jquery.ui.all.css" />
+    <Content Include="Content\themes\custom\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\custom\jquery.ui.base.css" />
+    <Content Include="Content\themes\custom\jquery.ui.button.css" />
+    <Content Include="Content\themes\custom\jquery.ui.core.css" />
+    <Content Include="Content\themes\custom\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\custom\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\custom\jquery.ui.menu.css" />
+    <Content Include="Content\themes\custom\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\custom\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\custom\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\custom\jquery.ui.slider.css" />
+    <Content Include="Content\themes\custom\jquery.ui.spinner.css" />
+    <Content Include="Content\themes\custom\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\custom\jquery.ui.theme.css" />
+    <Content Include="Content\themes\custom\jquery.ui.tooltip.css" />
+    <Content Include="Content\themes\custom\minified\images\ui-bg_flat_100_020202_40x100.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-bg_flat_100_cccccc_40x100.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-bg_flat_100_ffffff_40x100.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-bg_highlight-soft_15_222222_1x100.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-bg_highlight-soft_15_444444_1x100.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-bg_highlight-soft_80_fafafa_1x100.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-bg_inset-soft_15_003473_1x100.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-bg_inset-soft_20_0079ce_1x100.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-icons_003473_256x240.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-icons_a83300_256x240.png" />
+    <Content Include="Content\themes\custom\minified\images\ui-icons_fafafa_256x240.png" />
+    <Content Include="Content\themes\custom\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.menu.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.spinner.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\custom\minified\jquery.ui.tooltip.min.css" />
     <Content Include="Content\_base.css">
       <DependentUpon>_base.css.bundle</DependentUpon>
     </Content>
@@ -367,6 +424,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\" />
+    <Folder Include="Filters\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -8,15 +8,21 @@ using System.Web.Security;
 using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
-using GCR.Web.Filters;
 using GCR.Web.Models;
+using GCR.Core;
+using GCR.Core.Services;
 
 namespace GCR.Web.Controllers
 {
     [Authorize]
-    [InitializeSimpleMembership]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
+        private IUserService userService;
+
+        public AccountController(IUserService service)
+        {
+            userService = service;
+        }
         //
         // GET: /Account/Login
 
@@ -35,7 +41,7 @@ namespace GCR.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
+            if (ModelState.IsValid && userService.Login(model.UserName, model.Password, model.RememberMe))
             {
                 return RedirectToLocal(returnUrl);
             }
@@ -52,7 +58,7 @@ namespace GCR.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
-            WebSecurity.Logout();
+            userService.Logout();
 
             return RedirectToAction("Index", "Home");
         }
@@ -80,12 +86,12 @@ namespace GCR.Web.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
-                    WebSecurity.Login(model.UserName, model.Password);
+                    userService.Login(model.UserName, model.Password, false);
                     return RedirectToAction("Index", "Home");
                 }
                 catch (MembershipCreateUserException e)
                 {
-                    ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
+                    //ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
             }
 
@@ -362,44 +368,6 @@ namespace GCR.Web.Controllers
             public override void ExecuteResult(ControllerContext context)
             {
                 OAuthWebSecurity.RequestAuthentication(Provider, ReturnUrl);
-            }
-        }
-
-        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
-        {
-            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
-            // a full list of status codes.
-            switch (createStatus)
-            {
-                case MembershipCreateStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
-
-                case MembershipCreateStatus.DuplicateEmail:
-                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
-
-                case MembershipCreateStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
-
-                case MembershipCreateStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidUserName:
-                    return "The user name provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                case MembershipCreateStatus.UserRejected:
-                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
             }
         }
         #endregion

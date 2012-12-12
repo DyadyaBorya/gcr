@@ -30,8 +30,8 @@ namespace GCR.Web
             bun.Transforms.Clear();
             bundles.Add(bun);
 
-            string theme = "base";
-            bun = new StyleBundle("~/Content/themes/" + theme + "/css", VirtualPathUtility.ToAbsolute("~/Content/themes/" + theme + "/minified/jquery-ui.min.css")).Include(
+            string theme = "custom";
+            bun = new StyleBundle("~/Content/themes/css", VirtualPathUtility.ToAbsolute("~/Content/themes/" + theme + "/minified/jquery-ui.min.css")).Include(
             "~/Content/themes/" + theme + "/jquery.ui.core.css",
             "~/Content/themes/" + theme + "/jquery.ui.accordion.css",
             "~/Content/themes/" + theme + "/jquery.ui.autocomplete.css",

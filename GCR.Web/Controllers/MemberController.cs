@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using GCR.Core.Entities;
 using GCR.Core.Services;
-using GCR.Web.Models.Member;
+using GCR.Web.Models;
 
 namespace GCR.Web.Controllers
 {
