@@ -6,16 +6,15 @@
     <edmx:StorageModels>
     <Schema Namespace="GCR.Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="GCRModelStoreContainer">
+          <EntitySet Name="AppSetting" EntityType="GCR.Model.Store.AppSetting" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="HomePagePhoto" EntityType="GCR.Model.Store.HomePagePhoto" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Members" EntityType="GCR.Model.Store.Members" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="News" EntityType="GCR.Model.Store.News" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Schedule" EntityType="GCR.Model.Store.Schedule" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Season" EntityType="GCR.Model.Store.Season" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Team" EntityType="GCR.Model.Store.Team" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="UserProfile" EntityType="GCR.Model.Store.UserProfile" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="webpages_Membership" EntityType="GCR.Model.Store.webpages_Membership" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="webpages_OAuthMembership" EntityType="GCR.Model.Store.webpages_OAuthMembership" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="webpages_Roles" EntityType="GCR.Model.Store.webpages_Roles" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="webpages_UsersInRoles" EntityType="GCR.Model.Store.webpages_UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserSetting" EntityType="GCR.Model.Store.UserSetting" store:Type="Tables" Schema="dbo" />
           <AssociationSet Name="FK_Schedule_Season" Association="GCR.Model.Store.FK_Schedule_Season">
             <End Role="Season" EntitySet="Season" />
             <End Role="Schedule" EntitySet="Schedule" />
@@ -24,15 +23,36 @@
             <End Role="Team" EntitySet="Team" />
             <End Role="Schedule" EntitySet="Schedule" />
           </AssociationSet>
-          <AssociationSet Name="FK_webpages_UsersInRoles_UserProfile" Association="GCR.Model.Store.FK_webpages_UsersInRoles_UserProfile">
+          <AssociationSet Name="FK_UserSetting_UserProfile" Association="GCR.Model.Store.FK_UserSetting_UserProfile">
             <End Role="UserProfile" EntitySet="UserProfile" />
-            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
-          </AssociationSet>
-          <AssociationSet Name="FK_webpages_UsersInRoles_webpages_Roles" Association="GCR.Model.Store.FK_webpages_UsersInRoles_webpages_Roles">
-            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
-            <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+            <End Role="UserSetting" EntitySet="UserSetting" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AppSetting">
+          <Key>
+            <PropertyRef Name="AppSettingId" />
+          </Key>
+          <Property Name="AppSettingId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SettingName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SettingValue" Type="varchar(max)" />
+          <Property Name="ValueTypeCode" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HomePagePhoto">
+          <Key>
+            <PropertyRef Name="HomePagePhotoId" />
+          </Key>
+          <Property Name="HomePagePhotoId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PhotoPath" Type="varchar" Nullable="false" MaxLength="256" />
+          <Property Name="DisplayOrder" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Members">
           <Key>
             <PropertyRef Name="MemberId" />
@@ -111,45 +131,19 @@
           <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserName" Type="nvarchar(max)" />
         </EntityType>
-        <EntityType Name="webpages_Membership">
+        <EntityType Name="UserSetting">
           <Key>
-            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserSettingId" />
           </Key>
+          <Property Name="UserSettingId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="CreateDate" Type="datetime" />
-          <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
-          <Property Name="IsConfirmed" Type="bit" />
-          <Property Name="LastPasswordFailureDate" Type="datetime" />
-          <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
-          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="PasswordChangedDate" Type="datetime" />
-          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
-          <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
-          <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="webpages_OAuthMembership">
-          <Key>
-            <PropertyRef Name="Provider" />
-            <PropertyRef Name="ProviderUserId" />
-          </Key>
-          <Property Name="Provider" Type="nvarchar" Nullable="false" MaxLength="30" />
-          <Property Name="ProviderUserId" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="webpages_Roles">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="RoleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
-        </EntityType>
-        <EntityType Name="webpages_UsersInRoles">
-          <Key>
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="SettingName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SettingValue" Type="varchar(max)" />
+          <Property Name="ValueTypeCode" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Schedule_Season">
           <End Role="Season" Type="GCR.Model.Store.Season" Multiplicity="0..1" />
@@ -175,27 +169,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_webpages_UsersInRoles_UserProfile">
+        <Association Name="FK_UserSetting_UserProfile">
           <End Role="UserProfile" Type="GCR.Model.Store.UserProfile" Multiplicity="1" />
-          <End Role="webpages_UsersInRoles" Type="GCR.Model.Store.webpages_UsersInRoles" Multiplicity="*" />
+          <End Role="UserSetting" Type="GCR.Model.Store.UserSetting" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="UserProfile">
               <PropertyRef Name="UserId" />
             </Principal>
-            <Dependent Role="webpages_UsersInRoles">
+            <Dependent Role="UserSetting">
               <PropertyRef Name="UserId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_webpages_UsersInRoles_webpages_Roles">
-          <End Role="webpages_Roles" Type="GCR.Model.Store.webpages_Roles" Multiplicity="1" />
-          <End Role="webpages_UsersInRoles" Type="GCR.Model.Store.webpages_UsersInRoles" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="webpages_Roles">
-              <PropertyRef Name="RoleId" />
-            </Principal>
-            <Dependent Role="webpages_UsersInRoles">
-              <PropertyRef Name="RoleId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -204,15 +186,15 @@
     <edmx:ConceptualModels>
       <Schema Namespace="GCR.Model" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="DB" p1:LazyLoadingEnabled="true" a:TypeAccess="Internal" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+          <EntitySet Name="AppSettings" EntityType="GCR.Model.AppSetting" />
+          <EntitySet Name="HomePagePhotoes" EntityType="GCR.Model.HomePagePhoto" />
           <EntitySet Name="Members" EntityType="GCR.Model.Member" />
           <EntitySet Name="News" EntityType="GCR.Model.News" />
           <EntitySet Name="Schedules" EntityType="GCR.Model.Schedule" />
           <EntitySet Name="Seasons" EntityType="GCR.Model.Season" />
           <EntitySet Name="Teams" EntityType="GCR.Model.Team" />
           <EntitySet Name="UserProfiles" EntityType="GCR.Model.UserProfile" />
-          <EntitySet Name="webpages_Membership" EntityType="GCR.Model.webpages_Membership" />
-          <EntitySet Name="webpages_OAuthMembership" EntityType="GCR.Model.webpages_OAuthMembership" />
-          <EntitySet Name="webpages_Roles" EntityType="GCR.Model.webpages_Roles" />
+          <EntitySet Name="UserSettings" EntityType="GCR.Model.UserSetting" />
           <AssociationSet Name="FK_Schedule_Season" Association="GCR.Model.FK_Schedule_Season">
             <End Role="Season" EntitySet="Seasons" />
             <End Role="Schedule" EntitySet="Schedules" />
@@ -221,11 +203,36 @@
             <End Role="Team" EntitySet="Teams" />
             <End Role="Schedule" EntitySet="Schedules" />
           </AssociationSet>
-          <AssociationSet Name="webpages_UsersInRoles" Association="GCR.Model.webpages_UsersInRoles">
+          <AssociationSet Name="FK_UserSetting_UserProfile" Association="GCR.Model.FK_UserSetting_UserProfile">
             <End Role="UserProfile" EntitySet="UserProfiles" />
-            <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+            <End Role="UserSetting" EntitySet="UserSettings" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="AppSetting">
+          <Key>
+            <PropertyRef Name="AppSettingId" />
+          </Key>
+          <Property Type="Int32" Name="AppSettingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SettingName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SettingValue" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ValueTypeCode" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HomePagePhoto">
+          <Key>
+            <PropertyRef Name="HomePagePhotoId" />
+          </Key>
+          <Property Type="Int32" Name="HomePagePhotoId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PhotoPath" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="DisplayOrder" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+        </EntityType>
         <EntityType Name="Member">
           <Key>
             <PropertyRef Name="MemberId" />
@@ -307,40 +314,22 @@
           </Key>
           <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="UserName" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="webpages_Roles" Relationship="GCR.Model.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+          <NavigationProperty Name="UserSettings" Relationship="GCR.Model.FK_UserSetting_UserProfile" FromRole="UserProfile" ToRole="UserSetting" />
         </EntityType>
-        <EntityType Name="webpages_Membership">
+        <EntityType Name="UserSetting">
           <Key>
-            <PropertyRef Name="UserId" />
+            <PropertyRef Name="UserSettingId" />
           </Key>
+          <Property Type="Int32" Name="UserSettingId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="UserId" Nullable="false" />
-          <Property Type="DateTime" Name="CreateDate" Precision="3" />
-          <Property Type="String" Name="ConfirmationToken" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="Boolean" Name="IsConfirmed" />
-          <Property Type="DateTime" Name="LastPasswordFailureDate" Precision="3" />
-          <Property Type="Int32" Name="PasswordFailuresSinceLastSuccess" Nullable="false" />
-          <Property Type="String" Name="Password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="PasswordChangedDate" Precision="3" />
-          <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="PasswordVerificationToken" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Type="DateTime" Name="PasswordVerificationTokenExpirationDate" Precision="3" />
-        </EntityType>
-        <EntityType Name="webpages_OAuthMembership">
-          <Key>
-            <PropertyRef Name="Provider" />
-            <PropertyRef Name="ProviderUserId" />
-          </Key>
-          <Property Type="String" Name="Provider" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="ProviderUserId" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="UserId" Nullable="false" />
-        </EntityType>
-        <EntityType Name="webpages_Roles">
-          <Key>
-            <PropertyRef Name="RoleId" />
-          </Key>
-          <Property Type="Int32" Name="RoleId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="UserProfiles" Relationship="GCR.Model.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+          <Property Type="String" Name="SettingName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SettingValue" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ValueTypeCode" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="ModifiedBy" Nullable="false" />
+          <NavigationProperty Name="UserProfile" Relationship="GCR.Model.FK_UserSetting_UserProfile" FromRole="UserSetting" ToRole="UserProfile" />
         </EntityType>
         <Association Name="FK_Schedule_Season">
           <End Type="GCR.Model.Season" Role="Season" Multiplicity="0..1" />
@@ -366,16 +355,51 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="webpages_UsersInRoles">
-          <End Type="GCR.Model.UserProfile" Role="UserProfile" Multiplicity="*" />
-          <End Type="GCR.Model.webpages_Roles" Role="webpages_Roles" Multiplicity="*" />
+        <Association Name="FK_UserSetting_UserProfile">
+          <End Type="GCR.Model.UserProfile" Role="UserProfile" Multiplicity="1" />
+          <End Type="GCR.Model.UserSetting" Role="UserSetting" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserSetting">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="GCRModelStoreContainer" CdmEntityContainer="DB">
+          <EntitySetMapping Name="AppSettings">
+            <EntityTypeMapping TypeName="GCR.Model.AppSetting">
+              <MappingFragment StoreEntitySet="AppSetting">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ValueTypeCode" ColumnName="ValueTypeCode" />
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="SettingName" ColumnName="SettingName" />
+                <ScalarProperty Name="AppSettingId" ColumnName="AppSettingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HomePagePhotoes">
+            <EntityTypeMapping TypeName="GCR.Model.HomePagePhoto">
+              <MappingFragment StoreEntitySet="HomePagePhoto">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="DisplayOrder" ColumnName="DisplayOrder" />
+                <ScalarProperty Name="PhotoPath" ColumnName="PhotoPath" />
+                <ScalarProperty Name="HomePagePhotoId" ColumnName="HomePagePhotoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Members">
             <EntityTypeMapping TypeName="GCR.Model.Member">
               <MappingFragment StoreEntitySet="Members">
@@ -460,48 +484,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="webpages_Membership">
-            <EntityTypeMapping TypeName="GCR.Model.webpages_Membership">
-              <MappingFragment StoreEntitySet="webpages_Membership">
-                <ScalarProperty Name="PasswordVerificationTokenExpirationDate" ColumnName="PasswordVerificationTokenExpirationDate" />
-                <ScalarProperty Name="PasswordVerificationToken" ColumnName="PasswordVerificationToken" />
-                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
-                <ScalarProperty Name="PasswordChangedDate" ColumnName="PasswordChangedDate" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="PasswordFailuresSinceLastSuccess" ColumnName="PasswordFailuresSinceLastSuccess" />
-                <ScalarProperty Name="LastPasswordFailureDate" ColumnName="LastPasswordFailureDate" />
-                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
-                <ScalarProperty Name="ConfirmationToken" ColumnName="ConfirmationToken" />
-                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <EntitySetMapping Name="UserSettings">
+            <EntityTypeMapping TypeName="GCR.Model.UserSetting">
+              <MappingFragment StoreEntitySet="UserSetting">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ValueTypeCode" ColumnName="ValueTypeCode" />
+                <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+                <ScalarProperty Name="SettingName" ColumnName="SettingName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserSettingId" ColumnName="UserSettingId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="webpages_OAuthMembership">
-            <EntityTypeMapping TypeName="GCR.Model.webpages_OAuthMembership">
-              <MappingFragment StoreEntitySet="webpages_OAuthMembership">
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProviderUserId" ColumnName="ProviderUserId" />
-                <ScalarProperty Name="Provider" ColumnName="Provider" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="webpages_Roles">
-            <EntityTypeMapping TypeName="GCR.Model.webpages_Roles">
-              <MappingFragment StoreEntitySet="webpages_Roles">
-                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <AssociationSetMapping Name="webpages_UsersInRoles" TypeName="GCR.Model.webpages_UsersInRoles" StoreEntitySet="webpages_UsersInRoles">
-            <EndProperty Name="webpages_Roles">
-              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
-            </EndProperty>
-            <EndProperty Name="UserProfile">
-              <ScalarProperty Name="UserId" ColumnName="UserId" />
-            </EndProperty>
-          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

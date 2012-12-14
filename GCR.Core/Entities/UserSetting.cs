@@ -12,16 +12,18 @@ namespace GCR.Core.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class webpages_Roles
+    public partial class UserSetting
     {
-    	public webpages_Roles()
-    	{
-    		this.UserProfiles = new HashSet<UserProfile>();
-    	}
+    	public int UserSettingId { get; set; }
+    	public int UserId { get; set; }
+    	public string SettingName { get; set; }
+    	public string SettingValue { get; set; }
+    	public int ValueTypeCode { get; set; }
+    	public System.DateTime CreatedOn { get; set; }
+    	public int CreatedBy { get; set; }
+    	public System.DateTime ModifiedOn { get; set; }
+    	public int ModifiedBy { get; set; }
     
-    	public int RoleId { get; set; }
-    	public string RoleName { get; set; }
-    
-    	public virtual ICollection<UserProfile> UserProfiles { get; set; }
+    	public virtual UserProfile UserProfile { get; set; }
     }
 }

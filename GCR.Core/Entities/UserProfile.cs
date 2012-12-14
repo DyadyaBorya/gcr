@@ -16,12 +16,12 @@ namespace GCR.Core.Entities
     {
     	public UserProfile()
     	{
-    		this.webpages_Roles = new HashSet<webpages_Roles>();
+    		this.UserSettings = new HashSet<UserSetting>();
     	}
     
     	public int UserId { get; set; }
     	public string UserName { get; set; }
     
-    	public virtual ICollection<webpages_Roles> webpages_Roles { get; set; }
+    	public virtual ICollection<UserSetting> UserSettings { get; set; }
     }
 }

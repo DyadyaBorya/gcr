@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Ninject.Modules;
 using GCR.Core.Services;
 using GCR.Business.Services;
+using GCR.Core.Security;
+using GCR.Business.Security;
 
 namespace GCR.Business
 {
@@ -19,6 +21,7 @@ namespace GCR.Business
             Bind<ISeasonService>().To<SeasonService>();
             Bind<ITeamService>().To<TeamService>();
             Bind<IUserService>().To<UserService>();
+            Bind<ISecurityProvider>().To<SecurityProvider>();
         }
     }
 }

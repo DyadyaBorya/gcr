@@ -12,12 +12,15 @@ namespace GCR.Core.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class AppSetting
     {
-    	public string name { get; set; }
-    	public int principal_id { get; set; }
-    	public int diagram_id { get; set; }
-    	public Nullable<int> version { get; set; }
-    	public byte[] definition { get; set; }
+    	public int AppSettingId { get; set; }
+    	public string SettingName { get; set; }
+    	public string SettingValue { get; set; }
+    	public int ValueTypeCode { get; set; }
+    	public System.DateTime CreatedOn { get; set; }
+    	public int CreatedBy { get; set; }
+    	public System.DateTime ModifiedOn { get; set; }
+    	public int ModifiedBy { get; set; }
     }
 }

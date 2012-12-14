@@ -5,18 +5,18 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="5f8ae0c87091465995965a0598a6fc20" Name="Diagram1" ZoomLevel="62">
-        <EntityTypeShape EntityType="GCR.Model.Member" Width="1.5" PointX="2.9197123995608241" PointY="30.625416129187411" />
-        <EntityTypeShape EntityType="GCR.Model.News" Width="1.5" PointX="5.7096058827403962" PointY="11.697033366047327" />
-        <EntityTypeShape EntityType="GCR.Model.Schedule" Width="1.5" PointX="8.9816822376948231" PointY="0.20090837786016444" />
-        <EntityTypeShape EntityType="GCR.Model.Season" Width="1.5" PointX="2.0956064174396944" PointY="3.62663914432127" />
-        <EntityTypeShape EntityType="GCR.Model.Team" Width="1.5" PointX="4.6825146920431937" PointY="6.4624932885460993" />
-        <EntityTypeShape EntityType="GCR.Model.UserProfile" Width="1.5" PointX="10.625" PointY="13.125" />
-        <EntityTypeShape EntityType="GCR.Model.webpages_Membership" Width="1.5" PointX="9.125" PointY="6.375" />
-        <EntityTypeShape EntityType="GCR.Model.webpages_OAuthMembership" Width="1.5" PointX="16.25" PointY="7.5" />
-        <EntityTypeShape EntityType="GCR.Model.webpages_Roles" Width="1.5" PointX="15" PointY="13.375" />
+        <EntityTypeShape EntityType="GCR.Model.AppSetting" Width="1.5" PointX="1.6684423134049595" PointY="3.9712525922671205" />
+        <EntityTypeShape EntityType="GCR.Model.HomePagePhoto" Width="1.5" PointX="4.1222223509672204" PointY="3.9398607182967758" />
+        <EntityTypeShape EntityType="GCR.Model.Member" Width="1.5" PointX="7.1560108545962766" PointY="31.543565064456111" />
+        <EntityTypeShape EntityType="GCR.Model.News" Width="1.5" PointX="6.901055253530413" PointY="7.9145970977445117" />
+        <EntityTypeShape EntityType="GCR.Model.Schedule" Width="1.5" PointX="1.7120092053487939" PointY="7.4835908298769924" />
+        <EntityTypeShape EntityType="GCR.Model.Season" Width="1.5" PointX="3.5703490113701433" PointY="22.111889700457404" />
+        <EntityTypeShape EntityType="GCR.Model.Team" Width="1.5" PointX="8.0318276807814026" PointY="8.67219582603881" />
+        <EntityTypeShape EntityType="GCR.Model.UserProfile" Width="1.5" PointX="8.6738896615216" PointY="9.32648215132136" />
+        <EntityTypeShape EntityType="GCR.Model.UserSetting" Width="1.5" PointX="7.7614974285296618" PointY="12.269463947168301" />
         <AssociationConnector Association="GCR.Model.FK_Schedule_Season" />
         <AssociationConnector Association="GCR.Model.FK_Schedule_Team" />
-        <AssociationConnector Association="GCR.Model.webpages_UsersInRoles" />
+        <AssociationConnector Association="GCR.Model.FK_UserSetting_UserProfile" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

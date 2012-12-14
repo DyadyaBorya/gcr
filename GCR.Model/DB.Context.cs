@@ -25,14 +25,14 @@ namespace GCR.Model
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<AppSetting> AppSettings { get; set; }
+        public DbSet<HomePagePhoto> HomePagePhotoes { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<Season> Seasons { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
-        public DbSet<webpages_Membership> webpages_Membership { get; set; }
-        public DbSet<webpages_OAuthMembership> webpages_OAuthMembership { get; set; }
-        public DbSet<webpages_Roles> webpages_Roles { get; set; }
+        public DbSet<UserSetting> UserSettings { get; set; }
     }
 }

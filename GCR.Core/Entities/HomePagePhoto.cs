@@ -12,10 +12,14 @@ namespace GCR.Core.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class webpages_OAuthMembership
+    public partial class HomePagePhoto
     {
-    	public string Provider { get; set; }
-    	public string ProviderUserId { get; set; }
-    	public int UserId { get; set; }
+    	public int HomePagePhotoId { get; set; }
+    	public string PhotoPath { get; set; }
+    	public int DisplayOrder { get; set; }
+    	public System.DateTime CreatedOn { get; set; }
+    	public int CreatedBy { get; set; }
+    	public System.DateTime ModifiedOn { get; set; }
+    	public int ModifiedBy { get; set; }
     }
 }

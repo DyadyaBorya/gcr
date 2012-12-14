@@ -9,11 +9,8 @@ using GCR.Core.Entities;
 using GCR.Core.Repositories;
 using GCR.Core.Security;
 using GCR.Core.Services;
-using WebMatrix.WebData;
-using Microsoft.Web.WebPages.OAuth;
 using GCR.Core;
 using System.Transactions;
-using DotNetOpenAuth.AspNet;
 
 
 namespace GCR.Business.Services
@@ -21,53 +18,32 @@ namespace GCR.Business.Services
     public class UserService : IUserService
     {
         private IUserRepository userRepository;
+        private ISecurityProvider userSecurity;
 
-        public UserService(IUserRepository repo)
+        public UserService(IUserRepository repo, ISecurityProvider security)
         {
             userRepository = repo;
-            InitializeSimpleMembership.Initialize();
+            userSecurity = security;
         }
 
         public bool LoginLocal(string username, string password, bool persist)
         {
-            return WebSecurity.Login(username, password, persistCookie: persist);
+            return userSecurity.LoginLocal(username, password, persist);
         }
 
         public void Logout()
         {
-            WebSecurity.Logout();
+            userSecurity.Logout();
         }
 
         public void CreateLocalAccount(string username, string password)
         {
-            try
-            {
-                if (WebSecurity.UserExists(username))
-                {
-                    WebSecurity.CreateAccount(username, password);
-                }
-                else
-                {
-                    WebSecurity.CreateUserAndAccount(username, password);
-                }
-            }
-            catch (MembershipCreateUserException ex)
-            {
-                throw new UserCreationException(ErrorCodeToString(ex.StatusCode));
-            }
+            userSecurity.CreateLocalAccount(username, password);
         }
 
         public bool CreateOAuthAccount(string username, string encryptedLoginData)
         {
-            string provider = null;
-            string providerUserId = null;
-
-            if (!TryDecryptProviderData(encryptedLoginData, out provider, out providerUserId))
-            {
-                return false;
-            }
-
-            return CreateOAuthAccount(username, provider, providerUserId);
+            return userSecurity.CreateOAuthAccount(username, encryptedLoginData);
         }
 
         public bool CreateOAuthAccount(string username, string provider, string providerUserId)
@@ -80,7 +56,7 @@ namespace GCR.Business.Services
                 userRepository.Create(new UserProfile { UserName = username });
                 userRepository.SaveChanges();
 
-                OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, username);
+                userSecurity.CreateOAuthAccount(provider, providerUserId, username);
 
                 return true;
             }
@@ -92,81 +68,33 @@ namespace GCR.Business.Services
 
         public bool UpdateOAuthAccount(string username, string encryptedLoginData)
         {
-            string provider = null;
-            string providerUserId = null;
-
-            if (!TryDecryptProviderData(encryptedLoginData, out provider, out providerUserId))
-            {
-                return false;
-            }
-
-            return UpdateOAuthAccount(username, provider, providerUserId);
+            return userSecurity.UpdateOAuthAccount(username, encryptedLoginData);
         }
 
         public bool UpdateOAuthAccount(string username, string provider, string providerUserId)
         {
-            OAuthWebSecurity.CreateOrUpdateAccount(provider, providerUserId, username);
+            userSecurity.UpdateOAuthAccount(provider, providerUserId, username);
             return true;
         }
 
         public OAuthResult GetOAuthResultFromRequest(string returnUrl)
         {
-            AuthenticationResult result = OAuthWebSecurity.VerifyAuthentication(returnUrl);
-            var oAuth = new OAuthResult();
-
-            if (!result.IsSuccessful)
-            {
-                return oAuth;
-            }
-
-            oAuth.IsValid = true;
-            oAuth.UserName = result.UserName;
-            oAuth.Provider = result.Provider;
-            oAuth.ProviderUserId = result.ProviderUserId;
-            oAuth.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(result.Provider).DisplayName;
-            oAuth.EncryptedLoginData = EncryptProviderData(result.Provider, result.ProviderUserId);
-
-            return oAuth;
+            return userSecurity.GetOAuthResultFromRequest(returnUrl);
         }
 
         public OAuthResult GetOAuthResult(string encryptedLoginData)
         {
-            string provider = null;
-            string providerUserId = null;
-            var oAuth = new OAuthResult();
-
-            if (!TryDecryptProviderData(encryptedLoginData, out provider, out providerUserId))
-            {
-                return oAuth;
-            }
-
-            
-            oAuth.IsValid = true;
-            oAuth.Provider = provider;
-            oAuth.ProviderUserId = providerUserId;
-            oAuth.UserName = OAuthWebSecurity.GetUserName(provider, providerUserId);
-            oAuth.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(provider).DisplayName;
-            oAuth.EncryptedLoginData = encryptedLoginData;
-
-            return oAuth;
+            return userSecurity.GetOAuthResult(encryptedLoginData);
         }
-
 
         public bool LoginOAuth(string encryptedLoginData)
         {
-            string provider = null;
-            string providerUserId = null;
-
-            if (!TryDecryptProviderData(encryptedLoginData, out provider, out providerUserId))
-            {
-                return false;
-            }
-            return LoginOAuth(provider, providerUserId);
+            return userSecurity.LoginOAuth(encryptedLoginData);
         }
 
         public bool LoginOAuth(string providerName, string providerUserId)
         {
-            return OAuthWebSecurity.Login(providerName, providerUserId, createPersistentCookie: false);
+            return userSecurity.LoginOAuth(providerName, providerUserId);
         }
 
         public bool UsernameExists(string username)
@@ -174,122 +102,34 @@ namespace GCR.Business.Services
             return userRepository.Query.FirstOrDefault(u => u.UserName.ToLower() == username.ToLower()) != null;
         }
 
-
         public bool Disassociate(string provider, string providerUserId)
         {
-            bool success = false;
-            string ownerAccount = OAuthWebSecurity.GetUserName(provider, providerUserId);
-
-            // Only disassociate the account if the currently logged in user is the owner
-            if (ownerAccount == CurrentUser.Identity.Name)
-            {
-                // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
-                {
-                    bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(CurrentUser.Identity.Name));
-                    if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(CurrentUser.Identity.Name).Count > 1)
-                    {
-                        OAuthWebSecurity.DeleteAccount(provider, providerUserId);
-                        scope.Complete();
-                        success = true;
-                    }
-                }
-            }
-            return success;
+            return userSecurity.Disassociate(provider, providerUserId);
         }
 
         public IEnumerable<OAuthProvider> GetOAuthProviders()
         {
-            var accounts = OAuthWebSecurity.RegisteredClientData;
-            var providers = new List<OAuthProvider>();
-            foreach (var acct in accounts)
-            {
-                var pro = new OAuthProvider();
-                pro.ProviderName = acct.AuthenticationClient.ProviderName;
-                pro.ProviderDisplayName = acct.DisplayName;
-                providers.Add(pro);
-            }
-
-            return providers;
+            return userSecurity.GetOAuthProviders();
         }
 
         public IEnumerable<OAuthProvider> GetOAuthAccountsForUser(string username)
         {
-            var accounts = OAuthWebSecurity.GetAccountsFromUserName(username);
-            var providers = new List<OAuthProvider>();
-            foreach (var acct in accounts)
-            {
-                var pro = new OAuthProvider();
-                pro.ProviderName = acct.Provider;
-                pro.ProviderDisplayName = OAuthWebSecurity.GetOAuthClientData(acct.Provider).DisplayName;
-                pro.ProviderUserId = acct.ProviderUserId;
-                providers.Add(pro);
-            }
-
-            return providers;
+            return userSecurity.GetOAuthAccountsForUser(username);
         }
 
         public void RequestAuthentication(string provider, string returnUrl)
         {
-            OAuthWebSecurity.RequestAuthentication(provider, returnUrl);
+            userSecurity.RequestAuthentication(provider, returnUrl);
         }
 
         public bool HasLocalAccount(int userId)
         {
-            return OAuthWebSecurity.HasLocalAccount(userId);
+            return userSecurity.HasLocalAccount(userId);
         }
 
         public bool ChangeLocalPassword(string userName, string oldPassword, string newPassword)
         {
-            return WebSecurity.ChangePassword(userName, oldPassword, newPassword);
-        }
-
-        private string EncryptProviderData(string providerName, string providerUserId)
-        {
-            return OAuthWebSecurity.SerializeProviderUserId(providerName, providerUserId);
-        }
-
-        private bool TryDecryptProviderData(string data, out string providerName, out string providerUserId)
-        {
-            return OAuthWebSecurity.TryDeserializeProviderUserId(data, out providerName, out providerUserId);
-        }
-
-        private static string ErrorCodeToString(MembershipCreateStatus createStatus)
-        {
-            // See http://go.microsoft.com/fwlink/?LinkID=177550 for
-            // a full list of status codes.
-            switch (createStatus)
-            {
-                case MembershipCreateStatus.DuplicateUserName:
-                    return "User name already exists. Please enter a different user name.";
-
-                case MembershipCreateStatus.DuplicateEmail:
-                    return "A user name for that e-mail address already exists. Please enter a different e-mail address.";
-
-                case MembershipCreateStatus.InvalidPassword:
-                    return "The password provided is invalid. Please enter a valid password value.";
-
-                case MembershipCreateStatus.InvalidEmail:
-                    return "The e-mail address provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidAnswer:
-                    return "The password retrieval answer provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidQuestion:
-                    return "The password retrieval question provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.InvalidUserName:
-                    return "The user name provided is invalid. Please check the value and try again.";
-
-                case MembershipCreateStatus.ProviderError:
-                    return "The authentication provider returned an error. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                case MembershipCreateStatus.UserRejected:
-                    return "The user creation request has been canceled. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-
-                default:
-                    return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
-            }
+            return userSecurity.ChangeLocalPassword(userName, oldPassword, newPassword);
         }
     }
 }

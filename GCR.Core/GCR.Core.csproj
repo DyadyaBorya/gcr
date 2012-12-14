@@ -58,9 +58,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configuration.cs" />
+    <Compile Include="Entities\AppSetting.cs">
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entities\DB.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>DB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\HomePagePhoto.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\Member.cs">
@@ -81,24 +87,17 @@
     <Compile Include="Entities\Season.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\sysdiagram.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\Team.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\UserProfile.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\webpages_Membership.cs">
+    <Compile Include="Entities\UserSetting.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entities\webpages_OAuthMembership.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\webpages_Roles.cs">
-      <DependentUpon>DB.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Repositories\IHomepagePhotoRepository.cs" />
+    <Compile Include="Repositories\ISettingsRepository.cs" />
     <Compile Include="Security\OAuthProvider.cs" />
     <Compile Include="Security\CurrentUser.cs" />
     <Compile Include="Security\CustomPrincipal.cs" />
@@ -116,12 +115,14 @@
     <Compile Include="Repositories\INewsRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Security\UserCreationException.cs" />
+    <Compile Include="Services\IPhotoService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\INewsService.cs" />
     <Compile Include="Services\ISeasonService.cs" />
     <Compile Include="Services\ITeamService.cs" />
     <Compile Include="Services\IScheduleService.cs" />
     <Compile Include="Services\IMemberService.cs" />
+    <Compile Include="Setting.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

@@ -10,5 +10,8 @@ namespace GCR.Model.Repositories
 {
     public class ScheduleRepository : Repository<Schedule>, IScheduleRepository
     {
+        public ScheduleRepository()
+        {
+        }
     }
 }
