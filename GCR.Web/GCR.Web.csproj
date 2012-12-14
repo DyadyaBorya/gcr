@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\Enums.cs" />
+    <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\MemberModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

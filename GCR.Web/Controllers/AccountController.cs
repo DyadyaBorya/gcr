@@ -49,11 +49,6 @@ namespace GCR.Web.Controllers
             return View(model);
         }
 
-        //
-        // POST: /Account/LogOff
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             userService.Logout();

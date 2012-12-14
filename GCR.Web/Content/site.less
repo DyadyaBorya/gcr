@@ -22,6 +22,7 @@
 @font-alt-color: #fafafa;
 @heading-color: #222222;
 @link-color: #006699;
+@link--alt-color: #ffffff;
 
 @accent-color: #0079ce;
 @accent-alt-color: #996699;
@@ -60,6 +61,7 @@ body
 #body
 {
 	background: transparent url(images/bottom.jpg) center bottom repeat-x;
+	position: relative;
 }
 
 #inner-body
@@ -67,6 +69,7 @@ body
 	min-height: 1200px;
 	background: transparent url(images/background.jpg) center top repeat-x;
 	padding-bottom:50px;
+	position: relative;
 }
 
 #header
@@ -162,9 +165,25 @@ body
 
 #footer
 {
-	min-height: 40px;
-	background: @footer-color;
-	color: @font-alt-color;
+    background: @footer-color;
+    color: @font-alt-color;
+	position: relative;
+
+    a
+    {
+		color:@link--alt-color;
+    }
+
+	a:hover
+    {
+		color:darken(@link--alt-color, 15%);
+    }
+}
+#footer-inner
+{
+    width: @grid-width; 
+	margin: 0 auto;
+	padding: 25px 5px 10px 5px; 
 }
 
 h1, h2, h3, h4, h5, h6

@@ -56,7 +56,10 @@
         </div>
     </div>
     <div id="footer">
-        <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+        <div id="footer-inner">
+                    <p>&copy; @DateTime.Now.Year - Gopher College Rugby &nbsp; | &nbsp;  @Html.LoginView()</p>
+        </div>
+
     </div>
     @Scripts.Render("~/Script/base")
     <script type="text/javascript" src="~/Scripts/jquery.jcarousel.min.js"></script>
