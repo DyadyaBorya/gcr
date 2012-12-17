@@ -124,6 +124,7 @@
     <Compile Include="Services\IScheduleService.cs" />
     <Compile Include="Services\IMemberService.cs" />
     <Compile Include="Setting.cs" />
+    <Compile Include="TypeConverter.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

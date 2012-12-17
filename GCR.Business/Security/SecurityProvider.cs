@@ -11,6 +11,7 @@ using GCR.Core;
 using System.Transactions;
 using DotNetOpenAuth.AspNet;
 using System.Web.Security;
+using System.IO;
 
 namespace GCR.Business.Security
 {
@@ -222,6 +223,18 @@ namespace GCR.Business.Security
             return WebSecurity.UserExists(username);
         }
 
+        public string EncryptData(string value)
+        {
+            return CryptoHelper.ProtectData(value);
+        }
+
+        public string DecryptData(string encrytedData)
+        {
+            string value;
+            CryptoHelper.UnprotectData(encrytedData, out value);
+            return value;
+        }
+
         private string EncryptProviderData(string providerName, string providerUserId)
         {
             return OAuthWebSecurity.SerializeProviderUserId(providerName, providerUserId);
@@ -267,6 +280,54 @@ namespace GCR.Business.Security
 
                 default:
                     return "An unknown error occurred. Please verify your entry and try again. If the problem persists, please contact your system administrator.";
+            }
+        }
+
+        private static class CryptoHelper
+        {
+            public static string ProtectData(string value)
+            {
+                string str;
+                using (MemoryStream stream = new MemoryStream())
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+                    writer.Write(value);
+                    writer.Flush();
+
+                    byte[] dst = new byte[stream.Length];
+                    Buffer.BlockCopy(stream.GetBuffer(), 0, dst, 0, (int)stream.Length);
+                    byte[] result = MachineKey.Protect(dst, typeof(CryptoHelper).FullName, "User: " + CurrentUser.Identity.Name);
+                    str = Convert.ToBase64String(result);
+                }
+                return str;
+            }
+
+            public static bool UnprotectData(string protectedData, out string value)
+            {
+                value = null;
+                if (!string.IsNullOrEmpty(protectedData))
+                {
+                    byte[] src = Convert.FromBase64String(protectedData);
+                    byte[] buffer = MachineKey.Unprotect(src, typeof(CryptoHelper).FullName, "User: " + CurrentUser.Identity.Name);
+                    using (MemoryStream stream = new MemoryStream(buffer))
+                    using (BinaryReader reader = new BinaryReader(stream))
+                    {
+                        try
+                        {
+
+                            string str = reader.ReadString();
+                            if (stream.ReadByte() == -1)
+                            {
+                                value = str;
+                                return true;
+                            }
+                        }
+                        catch
+                        {
+                        }
+                    }
+                }
+                return false;
             }
         }
     }

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GCR.Core;
 using GCR.Core.Entities;
+using GCR.Core.Security;
 using GCR.Core.Services;
 using GCR.Web.Models;
 
@@ -12,11 +14,21 @@ namespace GCR.Web.Controllers
     public class MemberController : BaseController
     {
         private IMemberService memberService;
+        private ISecurityProvider securityProvider;
 
-        public MemberController(IMemberService service)
+        public MemberController(IMemberService service, ISecurityProvider security)
         {
             memberService = service;
+            securityProvider = security;
             SetActiveTab(Tabs.Member);
+        }
+
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+
+            string str = securityProvider.EncryptData(Configuration.UploadPath + "/Photos/Members");
+            ViewBag.UploadPath = "~/ImageUpload.aspx?w=150&h=200&p=" + Url.Encode(str);
         }
         //
         // GET: /Member/

@@ -43,5 +43,9 @@ namespace GCR.Core.Security
         void RequestAuthentication(string provider, string returnUrl);
 
         bool UserExists(string username);
+
+        string EncryptData(string value);
+
+        string DecryptData(string encrytedData);
     }
 }

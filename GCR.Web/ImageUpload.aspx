@@ -16,11 +16,31 @@
         <asp:UpdatePanel runat="server" ID="UpdatePanel1">
             <ContentTemplate>        
 
-                <ccPiczardUC:SimpleImageUpload ID="Picture1" runat="server" Width="830px" AutoOpenImageEditPopupAfterUpload="true" />
-                          
+                <ccPiczardUC:SimpleImageUpload ID="ImageUploader" runat="server" Width="830px" AutoOpenImageEditPopupAfterUpload="true" />
+                <asp:Button runat="server" ID="btnCancel" OnClick="btnCancel_Click" Text="cancel" UseSubmitBehavior="true" CssClass="hide" /> 
+                <asp:Button runat="server" ID="btnSave" OnClick="btnSave_Click" Text="save" UseSubmitBehavior="true" CssClass="hide"  /> 
             </ContentTemplate>
         </asp:UpdatePanel>
     </div>
     </form>
+    <script type="text/javascript">
+
+        function Upload_Notify() {
+            var notifier = window.parent.GCR.Notifier;
+            if (notifier != null) {
+                notifier.notify.apply(null, arguments);
+            }
+         }
+
+        function Upload_Ready() {
+             window.setTimeout(function () {
+                 Upload_Notify("ready");
+             }, 25);
+         }
+
+         function Upload_SaveSuccess(path) {
+             Upload_Notify("saved", path);
+         }
+    </script>
 </body>
 </html>

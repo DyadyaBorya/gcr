@@ -11,7 +11,7 @@
 {
     <div class="two row">
         <div class="eleven columns">
-            @Html.ValidationSummary(false)
+            @Html.Message()
         </div>
     </div>
     <div class="one row">
@@ -75,7 +75,7 @@
     </div>
 }
 <div class="image-uploader" style="display:none;">
-    <iframe src="@Url.Content("~/ImageUpload.aspx")" width="830px" height="540px" scrolling="no"></iframe>
+    <iframe src="@Url.Content(ViewBag.UploadPath)" width="830px" height="540px" scrolling="no"></iframe>
     </div>
 @section Scripts {
     <script type="text/javascript">
