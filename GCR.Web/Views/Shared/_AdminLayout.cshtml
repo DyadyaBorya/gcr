@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Member Create";
+}
+<div class="four row">
+    <div class="five border">
+        <div class="four columns offset-by-one alpha">
+            <h2>Admin</h2>
+            <ul class="none">
+                <li><h4>@Html.ActionLink("Members", "Admin", "Member")</h4></li>
+                <li><h4>@Html.ActionLink("Schedule", "Admin", "Member")</h4></li>
+                <li><h4>@Html.ActionLink("Seasons", "Admin", "Member")</h4></li>
+                <li><h4>@Html.ActionLink("Home Page", "Admin", "Member")</h4></li>
+                <li><h4>@Html.ActionLink("Photos", "Admin", "Member")</h4></li>
+            </ul>
+        </div>
+        <div class="seventeen columns offset-by-one omega">
+            @RenderBody()
+        </div>
+    </div>
+    @section Scripts {
+        @RenderSection("scripts", required: false)
+    }
+</div>

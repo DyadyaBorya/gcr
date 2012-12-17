@@ -49,6 +49,8 @@ namespace GCR.Web.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
             userService.Logout();

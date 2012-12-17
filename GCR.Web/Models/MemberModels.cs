@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,15 +9,30 @@ namespace GCR.Web.Models
     public class MemberViewModel
     {
         public int MemberId { get; set; }
+
+        [Display(Name="First Name")]
         public string FirstName { get; set; }
+
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Display(Name = "Is Active")]
         public bool IsActive { get; set; }
+
+        [Display(Name = "Member Since")]
         public int MemberSince { get; set; }
+
         public string Bio { get; set; }
+
         public string Photo { get; set; }
 
+        [Display(Name = "Has Photo")]
+        public bool HasPhoto { get { return string.IsNullOrEmpty(this.Photo); } }
+
+        [Display(Name = "Full Name")]
         public string FullName { get { return this.FirstName + " " + this.LastName; } }
-        public string PhotoForDisplay { get { return string.IsNullOrEmpty(this.Photo) ? "~/Content/Images/NoPhoto.png" : this.Photo; } }
+
+        public string PhotoForDisplay { get { return HasPhoto ? "~/Content/Images/NoPhoto.png" : this.Photo; } }
 
 
         public static MemberViewModel ToViewModel(GCR.Core.Entities.Member member)

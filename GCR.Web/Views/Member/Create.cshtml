@@ -1,0 +1,94 @@
+﻿@model GCR.Web.Models.MemberViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Member Create";
+}
+
+<h2>Create New Member</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="two row">
+        <div class="eleven columns">
+            @Html.ValidationSummary(false)
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.IsActive)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.EditorFor(model => model.IsActive)
+            @Html.ValidationMessageFor(model => model.IsActive)
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.MemberSince)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.EditorFor(model => model.MemberSince)
+            @Html.ValidationMessageFor(model => model.MemberSince)
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.Photo)
+        </div>
+        <div class="fourteen columns omega editor-field">
+           <a class="button" onclick="showImageDialog()">Select Photo</a>
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.Bio)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.TextAreaFor(model => model.Bio)
+            @Html.ValidationMessageFor(model => model.Bio)
+        </div>
+    </div>
+    <div class="one row">
+        <div class="fourteen columns omega offset-by-three editor-field">
+            <input type="submit" value="Create" />&nbsp;&nbsp;
+                @Html.ActionLink("Back to List", "Admin", null, new { @class = "button" })
+        </div>
+    </div>
+}
+<div class="image-uploader" style="display:none;">
+    <iframe src="@Url.Content("~/ImageUpload.aspx")" width="830px" height="540px" scrolling="no"></iframe>
+    </div>
+@section Scripts {
+    <script type="text/javascript">
+        function showImageDialog() {
+            $('.image-uploader').dialog({
+                modal: true, width: '860px', resizable: false, buttons: {
+                    Ok: function () {
+                        $(this).dialog("close");
+                    },
+                    Cancel: function () {
+                        $(this).dialog("close");
+                    }
+                }});
+        }
+    </script>
+}

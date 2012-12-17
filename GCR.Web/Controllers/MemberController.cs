@@ -82,7 +82,6 @@ namespace GCR.Web.Controllers
             {
                 ModelState.AddModelError("", ex);
             }
-
             return View(model);
         }
 

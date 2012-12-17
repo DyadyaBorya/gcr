@@ -69,6 +69,7 @@
     <Compile Include="Entities\HomePagePhoto.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\IAuditable.cs" />
     <Compile Include="Entities\Member.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>

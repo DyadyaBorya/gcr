@@ -36,6 +36,7 @@ namespace GCR.Web
             "~/Content/themes/" + theme + "/jquery.ui.accordion.css",
             "~/Content/themes/" + theme + "/jquery.ui.autocomplete.css",
             "~/Content/themes/" + theme + "/jquery.ui.button.css",
+            "~/Content/themes/" + theme + "/jquery.ui.datepicker.css",
             "~/Content/themes/" + theme + "/jquery.ui.dialog.css",
             "~/Content/themes/" + theme + "/jquery.ui.menu.css",
             "~/Content/themes/" + theme + "/jquery.ui.progressbar.css",

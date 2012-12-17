@@ -8,6 +8,12 @@ namespace GCR.Web
 {
     public class BaseController : Controller
     {
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            ViewBag.User = new Models.User();
+            base.Initialize(requestContext);
+        }
+
         public void SetActiveTab(Tabs activeTab)
         {
             ViewBag.HomeTab = null;

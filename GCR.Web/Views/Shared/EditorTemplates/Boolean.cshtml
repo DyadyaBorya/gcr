@@ -1,0 +1,7 @@
+﻿@model System.Boolean
+<div class="buttonset">
+    @Html.RadioButton("", true, Model == true, new { id=ViewData.ModelMetadata.PropertyName+ "_0"})
+    @Html.Label("0", "Yes")
+    @Html.RadioButton("", false, Model == false, new { id=ViewData.ModelMetadata.PropertyName+ "_1"})
+    @Html.Label("1", "No")
+</div>

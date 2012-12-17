@@ -6,6 +6,7 @@ using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using GCR.Core;
+using GCR.Core.Entities;
     
     internal partial class DB : DbContext
     {
@@ -19,6 +20,51 @@ using GCR.Core;
             : base(existingConnection, false)
         { 
             OnConstructorCalled();
+        }
+
+        public override int SaveChanges()
+        {
+            CheckForAuditItems();
+            return base.SaveChanges();
+        }
+
+        private void CheckForAuditItems()
+        {
+            var entities = this.ChangeTracker.Entries();
+            foreach (var entity in entities)
+            {
+                if (entity.State == System.Data.EntityState.Added)
+                {
+                    var auditable = entity.Entity as IAuditable;
+                    if (auditable != null)
+                    {
+                        UpdateAuditFieldsForInsert(auditable);
+                    }
+                }
+                else if (entity.State == System.Data.EntityState.Modified)
+                {
+                    var auditable = entity.Entity as IAuditable;
+                    if (auditable != null)
+                    {
+                        UpdateAuditFieldsForUpdate(auditable);
+                    }
+                }
+
+            }
+        }
+
+        private void UpdateAuditFieldsForInsert(IAuditable auditable)
+        {
+            auditable.CreatedBy = CurrentUser.Identity.UserId;
+            auditable.ModifiedBy = CurrentUser.Identity.UserId;
+            auditable.CreatedOn = DateTime.Now;
+            auditable.ModifiedOn = DateTime.Now;
+        }
+
+        private void UpdateAuditFieldsForUpdate(IAuditable auditable)
+        {
+            auditable.ModifiedBy = CurrentUser.Identity.UserId;
+            auditable.ModifiedOn = DateTime.Now;
         }
 
         /// <summary>

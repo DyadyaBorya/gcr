@@ -26,6 +26,11 @@ namespace GCR.Business.Services
             userSecurity = security;
         }
 
+        public UserProfile GetProfileByUsername(string username)
+        { 
+             return userRepository.Query.FirstOrDefault(u => u.UserName == username); 
+        }
+
         public bool LoginLocal(string username, string password, bool persist)
         {
             return userSecurity.LoginLocal(username, password, persist);

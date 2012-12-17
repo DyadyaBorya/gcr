@@ -5,28 +5,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
+using GCR.Core;
 
 namespace GCR.Web.Models
 {
-    public class UsersContext : DbContext
+    public class User
     {
-        public UsersContext()
-            : base(GCR.Core.Configuration.DatabaseConnectionString)
-        {
-        }
-
-        public DbSet<UserProfile> UserProfiles { get; set; }
+        public string Name { get { return CurrentUser.Identity.Name; } }
+        public bool IsLoggedIn { get { return CurrentUser.IsAuthenticated; } }
+        public bool IsAdmin { get { return CurrentUser.Principal.IsInRole("Admin"); } }
     }
-
-    [Table("UserProfile")]
-    public class UserProfile
-    {
-        [Key]
-        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
-        public int UserId { get; set; }
-        public string UserName { get; set; }
-    }
-
     public class RegisterExternalLoginModel
     {
         [Required]

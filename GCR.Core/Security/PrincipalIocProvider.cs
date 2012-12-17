@@ -9,6 +9,7 @@ using Ninject;
 using Ninject.Activation;
 using GCR.Core.Repositories;
 using GCR.Core.Entities;
+using GCR.Core.Services;
 
 namespace GCR.Core.Security
 {
@@ -20,8 +21,8 @@ namespace GCR.Core.Security
             string username = CurrentUser.GetCurrentUserName();
             if (!string.IsNullOrEmpty(username))
             {
-                var repo = context.Kernel.Get<IUserRepository>();
-                user = repo.Query.FirstOrDefault(u => u.UserName == username);
+                var repo = context.Kernel.Get<IUserService>();
+                user = repo.GetProfileByUsername(username);
             }
 
             int userId = user != null ? user.UserId: 0;

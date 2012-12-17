@@ -10,6 +10,8 @@ namespace GCR.Core.Services
 {
     public interface IUserService
     {
+        UserProfile GetProfileByUsername(string username);
+        
         bool LoginLocal(string username, string password, bool persist);
 
         void Logout();
