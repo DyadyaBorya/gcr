@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using GCR.Web.Infrastructure;
 
 namespace GCR.Web
 {
@@ -23,6 +24,10 @@ namespace GCR.Web
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+
+
+            ValueProviderFactories.Factories.Remove(ValueProviderFactories.Factories.OfType<JsonValueProviderFactory>().FirstOrDefault());
+            ValueProviderFactories.Factories.Add(new JsonNetValueProviderFactory());
         }
     }
 }

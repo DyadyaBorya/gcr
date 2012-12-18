@@ -19,7 +19,9 @@ namespace GCR.Web
                        , "~/Scripts/jquery.unobtrusive-ajax.js"
                        , "~/Scripts/jquery.validate.js"
                        , "~/Scripts/jquery.validate.unobtrusive.js"
-                       , "~/Scripts/knockout-{version}.debug.js");
+                       , "~/Scripts/json2.js"
+                       , "~/Scripts/charCount.js"
+                       , "~/Scripts/Common.js");
             bun.Transforms.Clear();
             bundles.Add(bun);
 

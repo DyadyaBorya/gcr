@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GCR.Core;
 using GCR.Core.Entities;
 using GCR.Core.Repositories;
 using GCR.Core.Services;
@@ -12,10 +13,16 @@ namespace GCR.Business.Services
     public class MemberService : IMemberService
     {
         private IMemberRepository memberRepository;
+        private IPhotoService photoService;
+        private string uploadPath;
 
-        public MemberService(IMemberRepository repo)
+        public MemberService(IMemberRepository repo, IPhotoService service)
         {
             memberRepository = repo;
+            photoService = service;
+            uploadPath = Configuration.UploadPath + "Photos/Members";
+            photoService.Initialize(uploadPath);
+
         }
 
         public IEnumerable<Member> FetchAll()
@@ -52,8 +59,24 @@ namespace GCR.Business.Services
 
         public void DeleteMember(Member member)
         {
-            memberRepository.Delete(member);
-            memberRepository.SaveChanges();
+            using (var scope = new TransactionScope())
+            {
+                memberRepository.Delete(member);
+                memberRepository.SaveChanges();
+                photoService.DeletePhoto(member.Photo);
+                scope.Complete();
+            }
+
+        }
+
+        public void DeleteOrphanPhotos(Func<string, bool> validationFunc)
+        {
+            photoService.DeleteOrphanPhotos(validationFunc);
+        }
+
+        public string GetPhotoUploadPath()
+        {
+            return uploadPath;
         }
     }
 }

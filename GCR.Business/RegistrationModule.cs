@@ -20,8 +20,10 @@ namespace GCR.Business
             Bind<IScheduleService>().To<ScheduleService>();
             Bind<ISeasonService>().To<SeasonService>();
             Bind<ITeamService>().To<TeamService>();
+            Bind<IHomePageService>().To<HomePageService>();
             Bind<IUserService>().To<UserService>();
             Bind<ISecurityProvider>().To<SecurityProvider>();
+            Bind<IPhotoService>().To<PhotoService>();
         }
     }
 }

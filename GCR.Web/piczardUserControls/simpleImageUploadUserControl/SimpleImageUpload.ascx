@@ -69,6 +69,7 @@
 
         <ccPiczard:PopupPictureTrimmer runat="server" id="popupPictureTrimmer1"
         ShowZoomPanel="true"
+        ShowRulers="false"
         ShowImageAdjustmentsPanel="true" 
         AutoFreezeOnFormSubmit="true" AutoPostBackOnPopupClose="Never"
         OnClientBeforePopupOpenFunction="CodeCarvings.Wcs.Piczard.Upload.SimpleImageUpload.onImageEditBeforePopupOpen"

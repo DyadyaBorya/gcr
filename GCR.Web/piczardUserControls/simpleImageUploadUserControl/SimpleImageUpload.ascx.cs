@@ -2322,6 +2322,11 @@ public partial class SimpleImageUpload
         }
     }
 
+    public void DeleteOldTemporaryFiles()
+    {
+        TemporaryFileManager.DeleteOldTemporaryFiles();
+    }
+
     protected string GetSubElementId(string subId)
     {
         return this.ClientID + "_" + subId;

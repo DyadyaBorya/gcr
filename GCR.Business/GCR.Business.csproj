@@ -88,6 +88,8 @@
     <Compile Include="RegistrationModule.cs" />
     <Compile Include="Security\InitializeSimpleMembership.cs" />
     <Compile Include="Security\SecurityProvider.cs" />
+    <Compile Include="Services\PhotoService.cs" />
+    <Compile Include="Services\HomePageService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Services\TeamService.cs" />
     <Compile Include="Services\ScheduleService.cs" />

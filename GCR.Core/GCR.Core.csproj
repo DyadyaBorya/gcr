@@ -45,6 +45,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
@@ -97,7 +98,7 @@
     <Compile Include="Entities\UserSetting.cs">
       <DependentUpon>DB.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\IHomepagePhotoRepository.cs" />
+    <Compile Include="Repositories\IHomePagePhotoRepository.cs" />
     <Compile Include="Repositories\ISettingsRepository.cs" />
     <Compile Include="Security\OAuthProvider.cs" />
     <Compile Include="Security\CurrentUser.cs" />
@@ -116,14 +117,16 @@
     <Compile Include="Repositories\INewsRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Security\UserCreationException.cs" />
-    <Compile Include="Services\IPhotoService.cs" />
+    <Compile Include="Services\IHomePageService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\INewsService.cs" />
     <Compile Include="Services\ISeasonService.cs" />
     <Compile Include="Services\ITeamService.cs" />
     <Compile Include="Services\IScheduleService.cs" />
     <Compile Include="Services\IMemberService.cs" />
+    <Compile Include="Services\IPhotoService.cs" />
     <Compile Include="Setting.cs" />
+    <Compile Include="TransactionScope.cs" />
     <Compile Include="TypeConverter.cs" />
   </ItemGroup>
   <ItemGroup />

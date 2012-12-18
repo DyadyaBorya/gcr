@@ -8,6 +8,8 @@ using GCR.Core.Entities;
 using GCR.Core.Security;
 using GCR.Core.Services;
 using GCR.Web.Models;
+using GCR.Web.Infrastructure;
+using System.IO;
 
 namespace GCR.Web.Controllers
 {
@@ -15,6 +17,7 @@ namespace GCR.Web.Controllers
     {
         private IMemberService memberService;
         private ISecurityProvider securityProvider;
+        private string uploadPath;
 
         public MemberController(IMemberService service, ISecurityProvider security)
         {
@@ -27,8 +30,11 @@ namespace GCR.Web.Controllers
         {
             base.Initialize(requestContext);
 
-            string str = securityProvider.EncryptData(Configuration.UploadPath + "/Photos/Members");
+            uploadPath = memberService.GetPhotoUploadPath();
+
+            string str = securityProvider.EncryptData(uploadPath);
             ViewBag.UploadPath = "~/ImageUpload.aspx?w=150&h=200&p=" + Url.Encode(str);
+
         }
         //
         // GET: /Member/
@@ -51,7 +57,7 @@ namespace GCR.Web.Controllers
 
         public ActionResult Admin()
         {
-            var members = from m in memberService.FetchAll()
+            var members = (from m in memberService.FetchAll()
                           select new MemberViewModel
                           {
                               MemberId = m.MemberId,
@@ -60,8 +66,10 @@ namespace GCR.Web.Controllers
                               MemberSince = m.MemberSince,
                               IsActive = m.IsActive,
                               Photo = m.Photo
-                          };
+                          }).ToList();
 
+
+            DeleteOrphanPhotos(members);
             return View(members);
         }
 
@@ -70,9 +78,13 @@ namespace GCR.Web.Controllers
 
         public ActionResult Create()
         {
-            var members = new MemberViewModel();
+            ViewBag.PageTitle = "Create New Member";
+            ViewBag.Title = "Create Member";
 
-            return View(members);
+            var model = new MemberViewModel();
+            model.IsActive = true;
+
+            return View("CreateEdit", model);
         }
 
         //
@@ -95,7 +107,10 @@ namespace GCR.Web.Controllers
             {
                 ModelState.AddModelError("", ex);
             }
-            return View(model);
+
+            ViewBag.PageTitle = "Create New Member";
+            ViewBag.Title = "Create Member";
+            return View("CreateEdit", model);
         }
 
         //
@@ -103,9 +118,13 @@ namespace GCR.Web.Controllers
 
         public ActionResult Edit(int id)
         {
-            var member = memberService.GetById(id);
+            ViewBag.PageTitle = "Edit Member";
+            ViewBag.Title = "Edit Member";
 
-            return View(member);
+            var member = memberService.GetById(id);
+            var model = MemberViewModel.ToViewModel(member);
+
+            return View("CreateEdit", model);
         }
 
         //
@@ -118,8 +137,8 @@ namespace GCR.Web.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    var member = MemberViewModel.ToModel(model);
-                    member.MemberId = id;
+                    var member = memberService.GetById(id);
+                    member = MemberViewModel.ToModel(model, member);
                     memberService.SaveMember(member);
 
                     return RedirectToAction("Admin");
@@ -130,7 +149,9 @@ namespace GCR.Web.Controllers
                 ModelState.AddModelError("", ex);
             }
 
-            return View(model);
+            ViewBag.PageTitle = "Edit Member";
+            ViewBag.Title = "Edit Member";
+            return View("CreateEdit", model);
         }
 
 
@@ -152,6 +173,12 @@ namespace GCR.Web.Controllers
             }
 
             return RedirectToAction("Admin");
+        }
+
+        private void DeleteOrphanPhotos(IEnumerable<MemberViewModel> members)
+        {
+            Func<string, bool> func = p => members.Any(m => Path.GetFileName(m.Photo) == Path.GetFileName(p));
+            memberService.DeleteOrphanPhotos(func);
         }
     }
 }

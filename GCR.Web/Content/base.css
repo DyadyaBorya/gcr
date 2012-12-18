@@ -1,4 +1,4 @@
-/*! -----------------------------------------------------------------------
+﻿/*! -----------------------------------------------------------------------
  Blueprint CSS Framework 1.0.1
  http://blueprintcss.org
 
@@ -393,7 +393,7 @@
   input[type=password]:focus,
   input[type=url]:focus,
   input[type=email]:focus,
-  textarea:focus {
+  textarea[name]:focus {
     border-color: #888;
     background-color: #e8f5ff;
   }
@@ -420,6 +420,9 @@
   }
   .button:hover {
     color: #fafafa;
+  }
+  a.ui-button {
+    padding: 0.1em;
   }
   textarea {
     width: 390px;

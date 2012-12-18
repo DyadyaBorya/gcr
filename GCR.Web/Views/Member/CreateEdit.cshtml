@@ -2,15 +2,14 @@
 
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.Title = "Member Create";
 }
 
-<h2>Create New Member</h2>
+<h2>@ViewBag.PageTitle</h2>
 
 @using (Html.BeginForm())
 {
     <div class="two row">
-        <div class="eleven columns">
+        <div class="twelve columns">
             @Html.Message()
         </div>
     </div>
@@ -21,7 +20,7 @@
         <div class="fourteen columns omega editor-field">
             @Html.EditorFor(model => model.FirstName)
         </div>
-        <div style="position:absolute; right:0; top:0">
+        <div style="position:absolute; right:75px; top:0">
             <img id="memberPhoto" src="@Url.Content(Model.PhotoForDisplay)" alt="@Model.FullName" class="photo" width="150" height="200" />
         </div>
     </div>
@@ -47,7 +46,6 @@
         </div>
         <div class="fourteen columns omega editor-field">
             @Html.EditorFor(model => model.MemberSince)
-            @Html.ValidationMessageFor(model => model.MemberSince)
         </div>
     </div>
     <div class="one row">
@@ -56,7 +54,7 @@
         </div>
         <div class="fourteen columns omega editor-field">
             @Html.HiddenFor(model => model.Photo)
-           <a class="button" onclick="showImageDialog()">Select New Photo</a>
+           <a class="button" onclick="window.GCR.ImageUpload.showImageDialog()">Select New Photo</a>
         </div>
     </div>
     <div class="one row">
@@ -69,7 +67,7 @@
     </div>
     <div class="one row">
         <div class="fourteen columns omega offset-by-three editor-field">
-            <input type="submit" value="Create" />&nbsp;&nbsp;
+            <input type="submit" value="Save" style="padding-left:1.4em; padding-right:1.4em" />&nbsp;&nbsp;
                 @Html.ActionLink("Back to List", "Admin", null, new { @class = "button" })
         </div>
     </div>
@@ -78,61 +76,17 @@
     <iframe src="@Url.Content(ViewBag.UploadPath)" width="830px" height="540px" scrolling="no"></iframe>
     </div>
 @section Scripts {
+    <script src="~/Scripts/imageUpload.js"></script>
     <script type="text/javascript">
-        window.GCR = {};
         $(function ()
         {
-            $(window).bind("beforeunload", cancelImage);
-            window.GCR.Notifier = new Notifier();
+            $(window).bind("beforeunload", window.GCR.ImageUpload.cancelImage);
             window.GCR.Notifier.add("saved", function () {
                 $("#memberPhoto").attr("src", arguments[1]);
-                $("input[name=Photo]").val(arguments[1]);
-                refreshImageDialog();
+                $("#Photo").val(arguments[1]);
+                window.GCR.ImageUpload.refreshImageDialog();
             });
+            $("#Bio").charCount();
         });
-        function saveImage() {
-            $("input[value=save]", $("iframe")[0].contentDocument).click();
-        }
-
-        function cancelImage() {
-            $("input[value=cancel]", $("iframe")[0].contentDocument).click();
-        }
-
-        function refreshImageDialog() {
-            $("iframe").attr("src", $("iframe")[0].src);
-        }
-
-        function showImageDialog() {
-            $('.image-uploader').dialog({
-                modal: true, width: '860px', resizable: false, buttons: {
-                    Ok: function () {
-                        saveImage();
-                        $(this).dialog("close");
-                    },
-                    Cancel: function () {
-                        cancelImage();
-                        $(this).dialog("close");
-                        refreshImageDialog();
-                    }
-                }});
-        }
-        function Notifier()
-        {
-            var self = this;
-            this.notify = function () {
-                var newArgs = [];
-                for (var i = 1; i < arguments.length; i++) {
-                    newArgs.push(arguments[i]);
-                }
- 
-                $(self).trigger(arguments[0], newArgs);
-            };
-            this.add = function (eventName, handler) { 
-                $(self).bind(eventName, handler);
-            };
-            this.remove = function (eventName, handler) { 
-                $(self).unbind(eventName, handler);
-            };
-        };
     </script>
 }

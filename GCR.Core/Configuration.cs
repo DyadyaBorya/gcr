@@ -34,7 +34,12 @@ namespace GCR.Core
 
         public static string UploadPath 
         {
-            get { return GetRequiredValue<string>("UploadPath").TrimStart('~', '/').TrimEnd('/'); }
+            get { return "~/" + GetRequiredValue<string>("UploadPath").TrimStart('~', '/').TrimEnd('/') + "/"; }
+        }
+
+        public static int PhotoFileLifeTime
+        {
+            get { return GetOptionalValue<int>("PhotoFileLifeTime", 720); }
         }
 
         /// <summary>

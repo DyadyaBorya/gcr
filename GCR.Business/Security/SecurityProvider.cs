@@ -15,7 +15,7 @@ using System.IO;
 
 namespace GCR.Business.Security
 {
-    public class SecurityProvider : ISecurityProvider
+    internal class SecurityProvider : ISecurityProvider
     {
         public SecurityProvider()
         {
@@ -158,7 +158,7 @@ namespace GCR.Business.Security
             if (ownerAccount == CurrentUser.Identity.Name)
             {
                 // Use a transaction to prevent the user from deleting their last login credential
-                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
+                using (var scope = new System.Transactions.TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
                 {
                     bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(CurrentUser.Identity.Name));
                     if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(CurrentUser.Identity.Name).Count > 1)

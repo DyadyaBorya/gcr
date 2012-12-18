@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GCR.Core.Entities;
+using GCR.Core.Repositories;
 
-namespace GCR.Core.Repositories
+namespace GCR.Model.Repositories
 {
-    public interface IHomePagePhotoRepository : IRepository<HomePagePhoto>
+    public class HomePagePhotoRepository : Repository<HomePagePhoto>, IHomePagePhotoRepository
     {
     }
 }

@@ -21,6 +21,8 @@ namespace GCR.Web
         {
             if (!this.IsPostBack)
             {
+                this.ImageUploader.DeleteOldTemporaryFiles();
+
                 this.ImageUploader.CropConstraint = new FixedCropConstraint(this.CropWidth, this.CropHeight);
                 this.ImageUploader.CropConstraint.DefaultImageSelectionStrategy = CropConstraintImageSelectionStrategy.Slice;
                 this.ImageUploader.PreviewFilter = null; //Use the selected image
@@ -37,9 +39,8 @@ namespace GCR.Web
             if (this.ImageUploader.HasNewImage)
             {
                 // Generate the main image            
-                //string path = Server.MapPath(string.Format("~/{0}/Photos/Members/", Configuration.UploadPath));
-                string webPath = string.Format("~/{0}", this.ImagePath.TrimStart('~', '/'));
-                string path = Server.MapPath(webPath);
+                string webPath = this.ImagePath;
+                string path = Server.MapPath(this.ImagePath);
 
                 // Get the original file name (but always use the .jpg extension)
                 string filename = IOHelper.GetUniqueFileName(path, Path.GetFileNameWithoutExtension(this.ImageUploader.SourceImageClientFileName) + ImageArchiver.GetFileExtensionFromImageFormatId(ImageFormat.Jpeg.Guid));

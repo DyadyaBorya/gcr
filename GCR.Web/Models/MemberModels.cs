@@ -10,9 +10,11 @@ namespace GCR.Web.Models
     {
         public int MemberId { get; set; }
 
+        [Required]
         [Display(Name="First Name")]
         public string FirstName { get; set; }
 
+        [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
@@ -22,6 +24,7 @@ namespace GCR.Web.Models
         [Display(Name = "Member Since")]
         public int MemberSince { get; set; }
 
+        [StringLength(400)]
         public string Bio { get; set; }
 
         public string Photo { get; set; }
@@ -35,9 +38,12 @@ namespace GCR.Web.Models
         public string PhotoForDisplay { get { return HasPhoto ? this.Photo : "~/Content/Images/NoPhoto.png"; } }
 
 
-        public static MemberViewModel ToViewModel(GCR.Core.Entities.Member member)
-        { 
-            var model = new MemberViewModel();
+        public static MemberViewModel ToViewModel(GCR.Core.Entities.Member member, MemberViewModel model = null)
+        {
+            if (model == null)
+            {
+                model = new MemberViewModel();
+            }
             model.FirstName = member.FirstName;
             model.LastName = member.LastName;
             model.MemberSince = member.MemberSince;
@@ -47,9 +53,12 @@ namespace GCR.Web.Models
             return model;
         }
 
-        public static GCR.Core.Entities.Member ToModel(MemberViewModel model)
+        public static GCR.Core.Entities.Member ToModel(MemberViewModel model, GCR.Core.Entities.Member member = null)
         {
-            var member = new GCR.Core.Entities.Member();
+            if (member == null)
+            {
+                member = new GCR.Core.Entities.Member();
+            }
             member.FirstName = model.FirstName;
             member.LastName = model.LastName;
             member.MemberSince = model.MemberSince;

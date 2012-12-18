@@ -7,13 +7,12 @@ using GCR.Core.Entities;
 
 namespace GCR.Core.Services
 {
-    public interface IMemberService
+    public interface IHomePageService
     {
-        IEnumerable<Member> FetchAll();
-        IEnumerable<Member> FetchActive();
-        Member GetById(int id);
-        void SaveMember(Member product);
-        void DeleteMember(Member product);
+        IEnumerable<HomePagePhoto> FetchPhoto();
+        HomePagePhoto GetPhotoById(int id);
+        void SavePhoto(HomePagePhoto photo);
+        void DeletePhoto(HomePagePhoto photo);
         void DeleteOrphanPhotos(Func<string, bool> validationFunc);
         string GetPhotoUploadPath();
     }

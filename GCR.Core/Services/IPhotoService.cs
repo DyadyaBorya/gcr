@@ -1,17 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.Hosting;
+using GCR.Core;
 using GCR.Core.Entities;
+using GCR.Core.Repositories;
+using GCR.Core.Services;
 
 namespace GCR.Core.Services
 {
-    public interface IPhotoService
+    public interface IPhotoService 
     {
-        IEnumerable<HomePagePhoto> FetchHomePagePhoto { get; }
-        HomePagePhoto GetById(int id);
-        void SaveHomePagePhoto(HomePagePhoto photo);
-        void DeleteHomePagePhoto(HomePagePhoto photo);
+        void Initialize(string path);
+
+        bool DeletePhoto(string path);
+
+        void DeleteOrphanPhotos(Func<string, bool> validationFunc);
+      
     }
 }

@@ -6,5 +6,7 @@
   <file>/Scripts/jquery.unobtrusive-ajax.js</file>
   <file>/Scripts/jquery.validate.js</file>
   <file>/Scripts/jquery.validate.unobtrusive.js</file>
-  <file>/Scripts/knockout-2.2.0.debug.js</file>
+  <file>/Scripts/json2.js</file>
+  <file>/Scripts/charCount.js</file>
+  <file>/Scripts/Common.js</file>
 </bundle>

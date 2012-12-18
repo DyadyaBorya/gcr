@@ -35,7 +35,7 @@
         function Upload_Ready() {
              window.setTimeout(function () {
                  Upload_Notify("ready");
-             }, 25);
+             }, 100);
          }
 
          function Upload_SaveSuccess(path) {

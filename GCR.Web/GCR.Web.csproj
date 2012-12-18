@@ -191,6 +191,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\HomePagePhotoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
     <Compile Include="Global.asax.cs">
@@ -206,7 +207,10 @@
     <Compile Include="Infrastructure\BaseController.cs" />
     <Compile Include="Infrastructure\Enums.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
+    <Compile Include="Infrastructure\JsonNetResult.cs" />
+    <Compile Include="Infrastructure\JsonNetValueProviderFactory.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\HomePagePhotoModels.cs" />
     <Compile Include="Models\MemberModels.cs" />
     <Compile Include="piczardUserControls\simpleImageUploadUserControl\SimpleImageUpload.ascx.cs">
       <DependentUpon>SimpleImageUpload.ascx</DependentUpon>
@@ -376,7 +380,6 @@
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="App_Data\__CCPZTF_78d3a7c598904cd48d0447186ad55482__wt.tmp" />
     <None Include="Content\site.less" />
     <None Include="Content\base.less" />
     <None Include="Content\_base.css.bundle" />
@@ -390,10 +393,14 @@
     <Content Include="piczardUserControls\simpleImageUploadUserControl\simpleImageUpload.js" />
     <Content Include="piczardUserControls\simpleImageUploadUserControl\upload.aspx" />
     <Content Include="piczardUserControls\simpleImageUploadUserControl\wait.gif" />
+    <Content Include="Scripts\charCount.js" />
+    <Content Include="Scripts\Common.js" />
+    <Content Include="Scripts\imageUpload.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.9.2.js" />
     <Content Include="Scripts\jquery-ui-1.9.2.min.js" />
+    <Content Include="Scripts\jquery.jcarousel.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -401,6 +408,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\json2.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\_base.js">
@@ -457,12 +465,13 @@
     </Content>
     <Content Include="Views\Member\Index.cshtml" />
     <Content Include="Views\Member\Admin.cshtml" />
-    <Content Include="Views\Member\Create.cshtml" />
+    <Content Include="Views\Member\CreateEdit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Content\fonts\" />
     <Folder Include="Filters\" />
   </ItemGroup>

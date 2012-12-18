@@ -19,6 +19,7 @@ namespace GCR.Model
             Bind<ISeasonRepository>().To<SeasonRepository>();
             Bind<ITeamRepository>().To<TeamRepository>();
             Bind<IUserRepository>().To<UserRepository>();
+            Bind<IHomePagePhotoRepository>().To<HomePagePhotoRepository>();
         }
     }
 }

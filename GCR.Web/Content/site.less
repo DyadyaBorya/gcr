@@ -165,23 +165,23 @@ body
 
 #footer
 {
-    background: @footer-color;
-    color: @font-alt-color;
+	background: @footer-color;
+	color: @font-alt-color;
 	position: relative;
 
-    a
-    {
+	a
+	{
 		color:@link--alt-color;
-    }
+	}
 
 	a:hover
-    {
+	{
 		color:darken(@link--alt-color, 15%);
-    }
+	}
 }
 #footer-inner
 {
-    width: @grid-width; 
+	width: @grid-width; 
 	margin: 0 auto;
 	padding: 25px 5px 20px 5px; 
 }
@@ -236,19 +236,19 @@ h1, h2, h3, h4, h5, h6
 	overflow: hidden;
 	height: 215px;
 
-    img
-    {
-        margin-right: 15px;
-        float: left;
-        width: 150px;
-        height: 200px;
-    }
+	img
+	{
+		margin-right: 15px;
+		float: left;
+		width: 150px;
+		height: 200px;
+	}
 }
 
 img.photo
 {
-    border: 6px solid #bbbbbb;
-    .rounded-corners(2px);
+	border: 6px solid #bbbbbb;
+	.rounded-corners(2px);
 }
 
 /* Styles for validation helpers */
@@ -260,7 +260,7 @@ img.photo
 	display: none;
 }
 
-input.input-validation-error, select.input-validation-error
+input.input-validation-error, select.input-validation-error, textarea.input-validation-error
 {
 	border-color: @error-border;
 	border-top-color: darken(@error-border, 20%);
@@ -281,6 +281,21 @@ input.input-validation-error, select.input-validation-error
 .validation-summary-valid
 {
 	display: none;
+}
+
+div.char-counter{
+	position:relative;
+	padding-bottom: 1em;
+	float: left; 
+
+	.counter{
+		position:absolute;
+		right:0;
+		bottom:0;
+		font-weight:bold;
+		color:@strong-color;
+	}
+	.exceeded{color:@error-font;}	
 }
 
 div.error, div.alert, div.notice, div.success, div.info
@@ -418,120 +433,120 @@ div.info a
 /* jcarousel home page theme */
 .jcarousel-skin-homepage
 {
-    /*height of the images*/
-    height: 450px;
-    overflow: hidden;
+	/*height of the images*/
+	height: 450px;
+	overflow: hidden;
 
-    li
-    {
-        float: left;
-    }
+	li
+	{
+		float: left;
+	}
 
-    .jcarousel-container
-    {
-        /*center and offset by 1.5 the width of the images*/
-        left: 50%;
-        margin-left: -1440px;
-    }
+	.jcarousel-container
+	{
+		/*center and offset by 1.5 the width of the images*/
+		left: 50%;
+		margin-left: -1440px;
+	}
 
-    .jcarousel-clip-horizontal
-    {
-        /*height of the images*/
-        height: 450px;
-    }
+	.jcarousel-clip-horizontal
+	{
+		/*height of the images*/
+		height: 450px;
+	}
 
-    .jcarousel-item
-    {
-        /*width and height of the images*/
-        width: 960px;
-        height: 450px;
-        position: relative;
-    }
+	.jcarousel-item
+	{
+		/*width and height of the images*/
+		width: 960px;
+		height: 450px;
+		position: relative;
+	}
 
-    .jcarousel-item-horizontal
-    {
-        margin: 0;
-    }
+	.jcarousel-item-horizontal
+	{
+		margin: 0;
+	}
 
-    .jcarousel-reveal
-    {
-        position: absolute;
-        /*height of the image /2 - height of reveal then rounded down*/
-        bottom: 130px;
-        left: 0;
-        /*width of the button plus padding plus 5px to the outer edge*/
-        width: 90px;
-        /*height of the button plus top and bottom padding*/
-        height: 155px;
-        z-index: 2;
-        background: url(images/transparent.gif) repeat left top;
-        opacity: 0.4;
+	.jcarousel-reveal
+	{
+		position: absolute;
+		/*height of the image /2 - height of reveal then rounded down*/
+		bottom: 130px;
+		left: 0;
+		/*width of the button plus padding plus 5px to the outer edge*/
+		width: 90px;
+		/*height of the button plus top and bottom padding*/
+		height: 155px;
+		z-index: 2;
+		background: url(images/transparent.gif) repeat left top;
+		opacity: 0.4;
 		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
 		filter: alpha(opacity=30);
-        transition: opacity 0.5s;
-        -moz-transition: opacity 0.5s;
-        -webkit-transition: opacity 0.5s;
-        -o-transition: opacity 0.5s;
-    }
+		transition: opacity 0.5s;
+		-moz-transition: opacity 0.5s;
+		-webkit-transition: opacity 0.5s;
+		-o-transition: opacity 0.5s;
+	}
 
-    .jcarousel-reveal.next
-    {
-        /*width of images * 2 - width of reveal*/
-        margin-left: 1830px;
-    }
+	.jcarousel-reveal.next
+	{
+		/*width of images * 2 - width of reveal*/
+		margin-left: 1830px;
+	}
 
-    .jcarousel-reveal.prev
-    {
-        /*width of images*/
-        margin-left: 960px;
-    }
+	.jcarousel-reveal.prev
+	{
+		/*width of images*/
+		margin-left: 960px;
+	}
 
-    .jcarousel-reveal div
-    {
-        position: absolute;
-        /*top and bottom padding*/
-        top: 60px;
-        /*width of button*/
-        width: 35px;
-        /*height of button*/
-        height: 35px;
-        cursor: pointer;
-        opacity: 0.5;
+	.jcarousel-reveal div
+	{
+		position: absolute;
+		/*top and bottom padding*/
+		top: 60px;
+		/*width of button*/
+		width: 35px;
+		/*height of button*/
+		height: 35px;
+		cursor: pointer;
+		opacity: 0.5;
 		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
 		filter: alpha(opacity=50);
-        transition: opacity 0.5s;
-        -moz-transition: opacity 0.5s;
-        -webkit-transition: opacity 0.5s;
-        -o-transition: opacity 0.5s;
-    }
+		transition: opacity 0.5s;
+		-moz-transition: opacity 0.5s;
+		-webkit-transition: opacity 0.5s;
+		-o-transition: opacity 0.5s;
+	}
 
-    .jcarousel-reveal.next div
-    {
-        /*5px to the outer edge*/
-        right: 5px;
-        background: url(images/carousel_next.png) no-repeat 0 top;
-    }
+	.jcarousel-reveal.next div
+	{
+		/*5px to the outer edge*/
+		right: 5px;
+		background: url(images/carousel_next.png) no-repeat 0 top;
+	}
 
-    .jcarousel-reveal.prev div
-    {
-        /*5px to the outer edge*/
-        left: 5px;
-        background: url(images/carousel_previous.png) no-repeat 0 top;
-    }
+	.jcarousel-reveal.prev div
+	{
+		/*5px to the outer edge*/
+		left: 5px;
+		background: url(images/carousel_previous.png) no-repeat 0 top;
+	}
 
-    .jcarousel-reveal:hover
-    {
-        opacity: 1;
+	.jcarousel-reveal:hover
+	{
+		opacity: 1;
 		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
 		filter: alpha(opacity=100);
-    }
+	}
 
-    .jcarousel-reveal.next div:hover, .jcarousel-reveal.prev div:hover
-    {
-        opacity: 0.8;
+	.jcarousel-reveal.next div:hover, .jcarousel-reveal.prev div:hover
+	{
+		opacity: 0.8;
 		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
 		filter: alpha(opacity=80);
-    }
+	}
 }
 
 

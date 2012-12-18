@@ -1,4 +1,4 @@
-@font-face {
+﻿@font-face {
   font-family: 'Patua One';
   font-style: normal;
   font-weight: 400;
@@ -187,7 +187,8 @@ img.photo {
   display: none;
 }
 input.input-validation-error,
-select.input-validation-error {
+select.input-validation-error,
+textarea.input-validation-error {
   border-color: #f58282;
   border-top-color: #ed2424;
   border-left-color: #ed2424;
@@ -199,6 +200,21 @@ select.input-validation-error {
 }
 .validation-summary-valid {
   display: none;
+}
+div.char-counter {
+  position: relative;
+  padding-bottom: 1em;
+  float: left;
+}
+div.char-counter .counter {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-weight: bold;
+  color: #053472;
+}
+div.char-counter .exceeded {
+  color: #8a1f11;
 }
 div.error,
 div.alert,

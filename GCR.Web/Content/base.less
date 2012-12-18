@@ -128,15 +128,15 @@
 
 	/* forms.css */
 	label, .editor-label { font-weight:bold; }
-    .editor-label {
-            text-align: right;
+	.editor-label {
+			text-align: right;
 
-            label {
-                padding: 6px 0;
-                margin: 0.5em 0;
+			label {
+				padding: 6px 0;
+				margin: 0.5em 0;
 				display: block;
-            }
-    }
+			}
+	}
 	fieldset {padding:0 1.4em 1.4em 1.4em;margin:0 0 1.5em 0;border:1px solid #ddd;}
 	legend {font-weight:bold;font-size:1.2em;margin-top:-0.2em;margin-bottom:1em;}
 	fieldset, #IE8#HACK {padding-top:1.4em;}
@@ -160,7 +160,7 @@
 	input[type=password]:focus, 
 	input[type=url]:focus, 
 	input[type=email]:focus,  
-	textarea:focus {
+	textarea[name]:focus {
 		border-color:#888;
 		background-color: lighten(@accent-color, 55%);
 	}
@@ -170,7 +170,7 @@
 		background-color:#fff;
 		border-width:1px;
 		border-style:solid;
-	 	padding:6px, 5px;
+		padding:6px, 5px;
 		width:225px;
 		.rounded-corners(2px);
 	}
@@ -190,9 +190,13 @@
 		//padding-top:2px;
 	}
 
-    .button:hover {
+	.button:hover {
 		color:@font-alt-color;
-    }
+	}
+	
+	a.ui-button {
+		padding: 0.1em;
+	}
 
 	textarea {width:390px;height:200px;}
 	form.inline {display: inline;}
