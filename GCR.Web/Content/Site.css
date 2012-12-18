@@ -168,11 +168,13 @@ h6 {
   height: 215px;
 }
 .team-pic img {
-  border: 6px solid #bbbbbb;
   margin-right: 15px;
   float: left;
   width: 150px;
   height: 200px;
+}
+img.photo {
+  border: 6px solid #bbbbbb;
   -moz-border-radius: 2px;
   -webkit-border-radius: 2px;
   border-radius: 2px;

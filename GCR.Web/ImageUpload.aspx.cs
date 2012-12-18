@@ -34,19 +34,24 @@ namespace GCR.Web
 
         protected void btnSave_Click(object sender, EventArgs e)
         {
-            // Generate the main image            
-            //string path = Server.MapPath(string.Format("~/{0}/Photos/Members/", Configuration.UploadPath));
-            string webPath = string.Format("~/{0}", this.ImagePath.TrimStart('~', '/'));
-            string path = Server.MapPath(webPath);
+            if (this.ImageUploader.HasNewImage)
+            {
+                // Generate the main image            
+                //string path = Server.MapPath(string.Format("~/{0}/Photos/Members/", Configuration.UploadPath));
+                string webPath = string.Format("~/{0}", this.ImagePath.TrimStart('~', '/'));
+                string path = Server.MapPath(webPath);
 
-            // Get the original file name (but always use the .jpg extension)
-            string filename = IOHelper.GetUniqueFileName(path, Path.GetFileNameWithoutExtension(this.ImageUploader.SourceImageClientFileName) + ImageArchiver.GetFileExtensionFromImageFormatId(ImageFormat.Jpeg.Guid));
-            
-            path = System.IO.Path.Combine(path, filename);
-            webPath = System.IO.Path.Combine(webPath, filename);
-            this.ImageUploader.SaveProcessedImageToFileSystem(path);
+                // Get the original file name (but always use the .jpg extension)
+                string filename = IOHelper.GetUniqueFileName(path, Path.GetFileNameWithoutExtension(this.ImageUploader.SourceImageClientFileName) + ImageArchiver.GetFileExtensionFromImageFormatId(ImageFormat.Jpeg.Guid));
 
-            ScriptManager.RegisterStartupScript(this, this.GetType(), "SaveSuccess", "Upload_SaveSuccess('" + ResolveUrl(webPath) + "');", true);
+                path = System.IO.Path.Combine(path, filename);
+                webPath = System.IO.Path.Combine(webPath, filename);
+                this.ImageUploader.SaveProcessedImageToFileSystem(path);
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "SaveSuccess", "Upload_SaveSuccess('" + ResolveUrl(webPath) + "');", true);
+            }
+
+            this.ImageUploader.ClearTemporaryFiles();
         }
 
 

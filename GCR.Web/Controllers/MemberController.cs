@@ -58,7 +58,8 @@ namespace GCR.Web.Controllers
                               FirstName = m.FirstName,
                               LastName = m.LastName,
                               MemberSince = m.MemberSince,
-                              IsActive = m.IsActive
+                              IsActive = m.IsActive,
+                              Photo = m.Photo
                           };
 
             return View(members);

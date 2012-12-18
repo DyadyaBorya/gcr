@@ -27,12 +27,12 @@ namespace GCR.Web.Models
         public string Photo { get; set; }
 
         [Display(Name = "Has Photo")]
-        public bool HasPhoto { get { return string.IsNullOrEmpty(this.Photo); } }
+        public bool HasPhoto { get { return !string.IsNullOrEmpty(this.Photo); } }
 
         [Display(Name = "Full Name")]
         public string FullName { get { return this.FirstName + " " + this.LastName; } }
 
-        public string PhotoForDisplay { get { return HasPhoto ? "~/Content/Images/NoPhoto.png" : this.Photo; } }
+        public string PhotoForDisplay { get { return HasPhoto ? this.Photo : "~/Content/Images/NoPhoto.png"; } }
 
 
         public static MemberViewModel ToViewModel(GCR.Core.Entities.Member member)

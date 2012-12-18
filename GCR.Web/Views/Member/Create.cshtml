@@ -14,13 +14,15 @@
             @Html.Message()
         </div>
     </div>
-    <div class="one row">
+    <div class="one row" style="position:relative">
         <div class="three columns alpha editor-label">
             @Html.LabelFor(model => model.FirstName)
         </div>
         <div class="fourteen columns omega editor-field">
             @Html.EditorFor(model => model.FirstName)
-            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+        <div style="position:absolute; right:0; top:0">
+            <img id="memberPhoto" src="@Url.Content(Model.PhotoForDisplay)" alt="@Model.FullName" class="photo" width="150" height="200" />
         </div>
     </div>
     <div class="one row">
@@ -29,7 +31,6 @@
         </div>
         <div class="fourteen columns omega editor-field">
             @Html.EditorFor(model => model.LastName)
-            @Html.ValidationMessageFor(model => model.LastName)
         </div>
     </div>
     <div class="one row">
@@ -38,7 +39,6 @@
         </div>
         <div class="fourteen columns omega editor-field">
             @Html.EditorFor(model => model.IsActive)
-            @Html.ValidationMessageFor(model => model.IsActive)
         </div>
     </div>
     <div class="one row">
@@ -55,7 +55,8 @@
             @Html.LabelFor(model => model.Photo)
         </div>
         <div class="fourteen columns omega editor-field">
-           <a class="button" onclick="showImageDialog()">Select Photo</a>
+            @Html.HiddenFor(model => model.Photo)
+           <a class="button" onclick="showImageDialog()">Select New Photo</a>
         </div>
     </div>
     <div class="one row">
@@ -64,7 +65,6 @@
         </div>
         <div class="fourteen columns omega editor-field">
             @Html.TextAreaFor(model => model.Bio)
-            @Html.ValidationMessageFor(model => model.Bio)
         </div>
     </div>
     <div class="one row">
@@ -79,16 +79,60 @@
     </div>
 @section Scripts {
     <script type="text/javascript">
+        window.GCR = {};
+        $(function ()
+        {
+            $(window).bind("beforeunload", cancelImage);
+            window.GCR.Notifier = new Notifier();
+            window.GCR.Notifier.add("saved", function () {
+                $("#memberPhoto").attr("src", arguments[1]);
+                $("input[name=Photo]").val(arguments[1]);
+                refreshImageDialog();
+            });
+        });
+        function saveImage() {
+            $("input[value=save]", $("iframe")[0].contentDocument).click();
+        }
+
+        function cancelImage() {
+            $("input[value=cancel]", $("iframe")[0].contentDocument).click();
+        }
+
+        function refreshImageDialog() {
+            $("iframe").attr("src", $("iframe")[0].src);
+        }
+
         function showImageDialog() {
             $('.image-uploader').dialog({
                 modal: true, width: '860px', resizable: false, buttons: {
                     Ok: function () {
+                        saveImage();
                         $(this).dialog("close");
                     },
                     Cancel: function () {
+                        cancelImage();
                         $(this).dialog("close");
+                        refreshImageDialog();
                     }
                 }});
         }
+        function Notifier()
+        {
+            var self = this;
+            this.notify = function () {
+                var newArgs = [];
+                for (var i = 1; i < arguments.length; i++) {
+                    newArgs.push(arguments[i]);
+                }
+ 
+                $(self).trigger(arguments[0], newArgs);
+            };
+            this.add = function (eventName, handler) { 
+                $(self).bind(eventName, handler);
+            };
+            this.remove = function (eventName, handler) { 
+                $(self).unbind(eventName, handler);
+            };
+        };
     </script>
 }
