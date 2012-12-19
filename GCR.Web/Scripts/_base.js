@@ -26168,8 +26168,8 @@ $.format = $.validator.format;
 } (jQuery));
 ///#source 1 1 /Scripts/json2.js
 /*!
-    json2.js
-    2012-10-08
+    http://www.JSON.org/json2.js
+    2011-10-19
 
     Public Domain.
 
@@ -26178,6 +26178,7 @@ $.format = $.validator.format;
     See http://www.JSON.org/js.html
 */
 /*
+
     This code should be minified before deployment.
     See http://javascript.crockford.com/jsmin.html
 
@@ -26328,7 +26329,8 @@ $.format = $.validator.format;
 // Create a JSON object only if one does not already exist. We create the
 // methods in a closure to avoid creating global variables.
 
-if (typeof JSON !== 'object') {
+var JSON;
+if (!JSON) {
     JSON = {};
 }
 
@@ -26654,7 +26656,7 @@ if (typeof JSON !== 'object') {
     }
 }());
 
-///#source 1 1 /Scripts/charCount.js
+///#source 1 1 /Scripts/custom/charCount.js
 (function ($) {
 
     $.fn.charCount = function (options) {
@@ -26720,50 +26722,28 @@ if (typeof JSON !== 'object') {
         });
     };
 })(jQuery);
-///#source 1 1 /Scripts/Common.js
+///#source 1 1 /Scripts/custom/common.js
 if (window.GCR === undefined)
 {
     window.GCR = {};
 }
-
-window.GCR.WebRequest = function (url, data, successCallback, failedCallback) {
-    /// <summary>
-    /// Creates an ajax post to the server to send/receive information.
-    /// </summary>
-    $.ajax({
-        url: url,
-        type: "POST",
-        data: data,
-        contentType: 'application/json',
-        success: function (result, textStatus, jqXHR) {
-            if (typeof (successCallback) === "function") {
-                successCallback(result, textStatus, jqXHR);
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            if (typeof (failedCallback) === "function") {
-                failedCallback(jqXHR, textStatus, errorThrown);
-            }
-        }
-    });
-};
 
 window.GCR.PostJson = function (url, jsObject, successCallback, failedCallback) {
     /// <summary>
     /// Creates an ajax post to the server to send/receive information.
     /// </summary>
 
-    window.GCR._WebRequest(url, JSON.stringify(jsObject), "POST", 'application/json', successCallback, failedCallback);
+    window.GCR._ServerRequest(url, JSON.stringify(jsObject), "POST", 'application/json', successCallback, failedCallback);
 };
 
-window.GCR.WebRequest = function (url, data, successCallback, failedCallback) {
+window.GCR.Post = function (url, data, successCallback, failedCallback) {
     /// <summary>
     /// Creates an ajax post to the server to send/receive information.
     /// </summary>
-    window.GCR._WebRequest(url, data, "POST", null, successCallback, failedCallback);
+    window.GCR._ServerRequest(url, data, "POST", null, successCallback, failedCallback);
 };
 
-window.GCR._WebRequest = function (url, data, method, contentType, successCallback, failedCallback) {
+window.GCR._ServerRequest = function (url, data, method, contentType, successCallback, failedCallback) {
     /// <summary>
     /// Creates an ajax post to the server to send/receive information.
     /// </summary>
@@ -26784,5 +26764,36 @@ window.GCR._WebRequest = function (url, data, method, contentType, successCallba
         }
     });
 };
+
+window.GCR.StatusMessage = function (message, status) {
+    var container = $('#top-message');
+    var div = null;
+
+    if (message.status) {
+        div = $("<div>" + message.message + "</div>");
+        container.removeClass().addClass(message.status);
+    }
+    else {
+        div = $("<div>" + message + "</div>");
+        container.removeClass().addClass(status || "success");
+    }
+    container.html(div);
+
+    var triggerClick = function () {
+        container.trigger('click');
+    };
+
+    var clickHandler = function () {
+        container.css("border-width", "0");
+        window.clearTimeout(alertTimer);
+        container.animate({ height: '0' }, 400);
+    };
+
+    var alertTimer = window.setTimeout(triggerClick, 4000);
+
+    container.click(clickHandler);
+    container.css("border-width", "2px");
+    container.animate({ height: div[0].offsetHeight }, 300)
+}
 
 

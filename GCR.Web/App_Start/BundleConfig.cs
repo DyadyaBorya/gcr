@@ -20,9 +20,19 @@ namespace GCR.Web
                        , "~/Scripts/jquery.validate.js"
                        , "~/Scripts/jquery.validate.unobtrusive.js"
                        , "~/Scripts/json2.js"
-                       , "~/Scripts/charCount.js"
-                       , "~/Scripts/Common.js");
+                       , "~/Scripts/custom/charCount.js"
+                       , "~/Scripts/custom/common.js");
             bun.Transforms.Clear();
+            bundles.Add(bun);
+
+            bun = new ScriptBundle("~/Script/app/homePagePhoto").Include(
+                      "~/Scripts/custom/imageUpload.js"
+                      ,  "~/Scripts/app/homePagePhoto.js");
+            bundles.Add(bun);
+
+            bun = new ScriptBundle("~/Script/app/member").Include(
+                "~/Scripts/custom/imageUpload.js"
+                , "~/Scripts/app/member.js");
             bundles.Add(bun);
 
             // NOTE: Web Essentials bundles may only be updated at build time.

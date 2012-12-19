@@ -65,14 +65,17 @@ namespace GCR.Web.Controllers
                     if (photo != null)
                     {
                         photo.DisplayOrder = photoVM.Order;
-                        homePageService.SavePhoto(photo);
                     }
                 }
-                return Json(new { Status = MessageMode.Success, Message = "Photo Display Order Updated!" });
+                homePageService.SavePhotos(photos);
+
+                var sm = new StatusMessage(MessageMode.Success, "New Order Saved Successfully!", Url.Action("Admin"));
+                this.ShowMessageAfterRedirect(sm);
+                return Json(sm);
             }
             else
             {
-                return Json(new { Status = MessageMode.Error, Message = "Something went Wrong!" });
+                return Json(new StatusMessage(MessageMode.Error, "Order could not be Saved!"));
             }
         }
 
@@ -102,7 +105,7 @@ namespace GCR.Web.Controllers
                     var photo = HomePagePhotoViewModel.ToModel(model);
                     homePageService.SavePhoto(photo);
 
-                    return RedirectToAction("Admin");
+                    return PartialView("_PhotoPartial", HomePagePhotoViewModel.ToViewModel(photo));
                 }
             }
             catch(Exception ex)
@@ -110,9 +113,7 @@ namespace GCR.Web.Controllers
                 ModelState.AddModelError("", ex);
             }
 
-            ViewBag.PageTitle = "Create Home Page Photo";
-            ViewBag.Title = "Create Home Page Photo";
-            return View(model);
+            return Json(new { Status = MessageMode.Error, Message = "Error occurred until saving photo!" });
         }
 
 

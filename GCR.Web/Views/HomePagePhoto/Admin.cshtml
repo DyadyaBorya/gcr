@@ -8,24 +8,22 @@
 <h2>Home Page Photo Admin</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <button onclick="window.GCR.ImageUpload.showImageDialog()" >Select New Photo</button>&nbsp;&nbsp;
+    <button id="saveOrder">Save Order</button>
 </p>
-<ul>
+<ul id="HomepagePhotoContainer" class="control">
 @foreach (var item in Model) {
-    <li style="display:block;border: 1px solid #ddd" class="clearfix">
-        <div style="float:left; padding-left:15px; background-color:#0000FF">
-        <img src="@Url.Content(item.PhotoPath)" alt="@item.DisplayOrder" class="photo" width="320" height="150" />
-        </div>
-        <div style="float:left; padding-left:25px;">
-        @Html.DisplayFor(modelItem => item.DisplayOrder)
-        @using (Html.BeginForm("Delete", "HomePagePhoto", FormMethod.Post, new { @class = "inline"}))
-        {
-            @Html.AntiForgeryToken()
-            @Html.Hidden("id", item.HomePagePhotoId)
-            <a onclick="$(this).parent().submit()">Delete</a>
-                            
-        }
-        </div>
-    </li>
+    Html.RenderPartial("_PhotoPartial", item);
 }
 </ul>
+
+<div class="image-uploader hide">
+    <iframe src="@Url.Content(ViewBag.UploadPath)" width="830px" height="540px" scrolling="no"></iframe>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        var _createActionUrl = "@Url.Action("Create")";
+        var _saveActionUrl = "@Url.Action("SaveOrder")";
+    </script>
+   @Scripts.Render("~/Script/app/homePagePhoto")
+}

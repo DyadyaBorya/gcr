@@ -74,19 +74,9 @@
 }
 <div class="image-uploader" style="display:none;">
     <iframe src="@Url.Content(ViewBag.UploadPath)" width="830px" height="540px" scrolling="no"></iframe>
-    </div>
+</div>
+
 @section Scripts {
-    <script src="~/Scripts/imageUpload.js"></script>
-    <script type="text/javascript">
-        $(function ()
-        {
-            $(window).bind("beforeunload", window.GCR.ImageUpload.cancelImage);
-            window.GCR.Notifier.add("saved", function () {
-                $("#memberPhoto").attr("src", arguments[1]);
-                $("#Photo").val(arguments[1]);
-                window.GCR.ImageUpload.refreshImageDialog();
-            });
-            $("#Bio").charCount();
-        });
-    </script>
+   @Scripts.Render("~/Script/app/member")
 }
+

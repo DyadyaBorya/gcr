@@ -28,6 +28,7 @@ namespace GCR.Web.Models
             {
                 model = new HomePagePhotoViewModel();
             }
+            model.HomePagePhotoId = photo.HomePagePhotoId;
             model.DisplayOrder = photo.DisplayOrder;
             model.PhotoPath = photo.PhotoPath;
 

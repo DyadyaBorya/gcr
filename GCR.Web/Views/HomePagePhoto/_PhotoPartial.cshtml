@@ -1,0 +1,23 @@
+﻿@model GCR.Web.Models.HomePagePhotoViewModel
+
+<li data-id="@Model.HomePagePhotoId">
+    <div class="handle">
+        <div class="content clearfix">
+                <img src="@Url.Content(Model.PhotoPath)" alt="@Model.DisplayOrder" width="240" height="113" />
+            <div class="command-bar">
+                <span class="display-order command" style="float:left" title="Display Order">
+                    @Html.DisplayFor(modelItem => Model.DisplayOrder)
+                </span>
+                <span class="command delete omega" title="Delete" onclick="$(this).children(':first').submit()">
+                    @using (Html.BeginForm("Delete", "HomePagePhoto", FormMethod.Post, new { @class = "inline" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", Model.HomePagePhotoId)                       
+                    }
+                </span>
+                <span class="command move-down" onclick="window.GCR.HomePagePhoto.moveDown(this)" title="Move Down"></span>
+                <span class="command move-up" onclick="window.GCR.HomePagePhoto.moveUp(this)" title="Move Up"></span>
+            </div>
+        </div>
+    </div>
+</li>

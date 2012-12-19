@@ -216,6 +216,82 @@ div.char-counter .counter {
 div.char-counter .exceeded {
   color: #8a1f11;
 }
+.control li {
+  display: block;
+  padding: 8px;
+  float: left;
+}
+.control .ui-sortable-placeholder {
+  border: 2px dashed #053472;
+  background-color: #ececec;
+  visibility: visible !important;
+  opacity: 0.4;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
+  margin: 7px 6px 5px 6px;
+  padding: 0;
+}
+.control li .handle {
+  background-color: #053472;
+  padding-left: 20px;
+  border: 1px solid #053472;
+}
+.control li:hover .handle {
+  background-color: #0079ce;
+  border: 1px solid #0079ce;
+}
+.control li .content {
+  padding: 8px 10px;
+  background-color: #ececec;
+}
+.control li:hover .content {
+  background-color: #f3f3f3;
+}
+.control .content img {
+  border: 2px solid #c1c1c1;
+  display: block;
+}
+.control .command-bar {
+  margin-top: 7px;
+}
+.control .command {
+  width: 32px;
+  height: 32px;
+  display: block;
+  float: right;
+  margin-right: 10px;
+}
+.control .command.omega {
+  margin-right: 0;
+}
+.control .command[onclick] {
+  cursor: pointer;
+}
+.control .command.move-up {
+  background: url(images/arrowup.png) center center no-repeat;
+}
+.control .command.move-up:hover {
+  background: url(images/arrowup-over.png) center center no-repeat;
+}
+.control .command.move-down {
+  background: url(images/arrowdown.png) center center no-repeat;
+}
+.control .command.move-down:hover {
+  background: url(images/arrowdown-over.png) center center no-repeat;
+}
+.control .command.delete {
+  background: url(images/delete.png) center center no-repeat;
+}
+.control .command.delete:hover {
+  background: url(images/delete-over.png) center center no-repeat;
+}
+.control .display-order {
+  font-size: 36px;
+  line-height: 32px;
+  text-align: center;
+  font-weight: bold;
+  color: #053472;
+}
 div.error,
 div.alert,
 div.notice,
@@ -279,45 +355,48 @@ div.info a {
   padding: 0;
   margin: 0;
   border-width: 0;
+  cursor: pointer;
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
 }
-#top-message .info {
+#top-message.info {
   background: #bde5f8;
   color: #205791;
 }
-#top-message .success {
+#top-message.success {
   background: #dff2bf;
   color: #264409;
 }
-#top-message .notice {
+#top-message.notice {
   background: #feefb3;
   color: #514721;
 }
-#top-message .error,
-#top-message .alert {
+#top-message.error,
+.alert {
   background: #ffbaba;
   color: #8a1f11;
 }
 #top-message div {
   overflow: hidden;
-  /*width 962px minus 50px left pad and 20px right pad*/
-
-  width: 892px;
+  width: 890px;
   margin: 0 auto;
   text-align: center;
   border: none;
   padding: 8px 20px 5px 50px;
+  font-size: 1.3em;
 }
-#top-message .info div {
+#top-message.info div {
   background: url('images/Info32.png') no-repeat 10px center;
 }
-#top-message .success div {
+#top-message.success div {
   background: url('images/Success32.png') no-repeat 10px center;
 }
-#top-message .notice div {
+#top-message.notice div {
   background: url('images/Warning32.png') no-repeat 10px center;
 }
-#top-message .error div,
-#top-message .alert div {
+#top-message.error div,
+.alert div {
   background: url('images/Error32.png') no-repeat 10px center;
 }
 /* jcarousel home page theme */

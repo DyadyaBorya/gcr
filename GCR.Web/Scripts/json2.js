@@ -1,6 +1,6 @@
 /*!
-    json2.js
-    2012-10-08
+    http://www.JSON.org/json2.js
+    2011-10-19
 
     Public Domain.
 
@@ -9,6 +9,7 @@
     See http://www.JSON.org/js.html
 */
 /*
+
     This code should be minified before deployment.
     See http://javascript.crockford.com/jsmin.html
 
@@ -159,7 +160,8 @@
 // Create a JSON object only if one does not already exist. We create the
 // methods in a closure to avoid creating global variables.
 
-if (typeof JSON !== 'object') {
+var JSON;
+if (!JSON) {
     JSON = {};
 }
 

@@ -206,11 +206,13 @@
       <DependentUpon>ImageUpload.aspx</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\BaseController.cs" />
+    <Compile Include="Infrastructure\ControllerExtensions.cs" />
     <Compile Include="Infrastructure\Enums.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
     <Compile Include="Infrastructure\JsonNetResult.cs" />
     <Compile Include="Infrastructure\JsonNetValueProviderFactory.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\AppModels.cs" />
     <Compile Include="Models\ScheduleModels.cs" />
     <Compile Include="Models\HomePagePhotoModels.cs" />
     <Compile Include="Models\MemberModels.cs" />
@@ -237,18 +239,28 @@
     <Content Include="Content\base.min.css">
       <DependentUpon>base.less</DependentUpon>
     </Content>
+    <Content Include="Content\images\arrowdown-over.png" />
+    <Content Include="Content\images\arrowdown.png" />
+    <Content Include="Content\images\arrowup-over.png" />
+    <Content Include="Content\images\arrowup.png" />
     <Content Include="Content\images\background.jpg" />
     <Content Include="Content\images\bottom-shadow.png" />
     <Content Include="Content\images\bottom.jpg" />
+    <Content Include="Content\images\carousel_next.png" />
+    <Content Include="Content\images\carousel_previous.png" />
     <Content Include="Content\images\content-border.gif" />
+    <Content Include="Content\images\delete-over.png" />
+    <Content Include="Content\images\delete.png" />
     <Content Include="Content\images\Error32.png" />
     <Content Include="Content\images\fb.png" />
     <Content Include="Content\images\Info32.png" />
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\menu-border.gif" />
+    <Content Include="Content\images\NoPhoto.png" />
     <Content Include="Content\images\shade.png" />
     <Content Include="Content\images\Success32.png" />
     <Content Include="Content\images\top-shadow.png" />
+    <Content Include="Content\images\transparent.gif" />
     <Content Include="Content\images\Warning32.png" />
     <Content Include="Content\site.css">
       <DependentUpon>site.less</DependentUpon>
@@ -395,9 +407,11 @@
     <Content Include="piczardUserControls\simpleImageUploadUserControl\simpleImageUpload.js" />
     <Content Include="piczardUserControls\simpleImageUploadUserControl\upload.aspx" />
     <Content Include="piczardUserControls\simpleImageUploadUserControl\wait.gif" />
-    <Content Include="Scripts\charCount.js" />
-    <Content Include="Scripts\Common.js" />
-    <Content Include="Scripts\imageUpload.js" />
+    <Content Include="Scripts\app\member.js" />
+    <Content Include="Scripts\app\homePagePhoto.js" />
+    <Content Include="Scripts\custom\charCount.js" />
+    <Content Include="Scripts\custom\common.js" />
+    <Content Include="Scripts\custom\imageUpload.js" />
     <Content Include="Scripts\jquery-1.8.3.js" />
     <Content Include="Scripts\jquery-1.8.3.min.js" />
     <Content Include="Scripts\jquery-ui-1.9.2.js" />
@@ -411,6 +425,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\json2.js" />
+    <Content Include="Scripts\json2.min.js" />
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\_base.js">
@@ -472,7 +487,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
     <Content Include="Views\HomePagePhoto\Admin.cshtml" />
-    <Content Include="Views\HomePagePhoto\Create.cshtml" />
+    <Content Include="Views\HomePagePhoto\_PhotoPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

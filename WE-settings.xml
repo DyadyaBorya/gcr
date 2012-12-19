@@ -21,7 +21,7 @@
     <HtmlEnableMustache>true</HtmlEnableMustache>
     <HtmlEnableZenCoding>true</HtmlEnableZenCoding>
     <JavaScriptAutoCloseBraces>true</JavaScriptAutoCloseBraces>
-    <JavaScriptEnableMinification>false</JavaScriptEnableMinification>
+    <JavaScriptEnableMinification>true</JavaScriptEnableMinification>
     <JavascriptEnableRegions>true</JavascriptEnableRegions>
     <JavaScriptGenerateSourceMaps>true</JavaScriptGenerateSourceMaps>
     <JavaScriptOutlining>true</JavaScriptOutlining>

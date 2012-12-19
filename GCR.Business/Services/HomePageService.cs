@@ -41,6 +41,7 @@ namespace GCR.Business.Services
             if (photo.HomePagePhotoId == 0)
             {
                 homePageRepository.Create(photo);
+                photo.DisplayOrder = GetNextDisplayOrder();
             }
             else
             {
@@ -70,8 +71,9 @@ namespace GCR.Business.Services
                 }
                 homePageRepository.SaveChanges();
 
-                EnsureDisplayOrders(photos);
+                EnsureDisplayOrders(photos.OrderBy(d=>d.DisplayOrder));
                 homePageRepository.SaveChanges();
+                scope.Complete();
             }
         }
 

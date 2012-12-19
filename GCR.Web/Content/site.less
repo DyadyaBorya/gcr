@@ -298,6 +298,118 @@ div.char-counter{
 	.exceeded{color:@error-font;}	
 }
 
+.control
+{
+    li
+    {
+        display: block;
+        padding: 8px;
+        float: left;
+    }
+
+    .ui-sortable-placeholder
+    {
+		border: 2px dashed @strong-color;
+		background-color: #ececec;
+		visibility:visible !important;
+		opacity:0.4;
+		-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+		filter: alpha(opacity=30);
+		margin:7px 6px 5px 6px;
+		padding: 0;
+    }
+
+    li .handle
+    {
+        background-color: @strong-color;
+        padding-left: 20px;
+        border: 1px solid @strong-color;
+    }
+
+	li:hover .handle
+    {
+        background-color: @accent-color;
+        border: 1px solid @accent-color;
+    }
+    li .content
+    {
+        padding: 8px 10px;
+        background-color: #ececec;
+    }
+	li:hover .content
+    {
+        background-color: #f3f3f3;
+    }
+    .content img
+    {
+        border: 2px solid #c1c1c1;
+        display: block;
+    }
+
+    .command-bar
+    {
+        margin-top: 7px;
+    }
+
+    .command
+    {
+        width: 32px;
+        height: 32px;
+        display: block;
+        float: right;
+        margin-right: 10px;
+    }
+
+        .command.omega
+        {
+            margin-right: 0;
+        }
+
+        .command[onclick]
+        {
+            cursor: pointer;
+        }
+
+        .command.move-up
+        {
+            background: url(images/arrowup.png) center center no-repeat;
+        }
+
+            .command.move-up:hover
+            {
+                background: url(images/arrowup-over.png) center center no-repeat;
+            }
+
+        .command.move-down
+        {
+            background: url(images/arrowdown.png) center center no-repeat;
+        }
+
+            .command.move-down:hover
+            {
+                background: url(images/arrowdown-over.png) center center no-repeat;
+            }
+
+        .command.delete
+        {
+            background: url(images/delete.png) center center no-repeat;
+        }
+
+            .command.delete:hover
+            {
+                background: url(images/delete-over.png) center center no-repeat;
+            }
+
+    .display-order
+    {
+        font-size: 36px;
+        line-height: 32px;
+        text-align: center;
+        font-weight: bold;
+        color: @strong-color;
+    }
+}
+
 div.error, div.alert, div.notice, div.success, div.info
 {
 	position: relative;
@@ -373,61 +485,62 @@ div.info a
 	padding: 0;
 	margin: 0;
 	border-width: 0;
+	cursor: pointer;
+	.rounded-corners(0);
+}
+#top-message.info
+{
+	background: @info-background;
+	color: @info-font;
+}
 
-	.info
-	{
-		background: @info-background;
-		color: @info-font;
-	}
+#top-message.success
+{
+	background: @success-background;
+	color: @success-font;
+}
 
-	.success
-	{
-		background: @success-background;
-		color: @success-font;
-	}
+#top-message.notice
+{
+	background: @notice-background;
+	color: @notice-font;
+}
 
-	.notice
-	{
-		background: @notice-background;
-		color: @notice-font;
-	}
+#top-message.error, .alert
+{
+	background: @error-background;
+	color: @error-font;
+}
 
-	.error, .alert
-	{
-		background: @error-background;
-		color: @error-font;
-	}
+#top-message div
+{
+	overflow: hidden;
+	width: 890px;
+	margin: 0 auto;
+	text-align: center;
+	border: none;
+	padding: 8px 20px 5px 50px;
+	font-size:1.3em;
+}
 
-	div
-	{
-		overflow: hidden;
-		/*width 962px minus 50px left pad and 20px right pad*/
-		width: 892px;
-		margin: 0 auto;
-		text-align: center;
-		border: none;
-		padding: 8px 20px 5px 50px;
-	}
+#top-message.info div
+{
+	background: url('images/Info32.png') no-repeat 10px center;
+}
 
-	.info div
-	{
-		background: url('images/Info32.png') no-repeat 10px center;
-	}
+#top-message.success div
+{
+	background: url('images/Success32.png') no-repeat 10px center;
+}
 
-	.success div
-	{
-		background: url('images/Success32.png') no-repeat 10px center;
-	}
+#top-message.notice div
+{
+	background: url('images/Warning32.png') no-repeat 10px center;
+}
 
-	.notice div
-	{
-		background: url('images/Warning32.png') no-repeat 10px center;
-	}
-
-	.error div, .alert div
-	{
-		background: url('images/Error32.png') no-repeat 10px center;
-	}
+#top-message.error div, .alert div
+{
+	background: url('images/Error32.png') no-repeat 10px center;
 }
 
 /* jcarousel home page theme */

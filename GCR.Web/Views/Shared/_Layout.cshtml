@@ -1,74 +1,82 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>@ViewBag.Title - Gopher College Rugby</title>
-    <!--[if IE]>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <![endif]-->
-    <meta name="viewport" content="width=device-width" />
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Content/themes/css")
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title - Gopher College Rugby</title>
+	<!--[if IE]>
+		<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<![endif]-->
+	<meta name="viewport" content="width=device-width" />
+	@Styles.Render("~/Content/css")
+	@Styles.Render("~/Content/themes/css")
 </head>
 <body>
-    <div id="body">
-        <div id="inner-body">
-            <div id="header">
-                <div class="clearfix">
-                    <div style="float: right;">
-                        <div class="est">Established 1981</div>
-                        <div class="fb">
-                            <img src="~/Content/images/fb.png" />&nbsp;  
-                            <span>Follow us on facebook</span>&nbsp;   
-                        </div>
-                        <div class="nav">
-                            <ul class="clearfix">
-                                <li class="alpha @ViewBag.HomeTab">
-                                    <a href="@Url.Action("Index", "Home")">Home</a>
-                                    <div class="highlite"></div>
-                                </li>
-                                <li class="@ViewBag.AboutTab">
-                                    <a href="@Url.Action("About", "Home")">About</a>
-                                    <div class="highlite"></div>
-                                </li>
-                                <li class="@ViewBag.ScheduleTab">
-                                    <a href="@Url.Action("Index", "Schedule")">Schedule</a>
-                                    <div class="highlite"></div>
-                                </li>
-                                <li class="@ViewBag.MemberTab">
-                                    <a href="@Url.Action("Index", "Member")">Team</a>
-                                    <div class="highlite"></div>
-                                </li>
-                                <li class="@ViewBag.NewsTab">
-                                    <a href="@Url.Action("Index", "News")">News</a>
-                                    <div class="highlite"></div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <img src="~/Content/images/logo.png" style="" />
-                </div>
-            </div>
-            @RenderSection("home", required: false)
-            <div class="container">
-                @RenderBody()
-            </div>
-        </div>
-    </div>
-    <div id="footer">
-        <div id="footer-inner">
-                    <div>&copy; @DateTime.Now.Year - Gopher College Rugby &nbsp; | &nbsp;  @{Html.RenderPartial("_LoginView");} </div>
-        </div>
+	<div id="body">
+		<div id="inner-body">
+			<div id="header">
+				<div class="clearfix">
+					<div style="float: right;">
+						<div class="est">Established 1981</div>
+						<div class="fb">
+							<img src="~/Content/images/fb.png" />&nbsp;  
+							<span>Follow us on facebook</span>&nbsp;   
+						</div>
+						<div class="nav">
+							<ul class="clearfix">
+								<li class="alpha @ViewBag.HomeTab">
+									<a href="@Url.Action("Index", "Home")">Home</a>
+									<div class="highlite"></div>
+								</li>
+								<li class="@ViewBag.AboutTab">
+									<a href="@Url.Action("About", "Home")">About</a>
+									<div class="highlite"></div>
+								</li>
+								<li class="@ViewBag.ScheduleTab">
+									<a href="@Url.Action("Index", "Schedule")">Schedule</a>
+									<div class="highlite"></div>
+								</li>
+								<li class="@ViewBag.MemberTab">
+									<a href="@Url.Action("Index", "Member")">Team</a>
+									<div class="highlite"></div>
+								</li>
+								<li class="@ViewBag.NewsTab">
+									<a href="@Url.Action("Index", "News")">News</a>
+									<div class="highlite"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<img src="~/Content/images/logo.png" style="" />
+				</div>
+			</div>
+			@RenderSection("home", required: false)
+			<div class="container">
+				@RenderBody()
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div id="footer-inner">
+					<div>&copy; @DateTime.Now.Year - Gopher College Rugby &nbsp; | &nbsp;  @{Html.RenderPartial("_LoginView");} </div>
+		</div>
 
-    </div>
-    @Scripts.Render("~/Script/base")
-    <script type="text/javascript" src="~/Scripts/jquery.jcarousel.min.js"></script>
-    @RenderSection("scripts", required: false)
-    <script type="text/javascript">
-        $(function () {
-            $("input[type=submit], input[type=button], button, .button").button();
-            $(".buttonset").buttonset();
-        });
-    </script>
+	</div>
+	<div id="top-message" class="success">        
+	</div>
+	@Scripts.Render("~/Script/base")
+	<script type="text/javascript" src="~/Scripts/jquery.jcarousel.min.js"></script>
+	@RenderSection("scripts", required: false)
+	<script type="text/javascript">
+		$(function () {
+			$("input[type=submit], input[type=button], button, .button").button();
+			$(".buttonset").buttonset();
+			@{
+				if (TempData["StatusMessage"] != null)
+				{
+					Html.ViewContext.Writer.Write("\t window.GCR.StatusMessage(" + TempData["StatusMessage"] + ");");
+				}
+			}
+		});
+	</script>
 </body>
 </html>
