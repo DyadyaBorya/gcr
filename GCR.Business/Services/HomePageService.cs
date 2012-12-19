@@ -25,7 +25,7 @@ namespace GCR.Business.Services
 
         }
 
-        public IEnumerable<HomePagePhoto> FetchPhoto()
+        public IEnumerable<HomePagePhoto> FetchPhotos()
         {
             return homePageRepository.Query.
                 OrderBy(a => a.DisplayOrder);
@@ -48,12 +48,46 @@ namespace GCR.Business.Services
             }
 
             homePageRepository.SaveChanges();
+
+            EnsureDisplayOrders();
+            homePageRepository.SaveChanges();
+        }
+
+        public void SavePhotos(IEnumerable<HomePagePhoto> photos)
+        {
+            using (var scope = new TransactionScope())
+            {
+                foreach (var photo in photos)
+                {
+                    if (photo.HomePagePhotoId == 0)
+                    {
+                        homePageRepository.Create(photo);
+                    }
+                    else
+                    {
+                        homePageRepository.Update(photo);
+                    }
+                }
+                homePageRepository.SaveChanges();
+
+                EnsureDisplayOrders(photos);
+                homePageRepository.SaveChanges();
+            }
         }
 
         public void DeletePhoto(HomePagePhoto photo)
         {
-            homePageRepository.Delete(photo);
-            homePageRepository.SaveChanges();
+            using (var scope = new TransactionScope())
+            {
+                homePageRepository.Delete(photo);
+                homePageRepository.SaveChanges();
+
+                EnsureDisplayOrders();
+                homePageRepository.SaveChanges();
+
+                photoService.DeletePhoto(photo.PhotoPath);
+                scope.Complete();
+            }
         }
 
         public void DeleteOrphanPhotos(Func<string, bool> validationFunc)
@@ -64,6 +98,31 @@ namespace GCR.Business.Services
         public string GetPhotoUploadPath()
         {
             return uploadPath;
+        }
+
+        private void EnsureDisplayOrders()
+        {
+            EnsureDisplayOrders(FetchPhotos().ToList());
+
+        }
+
+        private void EnsureDisplayOrders(IEnumerable<HomePagePhoto> photos)
+        {
+            int count = 1;
+            foreach (var photo in photos)
+            {
+                photo.DisplayOrder = count;
+                count++;
+            }
+        }
+
+        private int GetNextDisplayOrder()
+        {
+            int? lastOrder = (from p in homePageRepository.Query
+                              orderby p.DisplayOrder descending
+                              select p.DisplayOrder).FirstOrDefault();
+
+            return lastOrder.HasValue ? lastOrder.Value + 1 : 1;
         }
     }
 }

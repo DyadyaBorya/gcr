@@ -55,6 +55,10 @@ namespace GCR.Business.Services
 
         private void DeleteOrphanPhotosInternal(Func<string, bool> validationFunc)
         {
+            if (!File.Exists(phyiscalPath))
+            {
+                Directory.CreateDirectory(phyiscalPath);
+            }
             string[] strArray = Directory.GetFiles(phyiscalPath);
             int num = 0;
 

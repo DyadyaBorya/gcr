@@ -1,0 +1,92 @@
+﻿@model GCR.Web.Models.MemberViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>@ViewBag.PageTitle</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="two row">
+        <div class="twelve columns">
+            @Html.Message()
+        </div>
+    </div>
+    <div class="one row" style="position:relative">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.EditorFor(model => model.FirstName)
+        </div>
+        <div style="position:absolute; right:75px; top:0">
+            <img id="memberPhoto" src="@Url.Content(Model.PhotoForDisplay)" alt="@Model.FullName" class="photo" width="150" height="200" />
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.EditorFor(model => model.LastName)
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.IsActive)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.EditorFor(model => model.IsActive)
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.MemberSince)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.EditorFor(model => model.MemberSince)
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.Photo)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.HiddenFor(model => model.Photo)
+           <a class="button" onclick="window.GCR.ImageUpload.showImageDialog()">Select New Photo</a>
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.Bio)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.TextAreaFor(model => model.Bio)
+        </div>
+    </div>
+    <div class="one row">
+        <div class="fourteen columns omega offset-by-three editor-field">
+            <input type="submit" value="Save" style="padding-left:1.4em; padding-right:1.4em" />&nbsp;&nbsp;
+                @Html.ActionLink("Back to List", "Admin", null, new { @class = "button" })
+        </div>
+    </div>
+}
+<div class="image-uploader" style="display:none;">
+    <iframe src="@Url.Content(ViewBag.UploadPath)" width="830px" height="540px" scrolling="no"></iframe>
+    </div>
+@section Scripts {
+    <script src="~/Scripts/imageUpload.js"></script>
+    <script type="text/javascript">
+        $(function ()
+        {
+            $(window).bind("beforeunload", window.GCR.ImageUpload.cancelImage);
+            window.GCR.Notifier.add("saved", function () {
+                $("#memberPhoto").attr("src", arguments[1]);
+                $("#Photo").val(arguments[1]);
+                window.GCR.ImageUpload.refreshImageDialog();
+            });
+            $("#Bio").charCount();
+        });
+    </script>
+}

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<GCR.Web.Models.HomePagePhotoViewModel>
+
+@{
+    ViewBag.Title = "Home Page Photo Admin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Home Page Photo Admin</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<ul>
+@foreach (var item in Model) {
+    <li style="display:block;border: 1px solid #ddd" class="clearfix">
+        <div style="float:left; padding-left:15px; background-color:#0000FF">
+        <img src="@Url.Content(item.PhotoPath)" alt="@item.DisplayOrder" class="photo" width="320" height="150" />
+        </div>
+        <div style="float:left; padding-left:25px;">
+        @Html.DisplayFor(modelItem => item.DisplayOrder)
+        @using (Html.BeginForm("Delete", "HomePagePhoto", FormMethod.Post, new { @class = "inline"}))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("id", item.HomePagePhotoId)
+            <a onclick="$(this).parent().submit()">Delete</a>
+                            
+        }
+        </div>
+    </li>
+}
+</ul>

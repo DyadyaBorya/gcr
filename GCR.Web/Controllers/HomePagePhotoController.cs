@@ -40,7 +40,7 @@ namespace GCR.Web.Controllers
 
         public ActionResult Admin()
         {
-            var photos = (from m in homePageService.FetchPhoto()
+            var photos = (from m in homePageService.FetchPhotos()
                            select new HomePagePhotoViewModel
                           {
                               HomePagePhotoId = m.HomePagePhotoId,
@@ -58,7 +58,7 @@ namespace GCR.Web.Controllers
         {
             if (photosVM != null)
             {
-                var photos = homePageService.FetchPhoto().ToList();
+                var photos = homePageService.FetchPhotos().ToList();
                 foreach (var photoVM in photosVM)
                 {
                     var photo = photos.FirstOrDefault(p => p.HomePagePhotoId == photoVM.Id);
