@@ -1,0 +1,10 @@
+﻿@model GCR.Web.Models.NewsViewModel
+<h3>
+    @Html.ActionLink(@Model.Title, "Details", new {id = @Model.NewsId})
+</h3>
+<h5>
+    Posted on @Model.CreatedDate
+</h5>
+<div style="margin-bottom:5em">
+    @Html.Raw(@Model.Article)
+</div>

@@ -18,12 +18,9 @@ namespace GCR.Business.Services
             scheduleRepository = repo;
         }
 
-        public IEnumerable<Schedule> Fetch 
+        public IQueryable<Schedule> Fetch()
         { 
-            get 
-            {
                 return scheduleRepository.Query;
-            }
         }
 
         public Schedule GetById(int id)

@@ -25,7 +25,7 @@ namespace GCR.Business.Services
 
         }
 
-        public IEnumerable<HomePagePhoto> FetchPhotos()
+        public IQueryable<HomePagePhoto> FetchPhotos()
         {
             return homePageRepository.Query.
                 OrderBy(a => a.DisplayOrder);

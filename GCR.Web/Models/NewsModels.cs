@@ -61,4 +61,11 @@ namespace GCR.Web.Models
             return news;
         }
     }
+
+    public class NewsArchiveViewModel
+    {
+        public string Name { get; set; }
+        public int Count{ get; set; }
+        public string Link { get; set; }
+    }
 }

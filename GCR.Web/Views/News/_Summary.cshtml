@@ -1,0 +1,7 @@
+﻿@model GCR.Web.Models.NewsViewModel
+<h4>
+    @Html.ActionLink(@Model.Title, "Details", new {id = @Model.NewsId})
+</h4>
+<p>
+    @Html.Raw(@Model.Summary);
+</p>

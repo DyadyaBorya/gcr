@@ -9,7 +9,7 @@ namespace GCR.Core.Services
 {
     public interface ISeasonService
     {
-        IEnumerable<Season> Fetch { get; }
+        IQueryable<Season> Fetch();
         Season GetById(int id);
         void SaveSeason(Season season);
         void DeleteSeason(Season season);

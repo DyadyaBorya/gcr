@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2 class="offset-by-one">News</h2>
+<div class="one row">
+    <div class="eighteen border">
+        <div class="sixteen columns offset-by-one">
+            @RenderBody()
+            <br />
+        </div>
+        <div class="four columns offset-by-two">
+            @{
+                Html.RenderAction("ArchiveSummary");
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @RenderSection("scripts", required: false)
+}
+
+

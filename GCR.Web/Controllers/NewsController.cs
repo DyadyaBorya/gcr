@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GCR.Core.Services;
+using GCR.Web.Infrastructure;
 using GCR.Web.Models;
 
 namespace GCR.Web.Controllers
@@ -21,13 +22,17 @@ namespace GCR.Web.Controllers
         //
         // GET: /News/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            var articles = from n in newsService.FetchPaging(1)
+            if (!page.HasValue)
+            {
+                page = 1;
+            }
+            var articles = from n in newsService.FetchPaging(page.Value)
                            select new NewsViewModel 
                            {
+                               NewsId = n.NewsId,
                                Article = n.Article,
-                               Link = n.Link,
                                Summary = n.Summary,
                                Title = n.Title,
                                CreatedOn = n.CreatedOn,
@@ -36,21 +41,79 @@ namespace GCR.Web.Controllers
             return View(articles);
         }
 
+        public ActionResult Archive(string year, string month, string day, int? page)
+        {
+            var dates = GetDates(year, month, day);
+            if (!page.HasValue)
+            {
+                page = 1;
+            }
+
+            var articles = from n in newsService.FetchArchive(dates.Item1, dates.Item2, page.Value)
+                           select new NewsViewModel
+                           {
+                               NewsId = n.NewsId,
+                               Article = n.Article,
+                               Summary = n.Summary,
+                               Title = n.Title,
+                               CreatedOn = n.CreatedOn,
+                               ModifiedOn = n.ModifiedOn,
+                           };
+
+            return View("Index", articles);
+        }
+
         //
         // GET: /News/Details/5
 
         public ActionResult Details(int id)
         {
-            return View();
+            var article = newsService.GetById(id);
+            var model = NewsViewModel.ToViewModel(article);
+            return View(model);
+        }
+
+        public ActionResult ArchiveSummary()
+        {
+            var sums = newsService.FetchArchiveSummaries().ToList();
+            var model = new List<NewsArchiveViewModel>(sums.Count());
+            foreach (var sum in sums)
+            {
+                string yearString = sum.Date.Year.ToString();
+                string monthString = sum.Date.ToString("MM");
+
+                model.Add(new NewsArchiveViewModel()
+                {
+                    Count = sum.Count,
+                    Name = sum.Date.ToString("MMMM yyyy"),
+                    Link = Url.RouteUrl("Archive", new { year = yearString, month = monthString })
+                        
+                });
+            }
+
+            return View("_Archive", model);
+        }
+
+        public ActionResult Recent()
+        {
+            var article = from n in newsService.FetchRecent()
+                        select new NewsViewModel 
+                        {
+                            NewsId = n.NewsId,
+                            Summary = n.Summary,
+                            Title = n.Title,
+                            CreatedOn = n.CreatedOn
+                        };
+
+            return View(article);
         }
 
         public ActionResult Admin()
         {
-            var articles = from n in newsService.FetchPaging(1)
+            var articles = from n in newsService.FetchAll()
                            select new NewsViewModel
                            {
                                NewsId = n.NewsId,
-                               Summary = n.Summary,
                                Title = n.Title,
                                CreatedOn = n.CreatedOn,
                                ModifiedOn = n.ModifiedOn,
@@ -91,6 +154,7 @@ namespace GCR.Web.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex);
+                this.LogError(ex);
             }
 
             ViewBag.PageTitle = "Create New Article";
@@ -133,6 +197,7 @@ namespace GCR.Web.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex);
+                this.LogError(ex);
             }
 
             ViewBag.PageTitle = "Edit Article";
@@ -155,9 +220,58 @@ namespace GCR.Web.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex);
+                this.LogError(ex);
             }
 
             return RedirectToAction("Admin");
+        }
+
+        private Tuple<DateTime, DateTime> GetDates(string year, string month, string day)
+        {
+            int y = 2012;
+            int m = 1;
+            int d = 1;
+            bool monthSpecified = false;
+            bool daySpecified = false;
+            DateTime startDate;
+            DateTime endDate;
+
+            if (!int.TryParse(year, out y))
+            {
+                y = 2012;
+            }
+            if (int.TryParse(month, out m))
+            {
+                monthSpecified = true;
+            }
+            else
+            {
+                m = 1;
+            }
+            if (int.TryParse(day, out d))
+            {
+                daySpecified = true;
+            }
+            else
+            {
+                d = 1;
+            }
+
+            startDate = new DateTime(y, m, d);
+
+            if (daySpecified)
+            {
+                endDate = startDate.AddDays(1);
+            }
+            else if (monthSpecified)
+            {
+                endDate = startDate.AddMonths(1);
+            }
+            else
+            {
+                endDate = startDate.AddYears(1);
+            }
+            return new Tuple<DateTime, DateTime>(startDate, endDate);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -7,9 +8,8 @@ using GCR.Core;
 using GCR.Core.Entities;
 using GCR.Core.Security;
 using GCR.Core.Services;
-using GCR.Web.Models;
 using GCR.Web.Infrastructure;
-using System.IO;
+using GCR.Web.Models;
 
 namespace GCR.Web.Controllers
 {
@@ -106,6 +106,7 @@ namespace GCR.Web.Controllers
             catch(Exception ex)
             {
                 ModelState.AddModelError("", ex);
+                this.LogError(ex);
             }
 
             ViewBag.PageTitle = "Create New Member";
@@ -147,6 +148,7 @@ namespace GCR.Web.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex);
+                this.LogError(ex);
             }
 
             ViewBag.PageTitle = "Edit Member";
@@ -170,6 +172,7 @@ namespace GCR.Web.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex);
+                this.LogError(ex);
             }
 
             return RedirectToAction("Admin");

@@ -9,9 +9,11 @@ namespace GCR.Core.Services
 {
     public interface INewsService
     {
-        IEnumerable<News> FetchAll();
-        IEnumerable<News> FetchRecent(int numberOfEntries = 10);
-        IEnumerable<News> FetchPaging(int pageNumber, int numberOfEntries = 10);
+        IQueryable<News> FetchAll();
+        IQueryable<News> FetchRecent(int numberOfEntries = 10);
+        IQueryable<News> FetchPaging(int pageNumber, int numberOfEntries = 10);
+        IQueryable<News> FetchArchive(DateTime startDate, DateTime endDate, int pageNumber, int numberOfEntries = 10);
+        IQueryable<NewsSummary> FetchArchiveSummaries();
         News GetById(int id);
         void SaveNews(News news);
         void DeleteNews(News news);

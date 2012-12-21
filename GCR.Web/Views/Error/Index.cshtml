@@ -4,15 +4,26 @@
     ViewBag.Title = Model.StatusCode.ToString() + " - " + Model.StatusDescription;
 }
 <h2 class="offset-by-one">What Happened?</h2>
-<div class="three row">
+<div class="four row">
     <div class="fourteen border">
     <div class="twelve columns offset-by-one alpha">
+        <br />
         <h3>@ViewBag.Title</h3>
+       <p style="font-size:1.2em">
+            Congratulations! You broke the internet. What's next? Do you want to kick my dog too!
+        </p>
         @if (@Model.RequestedUrl != null)
         { 
-            <p>The page you requested '@Model.RequestedUrl' could not be found.</p>
+            <p style="font-size:1.1em">The page you requested '@Model.RequestedUrl' could not be found.</p>
         }
-        <p>Congratulations! You broke the internet. What's next? Do you want to kick my dog too!</p>
+        <p style="font-size:1.1em">
+            If this error persists, please go to our @Html.ActionLink("contact page", "About", "Home") 
+            for help us want you were doing when this error occurred and any other 
+            helpful information that may help us find this.
+        </p>
+        <p style="font-size:1.1em">
+            Thank you for your patience and understanding.
+        </p>
     </div>
          <div class="six columns offset-by-two omega">
              <img src="~/Content/images/sad.jpg" class="photo" />

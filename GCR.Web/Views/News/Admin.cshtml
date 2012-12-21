@@ -29,13 +29,13 @@
         <td>
             @Html.DisplayFor(modelItem => item.Title)
         </td>
-        <td>
+        <td style="width:70px">
             @Html.DisplayFor(modelItem => item.CreatedOn)
         </td>
-        <td>
+        <td style="width:70px">
             @Html.DisplayFor(modelItem => item.ModifiedOn)
         </td>
-              <td>
+              <td style="white-space:nowrap">
                 @Html.ActionLink("Edit", "Edit", new { id = item.NewsId }) &nbsp;|&nbsp;
                 @using (Html.BeginForm("Delete", "News", FormMethod.Post, new { @class = "inline" }))
                 {

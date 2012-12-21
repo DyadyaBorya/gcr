@@ -9,8 +9,8 @@ namespace GCR.Core.Services
 {
     public interface IMemberService
     {
-        IEnumerable<Member> FetchAll();
-        IEnumerable<Member> FetchActive();
+        IQueryable<Member> FetchAll();
+        IQueryable<Member> FetchActive();
         Member GetById(int id);
         void SaveMember(Member product);
         void DeleteMember(Member product);

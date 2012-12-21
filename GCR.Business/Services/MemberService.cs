@@ -25,7 +25,7 @@ namespace GCR.Business.Services
 
         }
 
-        public IEnumerable<Member> FetchAll()
+        public IQueryable<Member> FetchAll()
         {
             return memberRepository.Query.
                 OrderByDescending(a => a.IsActive).
@@ -33,7 +33,7 @@ namespace GCR.Business.Services
                 ThenBy(a=> a.FirstName);
         }
 
-        public IEnumerable<Member> FetchActive()
+        public IQueryable<Member> FetchActive()
         {
             return this.FetchAll().Where(a=>a.IsActive);
         }

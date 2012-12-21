@@ -18,12 +18,9 @@ namespace GCR.Business.Services
             seasonRepository = repo;
         }
 
-        public IEnumerable<Season> Fetch 
+        public IQueryable<Season> Fetch()
         { 
-            get 
-            {
                 return seasonRepository.Query;
-            }
         }
 
         public Season GetById(int id)

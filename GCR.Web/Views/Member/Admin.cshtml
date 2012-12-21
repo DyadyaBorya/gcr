@@ -46,7 +46,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.HasPhoto)
             </td>
-            <td>
+            <td style="white-space:nowrap">
                 @Html.ActionLink("Edit", "Edit", new { id = item.MemberId }) &nbsp;|&nbsp;
                 @using (Html.BeginForm("Delete", "Member", FormMethod.Post, new { @class = "inline" }))
                 {

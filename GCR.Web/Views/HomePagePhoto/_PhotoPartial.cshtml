@@ -1,9 +1,10 @@
-﻿@model GCR.Web.Models.HomePagePhotoViewModel
+﻿@using System.IO
+@model GCR.Web.Models.HomePagePhotoViewModel
 
 <li data-id="@Model.HomePagePhotoId">
     <div class="handle">
         <div class="content clearfix">
-                <img src="@Url.Content(Model.PhotoPath)" alt="@Model.DisplayOrder" width="240" height="113" />
+                <img src="@Url.Content(Model.PhotoPath)" alt="@Path.GetFileNameWithoutExtension(Model.PhotoPath)" width="240" height="113" />
             <div class="command-bar">
                 <span class="display-order command" style="float:left" title="Display Order">
                     @Html.DisplayFor(modelItem => Model.DisplayOrder)

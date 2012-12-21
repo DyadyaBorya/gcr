@@ -9,7 +9,7 @@ namespace GCR.Core.Services
 {
     public interface IHomePageService
     {
-        IEnumerable<HomePagePhoto> FetchPhotos();
+        IQueryable<HomePagePhoto> FetchPhotos();
         HomePagePhoto GetPhotoById(int id);
         void SavePhoto(HomePagePhoto photo);
         void SavePhotos(IEnumerable<HomePagePhoto> photo);

@@ -6,18 +6,22 @@
         <div class="four columns offset-by-one alpha">
             <h2>Admin</h2>
             <ul class="none">
-                <li><h4>@Html.ActionLink("Members", "Admin", "Member")</h4></li>
-                <li><h4>@Html.ActionLink("Schedule", "Admin", "Member")</h4></li>
-                <li><h4>@Html.ActionLink("Seasons", "Admin", "Member")</h4></li>
                 <li><h4>@Html.ActionLink("Home Page", "Admin", "HomePagePhoto")</h4></li>
+                <li><h4>@Html.ActionLink("Members", "Admin", "Member")</h4></li>
+                <li><h4>@Html.ActionLink("News", "Admin", "News")</h4></li>
+                <li><h4>@Html.ActionLink("Schedule", "Admin", "Member")</h4></li>
+                <li><h4>@Html.ActionLink("Seasons", "Admin", "Member")</h4></li>               
                 <li><h4>@Html.ActionLink("Teams", "Admin", "Member")</h4></li>
+                
+                <li><h4>@Html.ActionLink("Error Log", "", "elmah")</h4></li>
             </ul>
         </div>
         <div class="seventeen columns offset-by-one omega">
             @RenderBody()
         </div>
     </div>
-    @section Scripts {
-        @RenderSection("scripts", required: false)
-    }
 </div>
+@section Scripts {
+    @RenderSection("scripts", required: false)
+}
+

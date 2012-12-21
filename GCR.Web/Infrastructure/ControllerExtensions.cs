@@ -13,11 +13,17 @@ namespace GCR.Web.Infrastructure
     {
         public static void ShowMessageAfterRedirect(this Controller controller, MessageMode status, string message)
         {
-            controller.TempData["StatusMessage"] = JsonConvert.SerializeObject(new StatusMessage(status, message));
+            ShowMessageAfterRedirect(controller, new StatusMessage(status, message));
         }
+
         public static void ShowMessageAfterRedirect(this Controller controller, StatusMessage message)
         {
             controller.TempData["StatusMessage"] = JsonConvert.SerializeObject(message);
+        }
+
+        public static void LogError(this Controller controller, Exception ex)
+        {
+            Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
         }
     }
 }

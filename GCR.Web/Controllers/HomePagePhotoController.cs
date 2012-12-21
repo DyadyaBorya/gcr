@@ -111,6 +111,7 @@ namespace GCR.Web.Controllers
             catch(Exception ex)
             {
                 ModelState.AddModelError("", ex);
+                this.LogError(ex);
             }
 
             return Json(new { Status = MessageMode.Error, Message = "Error occurred until saving photo!" });
@@ -132,6 +133,7 @@ namespace GCR.Web.Controllers
             catch (Exception ex)
             {
                 ModelState.AddModelError("", ex);
+                this.LogError(ex);
             }
 
             return RedirectToAction("Admin");

@@ -9,7 +9,7 @@ namespace GCR.Core.Services
 {
     public interface ITeamService
     {
-        IEnumerable<Team> Fetch { get; }
+        IQueryable<Team> Fetch();
         Team GetById(int id);
         void SaveTeam(Team team);
         void DeleteTeam(Team team);

@@ -18,12 +18,9 @@ namespace GCR.Business.Services
             teamRepository = repo;
         }
 
-        public IEnumerable<Team> Fetch 
+        public IQueryable<Team> Fetch()
         { 
-            get 
-            {
                 return teamRepository.Query;
-            }
         }
 
         public Team GetById(int id)

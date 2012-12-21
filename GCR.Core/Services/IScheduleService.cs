@@ -9,7 +9,7 @@ namespace GCR.Core.Services
 {
     public interface IScheduleService
     {
-        IEnumerable<Schedule> Fetch { get; }
+        IQueryable<Schedule> Fetch();
         Schedule GetById(int id);
         void SaveSchedule(Schedule schedule);
         void DeleteSchedule(Schedule schedule);

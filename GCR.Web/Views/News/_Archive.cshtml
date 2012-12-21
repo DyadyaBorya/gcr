@@ -1,0 +1,13 @@
+﻿@model IEnumerable<GCR.Web.Models.NewsArchiveViewModel>
+@{
+    Layout = null;
+}
+<h3>Archives</h3>
+<ul>
+    @foreach (var item in @Model)
+    {
+        <li>
+            <a href="@item.Link">@item.Name (@item.Count)</a>
+        </li>
+    }
+</ul>

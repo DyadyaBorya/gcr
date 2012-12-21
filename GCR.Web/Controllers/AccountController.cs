@@ -5,10 +5,11 @@ using System.Transactions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using GCR.Web.Models;
 using GCR.Core;
-using GCR.Core.Services;
 using GCR.Core.Security;
+using GCR.Core.Services;
+using GCR.Web.Infrastructure;
+using GCR.Web.Models;
 
 namespace GCR.Web.Controllers
 {
@@ -87,6 +88,7 @@ namespace GCR.Web.Controllers
                 catch (UserCreationException ex)
                 {
                     ModelState.AddModelError("", ex.Message);
+                    this.LogError(ex);
                 }
             }
 
@@ -169,9 +171,10 @@ namespace GCR.Web.Controllers
                         userService.CreateLocalAccount(CurrentUser.Identity.Name, model.NewPassword);
                         return RedirectToAction("Manage", new { Message = "Your password has been set." });
                     }
-                    catch (Exception e)
+                    catch (Exception ex)
                     {
-                        ModelState.AddModelError("", e);
+                        ModelState.AddModelError("", ex);
+                        this.LogError(ex);
                     }
                 }
             }

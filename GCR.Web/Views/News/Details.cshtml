@@ -1,0 +1,7 @@
+﻿@model GCR.Web.Models.NewsViewModel
+@{
+    Layout = "~/Views/News/_Layout.cshtml";
+    ViewBag.Title = Model.Title + " - News";
+    Html.RenderPartial("_Details", Model);
+ }
+       
