@@ -4,7 +4,7 @@ namespace GCR.Core.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class News
+    public partial class News: IAuditable
     {
     }
 }

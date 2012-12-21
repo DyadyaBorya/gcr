@@ -4,6 +4,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Globalization;
+using System.Web;
+using System.Web.Mvc;
 using System.Web.Security;
 using GCR.Core;
 using GCR.Web.Infrastructure;
@@ -64,10 +66,27 @@ namespace GCR.Web.Models
                     return "error";
             }
         }
+    }
 
-        public static void ShowMessageAfterRedirect(MessageMode status, string message)
+    public class HttpErrorViewModel : HandleErrorInfo
+    {
+        public HttpErrorViewModel(Exception exception, string controllerName, string actionName)
+            : base(exception, controllerName, actionName)
         {
-            
+            var http = exception as HttpException;
+            if (http != null)
+            {
+                this.StatusCode = http.GetHttpCode();
+            }
+            else
+            {
+                this.StatusCode = 500;
+            }
+            this.StatusDescription = HttpStatusDescription.Get(this.StatusCode);
         }
+        public int StatusCode { get; set; }
+        public string StatusDescription { get; set; }
+        public string RequestedUrl { get; set; }
+        public string ReferrerUrl { get; set; }
     }
 }

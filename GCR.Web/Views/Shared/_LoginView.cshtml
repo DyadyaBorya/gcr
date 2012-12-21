@@ -1,4 +1,5 @@
-﻿@if (ViewBag.User.IsLoggedIn) {
+﻿@if (ViewBag.User != null && ViewBag.User.IsLoggedIn)
+{
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "inline" })) {
         @Html.AntiForgeryToken()
         <a href="javascript:document.getElementById('logoutForm').submit()">Logout</a>

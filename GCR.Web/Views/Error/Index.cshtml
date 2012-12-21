@@ -1,14 +1,17 @@
-﻿@model System.Web.Mvc.HandleErrorInfo
-
+﻿@model GCR.Web.Models.HttpErrorViewModel
 @{
     Layout = "~/Views/Shared/_SimpleLayout.cshtml";
-    ViewBag.Title = "Error";
+    ViewBag.Title = Model.StatusCode.ToString() + " - " + Model.StatusDescription;
 }
 <h2 class="offset-by-one">What Happened?</h2>
 <div class="three row">
     <div class="fourteen border">
     <div class="twelve columns offset-by-one alpha">
         <h3>@ViewBag.Title</h3>
+        @if (@Model.RequestedUrl != null)
+        { 
+            <p>The page you requested '@Model.RequestedUrl' could not be found.</p>
+        }
         <p>Congratulations! You broke the internet. What's next? Do you want to kick my dog too!</p>
     </div>
          <div class="six columns offset-by-two omega">

@@ -18,12 +18,24 @@ namespace GCR.Business.Services
             newsRepository = repo;
         }
 
-        public IEnumerable<News> Fetch 
+        public IEnumerable<News> FetchAll()
         { 
-            get 
-            { 
-                return newsRepository.Query;
-            }
+            return newsRepository.Query.OrderByDescending(n=>n.ModifiedOn);
+        }
+
+        public IEnumerable<News> FetchPaging(int pageNumber, int numberOfEntries = 10)
+        {
+            if (pageNumber < 1) throw new ArgumentException("pageNumber can not be less than 1.");
+            if (numberOfEntries < 1) throw new ArgumentException("numberOfEntries can not be less than 1.");
+
+            return FetchAll().Skip((pageNumber-1) * numberOfEntries).Take(numberOfEntries);
+        }
+
+        public IEnumerable<News> FetchRecent(int numberOfEntries = 10)
+        {
+            if (numberOfEntries < 1) throw new ArgumentException("numberOfEntries can not be less than 1.");
+
+            return FetchAll().Take(numberOfEntries);
         }
 
         public News GetById(int id)

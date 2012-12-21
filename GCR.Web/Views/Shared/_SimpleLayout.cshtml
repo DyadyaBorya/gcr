@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>@ViewBag.Title - Gopher College Rugby</title>
+	<!--[if IE]>
+		<link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+	<![endif]-->
+	<meta name="viewport" content="width=device-width" />
+    <link href="~/Content/_base.min.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="body">
+		<div id="inner-body">
+			<div id="header">
+				<div class="clearfix">
+					<div style="float: right;">
+						<div class="est">Established 1981</div>
+						<div class="fb">
+							<img src="~/Content/images/fb.png" />&nbsp;  
+							<span>Follow us on facebook</span>&nbsp;   
+						</div>
+						<div class="nav">
+							<ul class="clearfix">
+								<li class="alpha @ViewBag.HomeTab">
+									<a href="@Url.Action("Index", "Home")">Home</a>
+									<div class="highlite"></div>
+								</li>
+								<li class="@ViewBag.AboutTab">
+									<a href="@Url.Action("About", "Home")">About</a>
+									<div class="highlite"></div>
+								</li>
+								<li class="@ViewBag.ScheduleTab">
+									<a href="@Url.Action("Index", "Schedule")">Schedule</a>
+									<div class="highlite"></div>
+								</li>
+								<li class="@ViewBag.MemberTab">
+									<a href="@Url.Action("Index", "Member")">Team</a>
+									<div class="highlite"></div>
+								</li>
+								<li class="@ViewBag.NewsTab">
+									<a href="@Url.Action("Index", "News")">News</a>
+									<div class="highlite"></div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<img src="~/Content/images/logo.png" style="" />
+				</div>
+			</div>
+			<div class="container">
+				@RenderBody()
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div id="footer-inner">
+					<div>&copy; @DateTime.Now.Year - Gopher College Rugby} </div>
+		</div>
+
+	</div>
+	<div id="top-message" class="success">        
+	</div>
+</body>
+</html>

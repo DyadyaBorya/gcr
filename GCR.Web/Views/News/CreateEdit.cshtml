@@ -1,0 +1,57 @@
+﻿@model GCR.Web.Models.NewsViewModel
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>@ViewBag.PageTitle</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="two row">
+        <div class="twelve columns">
+            @Html.Message()
+        </div>
+    </div>
+    <div class="one row" style="position:relative">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.Title)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new {style = "width:400px"}})
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.Summary)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.TextAreaFor(model => model.Summary, new {style = "height:80px;width:400px"})
+        </div>
+    </div>
+    <div class="one row">
+        <div class="three columns alpha editor-label">
+            @Html.LabelFor(model => model.Article)
+        </div>
+        <div class="fourteen columns omega editor-field">
+            @Html.TextAreaFor(model => model.Article, new {style = "width:99%"})
+        </div>
+    </div>
+    <div class="one row">
+        <div class="fourteen columns omega offset-by-three editor-field">
+            <input type="submit" value="Save" style="padding-left:1.4em; padding-right:1.4em" />&nbsp;&nbsp;
+                @Html.ActionLink("Back to List", "Admin", null, new { @class = "button" })
+        </div>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            CKEDITOR.replace('Article');
+            $("#Summary").charCount();
+        });
+    </script>
+}
+
