@@ -12,7 +12,7 @@
         <EntityTypeShape EntityType="GCR.Model.Schedule" Width="1.5" PointX="1.7120092053487939" PointY="7.4835908298769924" />
         <EntityTypeShape EntityType="GCR.Model.Season" Width="1.5" PointX="3.5703490113701433" PointY="22.111889700457404" />
         <EntityTypeShape EntityType="GCR.Model.Team" Width="1.5" PointX="8.0318276807814026" PointY="8.67219582603881" />
-        <EntityTypeShape EntityType="GCR.Model.UserProfile" Width="1.5" PointX="8.6738896615216" PointY="9.32648215132136" />
+        <EntityTypeShape EntityType="GCR.Model.UserProfile" Width="1.5" PointX="11.5" PointY="8.75" />
         <EntityTypeShape EntityType="GCR.Model.UserSetting" Width="1.5" PointX="7.7614974285296618" PointY="12.269463947168301" />
         <AssociationConnector Association="GCR.Model.FK_Schedule_Season" />
         <AssociationConnector Association="GCR.Model.FK_Schedule_Team" />

@@ -1,0 +1,182 @@
+﻿<error errorId="ac686098-ee7f-40f8-8895-bfb119afeee6" application="/LM/W3SVC/9/ROOT" host="QCI-JANTOINE" type="System.Web.Security.MembershipCreateUserException" message="The username supplied is invalid." source="WebMatrix.WebData" detail="System.Web.Security.MembershipCreateUserException: The username supplied is invalid.&#xD;&#xA;   at WebMatrix.WebData.SimpleMembershipProvider.CreateOrUpdateOAuthAccount(String provider, String providerUserId, String userName)&#xD;&#xA;   at Microsoft.Web.WebPages.OAuth.OAuthWebSecurity.CreateOrUpdateAccount(String providerName, String providerUserId, String userName)&#xD;&#xA;   at GCR.Business.Security.SecurityProvider.CreateOAuthAccount(String username, String provider, String providerUserId) in c:\Users\jantoine\Documents\GitHub\gcr\GCR.Business\Security\SecurityProvider.cs:line 85&#xD;&#xA;   at GCR.Business.Services.UserService.CreateOAuthAccount(String username, String provider, String providerUserId) in c:\Users\jantoine\Documents\GitHub\gcr\GCR.Business\Services\UserService.cs:line 64&#xD;&#xA;   at GCR.Web.Controllers.AccountController.ExternalLoginConfirmation(RegisterExternalLoginModel model, String returnUrl) in c:\Users\jantoine\Documents\GitHub\gcr\GCR.Web\Controllers\AccountController.cs:line 247&#xD;&#xA;   at lambda_method(Closure , ControllerBase , Object[] )&#xD;&#xA;   at System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters)&#xD;&#xA;   at System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass42.&lt;BeginInvokeSynchronousActionMethod&gt;b__41()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethod(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass37.&lt;&gt;c__DisplayClass39.&lt;BeginInvokeActionMethodWithFilters&gt;b__33()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass4f.&lt;InvokeActionMethodFilterAsynchronously&gt;b__49()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass37.&lt;BeginInvokeActionMethodWithFilters&gt;b__36(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncResultWrapper.WrappedAsyncResult`1.End()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.EndInvokeActionMethodWithFilters(IAsyncResult asyncResult)&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass25.&lt;&gt;c__DisplayClass2a.&lt;BeginInvokeAction&gt;b__20()&#xD;&#xA;   at System.Web.Mvc.Async.AsyncControllerActionInvoker.&lt;&gt;c__DisplayClass25.&lt;BeginInvokeAction&gt;b__22(IAsyncResult asyncResult)" time="2012-12-27T21:04:14.4216625Z">
+  <serverVariables>
+    <item name="ALL_HTTP">
+      <value string="HTTP_CONNECTION:keep-alive&#xD;&#xA;HTTP_CONTENT_LENGTH:463&#xD;&#xA;HTTP_CONTENT_TYPE:application/x-www-form-urlencoded&#xD;&#xA;HTTP_ACCEPT:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;HTTP_ACCEPT_ENCODING:gzip, deflate&#xD;&#xA;HTTP_ACCEPT_LANGUAGE:en-US,en;q=0.5&#xD;&#xA;HTTP_COOKIE:__RequestVerificationToken=ZgDAHy3z0csQHBZ13qiNNi6ER9ZdQdyy4h0a7LI9twbaswvmKy35Gwnqnyr5hkwexTM_akDAiPTr8MqYAhWOewi0OW58u3suuEkWXubZEWE1&#xD;&#xA;HTTP_HOST:localhost:59490&#xD;&#xA;HTTP_REFERER:http://localhost:59490/Account/ExternalLoginCallback?code=4a20ea85996e5c00f0dc3526ead0127f20f327bf&amp;__provider__=bitly&amp;__sid__=80b3fe6fa9d744ad9dfef78192432cef&#xD;&#xA;HTTP_USER_AGENT:Mozilla/5.0 (Windows NT 6.1; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0&#xD;&#xA;HTTP_DNT:1&#xD;&#xA;" />
+    </item>
+    <item name="ALL_RAW">
+      <value string="Connection: keep-alive&#xD;&#xA;Content-Length: 463&#xD;&#xA;Content-Type: application/x-www-form-urlencoded&#xD;&#xA;Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8&#xD;&#xA;Accept-Encoding: gzip, deflate&#xD;&#xA;Accept-Language: en-US,en;q=0.5&#xD;&#xA;Cookie: __RequestVerificationToken=ZgDAHy3z0csQHBZ13qiNNi6ER9ZdQdyy4h0a7LI9twbaswvmKy35Gwnqnyr5hkwexTM_akDAiPTr8MqYAhWOewi0OW58u3suuEkWXubZEWE1&#xD;&#xA;Host: localhost:59490&#xD;&#xA;Referer: http://localhost:59490/Account/ExternalLoginCallback?code=4a20ea85996e5c00f0dc3526ead0127f20f327bf&amp;__provider__=bitly&amp;__sid__=80b3fe6fa9d744ad9dfef78192432cef&#xD;&#xA;User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0&#xD;&#xA;DNT: 1&#xD;&#xA;" />
+    </item>
+    <item name="APPL_MD_PATH">
+      <value string="/LM/W3SVC/9/ROOT" />
+    </item>
+    <item name="APPL_PHYSICAL_PATH">
+      <value string="C:\Users\jantoine\Documents\GitHub\GCR\GCR.Web\" />
+    </item>
+    <item name="AUTH_TYPE">
+      <value string="" />
+    </item>
+    <item name="AUTH_USER">
+      <value string="" />
+    </item>
+    <item name="AUTH_PASSWORD">
+      <value string="*****" />
+    </item>
+    <item name="LOGON_USER">
+      <value string="" />
+    </item>
+    <item name="REMOTE_USER">
+      <value string="" />
+    </item>
+    <item name="CERT_COOKIE">
+      <value string="" />
+    </item>
+    <item name="CERT_FLAGS">
+      <value string="" />
+    </item>
+    <item name="CERT_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="CERT_SERIALNUMBER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="CERT_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CERT_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="CONTENT_LENGTH">
+      <value string="463" />
+    </item>
+    <item name="CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded" />
+    </item>
+    <item name="GATEWAY_INTERFACE">
+      <value string="CGI/1.1" />
+    </item>
+    <item name="HTTPS">
+      <value string="off" />
+    </item>
+    <item name="HTTPS_KEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SECRETKEYSIZE">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_ISSUER">
+      <value string="" />
+    </item>
+    <item name="HTTPS_SERVER_SUBJECT">
+      <value string="" />
+    </item>
+    <item name="INSTANCE_ID">
+      <value string="9" />
+    </item>
+    <item name="INSTANCE_META_PATH">
+      <value string="/LM/W3SVC/9" />
+    </item>
+    <item name="LOCAL_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="PATH_INFO">
+      <value string="/Account/ExternalLoginConfirmation" />
+    </item>
+    <item name="PATH_TRANSLATED">
+      <value string="C:\Users\jantoine\Documents\GitHub\GCR\GCR.Web\Account\ExternalLoginConfirmation" />
+    </item>
+    <item name="QUERY_STRING">
+      <value string="" />
+    </item>
+    <item name="REMOTE_ADDR">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_HOST">
+      <value string="::1" />
+    </item>
+    <item name="REMOTE_PORT">
+      <value string="56905" />
+    </item>
+    <item name="REQUEST_METHOD">
+      <value string="POST" />
+    </item>
+    <item name="SCRIPT_NAME">
+      <value string="/Account/ExternalLoginConfirmation" />
+    </item>
+    <item name="SERVER_NAME">
+      <value string="localhost" />
+    </item>
+    <item name="SERVER_PORT">
+      <value string="59490" />
+    </item>
+    <item name="SERVER_PORT_SECURE">
+      <value string="0" />
+    </item>
+    <item name="SERVER_PROTOCOL">
+      <value string="HTTP/1.1" />
+    </item>
+    <item name="SERVER_SOFTWARE">
+      <value string="Microsoft-IIS/8.0" />
+    </item>
+    <item name="URL">
+      <value string="/Account/ExternalLoginConfirmation" />
+    </item>
+    <item name="HTTP_CONNECTION">
+      <value string="keep-alive" />
+    </item>
+    <item name="HTTP_CONTENT_LENGTH">
+      <value string="463" />
+    </item>
+    <item name="HTTP_CONTENT_TYPE">
+      <value string="application/x-www-form-urlencoded" />
+    </item>
+    <item name="HTTP_ACCEPT">
+      <value string="text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" />
+    </item>
+    <item name="HTTP_ACCEPT_ENCODING">
+      <value string="gzip, deflate" />
+    </item>
+    <item name="HTTP_ACCEPT_LANGUAGE">
+      <value string="en-US,en;q=0.5" />
+    </item>
+    <item name="HTTP_COOKIE">
+      <value string="__RequestVerificationToken=ZgDAHy3z0csQHBZ13qiNNi6ER9ZdQdyy4h0a7LI9twbaswvmKy35Gwnqnyr5hkwexTM_akDAiPTr8MqYAhWOewi0OW58u3suuEkWXubZEWE1" />
+    </item>
+    <item name="HTTP_HOST">
+      <value string="localhost:59490" />
+    </item>
+    <item name="HTTP_REFERER">
+      <value string="http://localhost:59490/Account/ExternalLoginCallback?code=4a20ea85996e5c00f0dc3526ead0127f20f327bf&amp;__provider__=bitly&amp;__sid__=80b3fe6fa9d744ad9dfef78192432cef" />
+    </item>
+    <item name="HTTP_USER_AGENT">
+      <value string="Mozilla/5.0 (Windows NT 6.1; WOW64; rv:17.0) Gecko/20100101 Firefox/17.0" />
+    </item>
+    <item name="HTTP_DNT">
+      <value string="1" />
+    </item>
+  </serverVariables>
+  <form>
+    <item name="__RequestVerificationToken">
+      <value string="OSZjGovdIpXX-QIhqcGwfMdVi9D-HtewRMd8pgEL9L7go_ODQbPr387H97f5jiubqKQkAnNy1Lv8LTV6trUF8R5QIoMRwnJ1Xs9ShjjPvoo1" />
+    </item>
+    <item name="UserName">
+      <value string="jonantoine2" />
+    </item>
+    <item name="ExternalLoginData">
+      <value string="5C355D57F8C9FFCEDC68C52A0C22A4A1D0551765D1B8E7E27604E0DCA0E3B596BDB744995D9D88813C6719FDCF160F2ED73A0A1C557D566AEF5A123DAE2F1C29D4DD000CFBD292F3A48D2D1310DDAF546EAEC3CD4121E581037B19F31D99A74751020801F0E41FB162258DE6439373E33488C4B453A442369E6723B653EF52F43F0D4EE2937D3C760EA340E90A762927" />
+    </item>
+  </form>
+  <cookies>
+    <item name="__RequestVerificationToken">
+      <value string="ZgDAHy3z0csQHBZ13qiNNi6ER9ZdQdyy4h0a7LI9twbaswvmKy35Gwnqnyr5hkwexTM_akDAiPTr8MqYAhWOewi0OW58u3suuEkWXubZEWE1" />
+    </item>
+  </cookies>
+</error>

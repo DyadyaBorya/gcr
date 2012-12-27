@@ -8,6 +8,8 @@ namespace GCR.Core.Security
 {
     public interface ISecurityProvider
     {
+        void RegisterOAuthProviders();
+
         bool LoginLocal(string username, string password, bool persist);
 
         void Logout();

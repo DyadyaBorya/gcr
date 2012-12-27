@@ -22,6 +22,21 @@ namespace GCR.Business.Security
             InitializeSimpleMembership.Initialize();
         }
 
+        public void RegisterOAuthProviders()
+        {
+            OAuthWebSecurity.RegisterMicrosoftClient(
+                clientId: "",
+                clientSecret: "");
+
+            OAuthWebSecurity.RegisterClient(
+                new BitlyClient("", ""), 
+                "Bitly", 
+                new Dictionary<string, object>()
+            );
+
+            OAuthWebSecurity.RegisterGoogleClient();
+        }
+
         public bool LoginLocal(string username, string password, bool persist)
         {
             return WebSecurity.Login(username, password, persistCookie: persist);

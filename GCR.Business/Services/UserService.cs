@@ -55,13 +55,13 @@ namespace GCR.Business.Services
         {
 
             // Check if user already exists
-            if (this.UsernameExists(username))
+            if (!this.UsernameExists(username))
             {
                 // Insert name into the profile table
                 userRepository.Create(new UserProfile { UserName = username });
                 userRepository.SaveChanges();
 
-                userSecurity.CreateOAuthAccount(provider, providerUserId, username);
+                userSecurity.CreateOAuthAccount( username, provider, providerUserId);
 
                 return true;
             }
