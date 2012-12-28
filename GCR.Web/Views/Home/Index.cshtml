@@ -3,20 +3,9 @@
 }
 
 @section home {
-<div style="position:relative; overflow:hidden;	margin-bottom:20px;">
-<ul id="mycarousel" class="jcarousel-skin-homepage">
-        <li><img src="~/Content/images/slide5.jpg" width="960" height="450" alt=""></li>
-        	<li><img src="~/Content/images/slide1.jpg" width="960" height="450" alt=""></li>
-            <li><img src="~/Content/images/slide6.jpg" width="960" height="450" alt=""></li>
-            <li><img src="~/Content/images/slide2.jpg" width="960" height="450" alt=""></li>
-            <li><img src="~/Content/images/slide3.jpg" width="960" height="450" alt=""></li>
-            <li><img src="~/Content/images/slide4.jpg" width="960" height="450" alt=""></li>
-        </ul>
-    <div class="left-shade"></div>
-    <div class="right-shade"></div>
-    <div class="top-shadow"></div>
-    <div class="bottom-shadow"></div>
-</div>
+ @{
+        Html.RenderAction("HomePage", "HomePagePhoto");
+ }
 }
 <div class="four row">
     <div class="wrapper eight border">

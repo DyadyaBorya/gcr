@@ -28,7 +28,7 @@ namespace GCR.Web.Controllers
             {
                 page = 1;
             }
-            var articles = from n in newsService.FetchPaging(page.Value)
+            var articles = (from n in newsService.FetchPaging(page.Value)
                            select new NewsViewModel 
                            {
                                NewsId = n.NewsId,
@@ -37,7 +37,18 @@ namespace GCR.Web.Controllers
                                Title = n.Title,
                                CreatedOn = n.CreatedOn,
                                ModifiedOn = n.ModifiedOn,
-                           };
+                           }).ToList();
+
+            if (this.IsAjaxRequest())
+            {
+                ViewBag.ClearLayout = true;
+            }
+            else
+            {
+                ViewBag.ClearLayout = false;
+            }
+            ViewBag.Title = "News";
+            ViewBag.ArticleCount = articles.Count;
             return View(articles);
         }
 
@@ -49,7 +60,7 @@ namespace GCR.Web.Controllers
                 page = 1;
             }
 
-            var articles = from n in newsService.FetchArchive(dates.Item1, dates.Item2, page.Value)
+            var articles = (from n in newsService.FetchArchive(dates.Item1, dates.Item2, page.Value)
                            select new NewsViewModel
                            {
                                NewsId = n.NewsId,
@@ -58,8 +69,18 @@ namespace GCR.Web.Controllers
                                Title = n.Title,
                                CreatedOn = n.CreatedOn,
                                ModifiedOn = n.ModifiedOn,
-                           };
+                           }).ToList();
 
+            if (this.IsAjaxRequest())
+            {
+                ViewBag.ClearLayout = true;
+            }
+            else
+            {
+                ViewBag.ClearLayout = false;
+            }
+            ViewBag.Title = "Archive for " + dates.Item1.ToString("MMMM yyyy");
+            ViewBag.ArticleCount = articles.Count;
             return View("Index", articles);
         }
 
@@ -76,7 +97,7 @@ namespace GCR.Web.Controllers
         public ActionResult ArchiveSummary()
         {
             var sums = newsService.FetchArchiveSummaries().ToList();
-            var model = new List<NewsArchiveViewModel>(sums.Count());
+            var model = new List<NewsArchiveViewModel>(sums.Count);
             foreach (var sum in sums)
             {
                 string yearString = sum.Date.Year.ToString();

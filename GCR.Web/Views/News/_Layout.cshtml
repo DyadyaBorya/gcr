@@ -1,22 +1,54 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2 class="offset-by-one">News</h2>
-<div class="one row">
+<h2 class="offset-by-one">@ViewBag.Title</h2>
+<div class="three row">
     <div class="eighteen border">
-        <div class="sixteen columns offset-by-one">
+        <div class="sixteen columns offset-by-one alpha" id="articleContainer">
             @RenderBody()
-            <br />
         </div>
-        <div class="four columns offset-by-two">
+        <div class="five columns offset-by-two omega">
             @{
                 Html.RenderAction("ArchiveSummary");
             }
         </div>
+        <div class="sixteen columns offset-by-one alpha">
+            <button id="loadMore" style="margin-bottom:2em;width:100%;">Load More Articles</button>
+        </div>
     </div>
 </div>
 @section Scripts {
-    @RenderSection("scripts", required: false)
+@RenderSection("scripts", required: false)
+@if (ViewBag.ArticleCount < 10)
+{
+    <script type="text/javascript">  
+        $(function () {
+            $("#loadMore").hide();
+        });
+    </script>
+}
+else
+{ 
+    <script type="text/javascript">         
+        $(function () {
+            var pageNum = parseInt(window.GCR.QueryString("page", 1));
+            var loadMoreSuccess = function (result) {
+                var articles = $(result);
+                $("#articleContainer").append(articles);
+                if (articles.length < 10)
+                {
+                    $("#loadMore").hide();
+                }
+            };
+            var loadMore = function () {
+                pageNum += 1;
+                window.GCR.Post('@Request.Url.AbsolutePath', { page: pageNum }, loadMoreSuccess);
+            };
+            $("#loadMore").bind("click", loadMore);
+        });
+</script>
+}
+
 }
 
 

@@ -69,5 +69,24 @@ window.GCR.StatusMessage = function (message, status) {
     container.click(clickHandler);
     container.css("border-width", "2px");
     container.animate({ height: div[0].offsetHeight }, 300)
-}
+};
 
+window.GCR.QueryString = function (key, defaultValue) {
+    if (window.GCR._QueryString === undefined) {
+        window.GCR._QueryString = {};
+        var pageURL = window.location.search.substring(1);
+        var variables = pageURL.split('&');
+        for (var i = 0; i < variables.length; i++) {
+            var parts = variables[i].split('=');
+            window.GCR._QueryString[parts[0]] = parts[1];
+        }
+    }
+
+    var qs = window.GCR._QueryString[key];
+    if (qs) {
+        return qs;
+    }
+    else {
+        return defaultValue;
+    }
+};

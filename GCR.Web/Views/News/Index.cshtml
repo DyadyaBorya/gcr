@@ -1,13 +1,10 @@
 ﻿@model IEnumerable<GCR.Web.Models.NewsViewModel>
-
 @{
-    Layout = "~/Views/News/_Layout.cshtml";
-    ViewBag.Title = "News";
+    Layout = ViewBag.ClearLayout ? null : "~/Views/News/_Layout.cshtml";
     foreach (var item in Model)
     {
             Html.RenderPartial("_Details", item);
     }
 }
-
 
 

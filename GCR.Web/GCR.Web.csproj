@@ -529,6 +529,8 @@
     <Content Include="Views\News\_Summary.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\_Layout.cshtml" />
+    <Content Include="Views\News\_Recent.cshtml" />
+    <Content Include="Views\HomePagePhoto\_HomePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

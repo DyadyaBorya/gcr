@@ -20,19 +20,19 @@ namespace GCR.Business.Services
 
         public IQueryable<News> FetchAll()
         { 
-            return newsRepository.Query.OrderByDescending(n=>n.ModifiedOn);
+            return newsRepository.Query.OrderByDescending(n=>n.CreatedOn);
         }
 
         public IQueryable<NewsSummary> FetchArchiveSummaries()
         {
-            return from n in FetchInternal(null, null, null, null)
+            return (from n in FetchInternal(null, null, null, null)
                    group n by new { n.CreatedOn.Year, n.CreatedOn.Month } into g
                    select new NewsSummary 
                    { 
                        Date = g.FirstOrDefault().CreatedOn,
                        SummaryType = SummaryType.Month,
                        Count = g.Count()
-                   };
+                   }).OrderByDescending(a=>a.Date);
         }
 
         public IQueryable<News> FetchArchive(DateTime startDate, DateTime endDate, int pageNumber, int numberOfEntries = 10)

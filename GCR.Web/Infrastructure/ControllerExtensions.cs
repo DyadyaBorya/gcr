@@ -25,5 +25,18 @@ namespace GCR.Web.Infrastructure
         {
             Elmah.ErrorSignal.FromCurrentContext().Raise(ex);
         }
+
+        public static bool IsAjaxRequest(this Controller controller)
+        {
+            string value = controller.Request.Headers["X-Requested-With"];
+            if (value == "XMLHttpRequest")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

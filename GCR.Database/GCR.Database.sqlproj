@@ -80,6 +80,7 @@
     <Build Include="dbo\Tables\UserSetting.sql" />
     <Build Include="dbo\Tables\HomePagePhoto.sql" />
     <Build Include="dbo\Tables\AppSetting.sql" />
+    <None Include="Scripts\Post\SampleData.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Post\Script.PostDeployment.sql" />

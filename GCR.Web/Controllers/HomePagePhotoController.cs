@@ -79,8 +79,26 @@ namespace GCR.Web.Controllers
             }
         }
 
-        //
-        // GET: /Member/Create
+        public ActionResult HomePage()
+        {
+            var photos = homePageService.FetchPhotos().ToList();
+            int idx = 0;
+            var model = new List<HomePagePhotoViewModel>(photos.Count);
+            for (int i = 1; i <= photos.Count; i++)
+			{
+                var photo = photos[i - 1];
+                if (i < photos.Count)
+                {
+                    model.Add(HomePagePhotoViewModel.ToViewModel(photo));
+                }
+                else
+                {
+                    model.Insert(0, HomePagePhotoViewModel.ToViewModel(photo));
+                }
+			}
+
+            return View("_HomePage", model);
+        }
 
         public ActionResult Create()
         {
