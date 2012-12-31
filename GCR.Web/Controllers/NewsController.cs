@@ -126,7 +126,7 @@ namespace GCR.Web.Controllers
                             CreatedOn = n.CreatedOn
                         };
 
-            return View(article);
+            return View("_Recent", article);
         }
 
         public ActionResult Admin()
