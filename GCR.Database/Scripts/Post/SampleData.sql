@@ -1,1 +1,1 @@
-﻿Insert Into [dbo].[webpages_Roles]		Values('Admin')
+﻿

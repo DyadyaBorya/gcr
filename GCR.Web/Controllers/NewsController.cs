@@ -9,6 +9,7 @@ using GCR.Web.Models;
 
 namespace GCR.Web.Controllers
 {
+    [Authorize]
     public class NewsController : BaseController
     {
         private INewsService newsService;
@@ -21,7 +22,7 @@ namespace GCR.Web.Controllers
 
         //
         // GET: /News/
-
+        [AllowAnonymous]
         public ActionResult Index(int? page)
         {
             if (!page.HasValue)
@@ -52,6 +53,7 @@ namespace GCR.Web.Controllers
             return View(articles);
         }
 
+        [AllowAnonymous]
         public ActionResult Archive(string year, string month, string day, int? page)
         {
             var dates = GetDates(year, month, day);
@@ -86,7 +88,7 @@ namespace GCR.Web.Controllers
 
         //
         // GET: /News/Details/5
-
+        [AllowAnonymous]
         public ActionResult Details(int id)
         {
             var article = newsService.GetById(id);
@@ -94,6 +96,7 @@ namespace GCR.Web.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public ActionResult ArchiveSummary()
         {
             var sums = newsService.FetchArchiveSummaries().ToList();
@@ -115,6 +118,7 @@ namespace GCR.Web.Controllers
             return View("_Archive", model);
         }
 
+        [AllowAnonymous]
         public ActionResult Recent()
         {
             var article = from n in newsService.FetchRecent()

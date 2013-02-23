@@ -14,6 +14,7 @@ using System.IO;
 
 namespace GCR.Web.Controllers
 {
+    [Authorize]
     public class HomePagePhotoController : BaseController
     {
         private IHomePageService homePageService;
@@ -79,10 +80,10 @@ namespace GCR.Web.Controllers
             }
         }
 
+        [AllowAnonymous]
         public ActionResult HomePage()
         {
             var photos = homePageService.FetchPhotos().ToList();
-            int idx = 0;
             var model = new List<HomePagePhotoViewModel>(photos.Count);
             for (int i = 1; i <= photos.Count; i++)
 			{

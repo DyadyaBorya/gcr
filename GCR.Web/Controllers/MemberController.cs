@@ -13,6 +13,7 @@ using GCR.Web.Models;
 
 namespace GCR.Web.Controllers
 {
+    [Authorize]
     public class MemberController : BaseController
     {
         private IMemberService memberService;
@@ -38,7 +39,7 @@ namespace GCR.Web.Controllers
         }
         //
         // GET: /Member/
-
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var members = from m in memberService.FetchActive()

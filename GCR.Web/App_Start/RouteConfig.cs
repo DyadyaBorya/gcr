@@ -13,11 +13,18 @@ namespace GCR.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("piczardWebResource.ashx/{*pathInfo}");
-
             routes.MapRoute(
                 name: "Archive",
                 url: "{controller}/Archive/{year}/{month}/{day}",
                 defaults: new { controller = "News", action = "Archive", month = UrlParameter.Optional, day = UrlParameter.Optional });
+
+            routes.MapPageRoute(
+                    routeName: "WebForms",
+                    routeUrl: "WebForms/{page}",
+                    physicalFile: "~/WebForms/{page}.aspx",
+                    checkPhysicalUrlAccess: false,
+                    defaults: null
+                    );
 
             routes.MapRoute(
                 name: "Default",

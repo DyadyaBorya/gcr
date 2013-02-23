@@ -9,6 +9,9 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-
-:r LookupData.sql
+:setvar cnt = 0
+if cnt > 0
+{
+	:r LookupData.sql
+}
 :r DefaultData.sql
