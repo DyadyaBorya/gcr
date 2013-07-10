@@ -13,6 +13,7 @@ using GCR.Web.Models;
 
 namespace GCR.Web.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ScheduleController : BaseController
     {
         private IScheduleService scheduleService;
@@ -27,7 +28,7 @@ namespace GCR.Web.Controllers
         }
         //
         // GET: /Member/
-
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var members = from s in scheduleService.Fetch()

@@ -9,9 +9,13 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-:setvar cnt = 0
-if cnt > 0
-{
+Declare @cnt Int = 0
+Select @cnt = Count(*) from [dbo].[webpages_Roles] 
+
+If @cnt = 0
+Begin
 	:r LookupData.sql
-}
-:r DefaultData.sql
+	:r DefaultData.sql
+
+End
+GO

@@ -40,7 +40,7 @@ namespace GCR.Core
         {
             get
             {
-                return IoC.Kernel.Get<CustomPrincipal>();
+                return IoC.Get<CustomPrincipal>();
             }
         }
 

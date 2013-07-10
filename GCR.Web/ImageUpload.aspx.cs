@@ -77,7 +77,7 @@ namespace GCR.Web
             get
             {
                 var qs = this.Request.QueryString["p"];
-                var provider = IoC.Kernel.Get<ISecurityProvider>();
+                var provider = IoC.Get<ISecurityProvider>();
                 return provider.DecryptData(qs);
             }
         }

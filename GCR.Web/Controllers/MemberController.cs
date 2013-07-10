@@ -13,7 +13,7 @@ using GCR.Web.Models;
 
 namespace GCR.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class MemberController : BaseController
     {
         private IMemberService memberService;
@@ -40,6 +40,7 @@ namespace GCR.Web.Controllers
         //
         // GET: /Member/
         [AllowAnonymous]
+        [HtmlAllowed]
         public ActionResult Index()
         {
             var members = from m in memberService.FetchActive()
@@ -76,7 +77,6 @@ namespace GCR.Web.Controllers
 
         //
         // GET: /Member/Create
-
         public ActionResult Create()
         {
             ViewBag.PageTitle = "Create New Member";
@@ -117,7 +117,6 @@ namespace GCR.Web.Controllers
 
         //
         // GET: /Member/Edit/5
-
         public ActionResult Edit(int id)
         {
             ViewBag.PageTitle = "Edit Member";

@@ -13,7 +13,7 @@ namespace GCR.Web
     {
         public static void RegisterAuth()
         {
-            var provider = IoC.Kernel.Get<ISecurityProvider>();
+            var provider = IoC.Get<ISecurityProvider>();
             provider.RegisterOAuthProviders();
         }
     }

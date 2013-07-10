@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GCR.Web.Infrastructure;
 
 namespace GCR.Web.Controllers
 {
+    [HtmlAllowed]
     public class HomeController : BaseController
     {
         public HomeController()

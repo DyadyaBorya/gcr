@@ -24,16 +24,6 @@ namespace GCR.Business.Security
 
         public void RegisterOAuthProviders()
         {
-            OAuthWebSecurity.RegisterMicrosoftClient(
-                clientId: "000000004C0DE076",
-                clientSecret: "KpKirXt8Fc5Ma0Ae26wRgCjJPBdTFlCy");
-
-            OAuthWebSecurity.RegisterClient(
-                new BitlyClient("f198069e0c55356a217458531e1ee42aba9e2a96", "5af9502ed0adf32b46b951e59f703618f40aede3"), 
-                "Bitly", 
-                new Dictionary<string, object>()
-            );
-
             OAuthWebSecurity.RegisterGoogleClient();
         }
 

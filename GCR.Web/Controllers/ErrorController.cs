@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GCR.Web.Infrastructure;
 using GCR.Web.Models;
 
 namespace GCR.Web.Controllers
 {
+    [HtmlAllowed]
     public class ErrorController : BaseController
     {
         public ActionResult NotFound(string url)

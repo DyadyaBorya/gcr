@@ -14,7 +14,7 @@ using System.IO;
 
 namespace GCR.Web.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class HomePagePhotoController : BaseController
     {
         private IHomePageService homePageService;
@@ -81,6 +81,7 @@ namespace GCR.Web.Controllers
         }
 
         [AllowAnonymous]
+        [HtmlAllowed]
         public ActionResult HomePage()
         {
             var photos = homePageService.FetchPhotos().ToList();

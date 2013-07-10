@@ -42,6 +42,11 @@ namespace GCR.Core
             get { return GetOptionalValue<int>("PhotoFileLifeTime", 720); }
         }
 
+        public static bool RequireSSL
+        {
+            get { return GetOptionalValue<bool>("RequireSSL", false); }
+        }
+
         /// <summary>
         /// Gets a required value with the specified setting name.
         /// </summary>
@@ -82,12 +87,9 @@ namespace GCR.Core
                 // try to get the setting
                 string strValue = ConfigurationManager.AppSettings[settingName];
 
-                if (strValue == null)
+                if (strValue == null && isRequired)
                 {
-                    if (isRequired)
-                    {
-                        throw new ConfigurationErrorsException("Application setting '" + settingName + "' is missing from configuration file and must be specified.");
-                    }
+                    throw new ConfigurationErrorsException("Application setting '" + settingName + "' is missing from configuration file and must be specified.");
                 }
                 else
                 {
@@ -100,10 +102,8 @@ namespace GCR.Core
                         throw new ConfigurationErrorsException("Application setting '" + settingName + "' is invalid. Could not convert '" + strValue + "' to type '" + typeof(T).FullName + ".");
                     }
                 }
-
                 _settings[settingName] = value;
             }
-
             return (T)value;
         }
     }
